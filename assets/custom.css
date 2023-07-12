@@ -61,6 +61,11 @@ div[data-section-id="header"] {
 .megamenu.site-nav__dropdown {
   position: fixed;
 }
+
+.dropdown_item-nav.clearance-nav {
+  right: 43%;
+}
+
 .site-nav__dropdown.megamenu {
   background-color: #fff;
 }
