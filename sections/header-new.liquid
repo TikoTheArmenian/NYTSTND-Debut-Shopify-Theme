@@ -1,0 +1,43 @@
+<div class="new-header">
+  <a href="https://nytstnd.com">
+  	<img src="{{ section.settings.logo-new | img_url: '300x300'}}" class="new-header__logo">
+  </a>
+</div>
+
+
+<style>
+.new-header{
+    width: 100%;
+    min-height: 80px;
+	text-align: center;
+	z-index: 100;
+    position: absolute;
+  	top: 40px !important;
+}
+.new-header__logo{
+	width: 150px;
+	height: auto;
+	object-fit: cover;
+}
+
+</style>
+
+{% schema %}
+  {
+    "name": "New header",
+    "settings": [
+		{
+          "type":"image_picker",
+          "id":"logo-new",
+          "label":"Logo"
+		}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

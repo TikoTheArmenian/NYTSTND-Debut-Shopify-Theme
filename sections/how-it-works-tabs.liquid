@@ -1,0 +1,45 @@
+{% if section.settings.checkShowTabs %}
+  <div class="works-page-tabs">
+    <ul class="works-page-tabs-list">
+      {%- for block in section.blocks -%}
+        <li class="works-page-tabs-item" data-tagname="{{ block.settings.pageLink }}">
+          <a href="{{ block.settings.pageLink }}" class="works-tab-link">
+            {{ block.settings.pageName }}
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Tabs section",
+    "class": "index-section index-section--flush",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "checkShowTabs",
+        "label": "Enable Page Links",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "page_links",
+        "name": "Links",
+        "settings": [
+          {
+            "type": "url",
+            "id": "pageLink",
+            "label": "Page Link"
+          }, {
+            "type": "text",
+            "id": "pageName",
+            "label": "Page Name"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,85 @@
+<div class="page-content new-page__main-content">
+
+
+	<div class="grid">
+    <div class="grid__item">
+      
+		
+			{% section 'hero-important-day' %}
+      
+        	{% section 'hero-video-important-day' %}
+       
+
+      <div class="rte rte--nomargin">
+        {{ page.content }}
+
+      </div>
+
+      
+    </div>
+  </div>
+    		
+      <div id="rich-text-left-side--section">
+
+        {% section 'rich-text-left-important-day' %}
+      </div>
+  		{% section 'twoSide-hero-important-day' %}
+  
+		<div id="slider-new--section">
+        {% section 'slideshow-important-day' %}
+      </div>
+  		<div id="new-product-come--section">
+        {% section 'product-come-important-day' %}
+      </div>
+  		{% section 'hero-importand-day-bottom' %}
+        <div id="rich-text-two-side--section">
+        {% section 'rich-text-twoSide-important-day' %}
+      </div>
+          <div id="rich-text-right-side--section">
+		{% section 'rich-text-right-important-day' %}
+
+      </div>
+  		{% section 'rich-text-bg-image-important-day' %}
+		<div id="featured-new-collection--section">
+        {% section 'featured-collection-important-day' %}
+        </div>
+     
+
+
+</div>
+
+
+<style>
+  
+  .new-page__main-content{
+    font-family: "Jost" !important;
+  }
+  
+   {% if handle contains 'trio' or handle contains 'fathers-day' or handle contains 'wireless' or handle contains 'quad'  or page.handle == 'black-friday'%}
+   .main-content, .page-content{
+  		padding-top:0 !important;
+  }
+  {% endif %}
+
+  
+    .new-page__main-title{
+      font-family: "Jost bold" !important;
+      font-size: 40px;
+      font-weight: bold;
+      line-height: 1.25;
+      letter-spacing: normal;
+      margin-bottom: 25px;
+  }
+  
+  .new-page__page-text{
+  
+  }
+   
+  @media (max-width: 768px){
+    .direction-mobile{
+    flex-direction: column;
+    
+    }
+  
+  }
+</style>

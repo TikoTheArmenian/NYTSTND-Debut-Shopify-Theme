@@ -1,0 +1,137 @@
+{% if section.settings.show_product_navigation %}
+  {% include 'product-page-navigation' %}
+{% endif %}
+<div class="product_info-section" id="product-info" data-section="{{ section.id }}">
+  <div class="product_info-section-heading" style="background-image: url('{{ product.metafields.custom.product_info_background_image.value | img_url: '1920x' }}');">
+    <h3 class="product_info-section-title aos-init" data-aos="fade-up">{{ product.metafields.custom.product_info.value }}
+    </h3>
+    {% if product.metafields.custom.product_info_description.value != blank %}
+      <p class="product_info-section-text aos-init" data-aos="fade-up">
+        {{ product.metafields.custom.product_info_description.value }}
+      </p>
+    {% endif %}
+  </div>
+  <div class="product_info-section-desc">
+    <div class="product_info-section-info" style="background-color: {{ section.settings.info_background_color }};">
+      <div class="product_info-section-texts">
+        {% if product.metafields.custom.product_info_title.value != blank %}
+          <h3 class="product-info-title aos-init" data-aos="fade-up">{{ product.metafields.custom.product_info_title.value }}
+          </h3>
+        {% endif %}
+        {% if product.metafields.custom.product_info_text.value %}
+          {% for text in product.metafields.custom.product_info_text.value %}
+            <p data-aos="fade-up" class="aos-init {% if forloop.index == 1 %}product-info-desc-first{% endif %} product-info-desc">{{ text }}
+            </p>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="product-info-image-block">
+      {%- assign img_url = product.metafields.custom.product_info_image.value | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      <img class="product-info-img lazyload"
+          data-src={{ img_url }}
+          data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1920]"
+          data-aspectratio="{{ product.metafields.custom.product_info_image.value.aspect_ratio }}"
+          data-sizes="auto"
+          alt="">
+    </div>
+  </div>
+  {% if product.metafields.custom.show_product_info_second_section.value %}
+    <div class="product_info-section-desc">
+      <div class="product-info-image-block">
+        {%- assign img_url_secound = product.metafields.custom.product_info_second_section_image.value | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="product-info-img lazyload"
+            data-src="{{ img_url_secound }}"
+            data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1920]"
+            data-aspectratio="{{ product.metafields.custom.product_info_second_section_image.value.aspect_ratio }}"
+            data-sizes="auto"
+          >
+      </div>
+      <div class="product_info-section-info" style="background-color: {{ section.settings.info_background_color }};">
+        <div class="product_info-section-texts">
+          {% if product.metafields.custom.product_info_second_section_title != blank %}
+            <h3 class="product-info-title aos-init" data-aos="fade-up">{{ product.metafields.custom.product_info_second_section_title.value }}
+            </h3>
+          {% endif %}
+          {% if product.metafields.custom.product_info_second_section_text.value != blank %}
+            <p data-aos="fade-up" class="product-info-desc aos-init">{{ product.metafields.custom.product_info_second_section_text.value }}
+            </p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {% if product.metafields.custom.show_product_info_third_section.value %}
+    <div class="product_info-section-desc">
+      <div class="product_info-section-info" style="background-color: {{ section.settings.info_background_color }};">
+        <div class="product_info-section-texts">
+          {% if product.metafields.custom.product_info_third_section_title != blank %}
+            <h3 class="product-info-title aos-init" data-aos="fade-up">{{ product.metafields.custom.product_info_third_section_title.value }}
+            </h3>
+          {% endif %}
+          {% if product.metafields.custom.product_info_third_section_text.value != blank %}
+            <p data-aos="fade-up" class="product-info-desc aos-init">{{ product.metafields.custom.product_info_third_section_text.value }}
+            </p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="product-info-image-block">
+        {%- assign img_url_third = product.metafields.custom.product_info_third_section_image.value | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="product-info-img lazyload" 
+            data-src={{ img_url_third }}
+            data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1920]"
+            data-aspectratio="{{ product.metafields.custom.product_info_third_section_image.value.aspect_ratio }}"
+            data-sizes="auto"
+            alt="">
+      </div>
+    </div>
+  {% endif %}
+  {% if product.metafields.custom.show_product_info_fourth_section.value %}
+    <div class="product_info-section-desc">
+      <div class="product-info-image-block">
+        {%- assign img_url_fourth = product.metafields.custom.product_info_fourth_section_image.value | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <img class="product-info-img lazyload"
+            data-src={{ img_url_fourth }}
+            data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1920]"
+            data-aspectratio="{{ product.metafields.custom.product_info_fourth_section_image.value.aspect_ratio }}"
+            data-sizes="auto"
+            alt="">
+      </div>
+      <div class="product_info-section-info" style="background-color: {{ section.settings.info_background_color }};">
+        <div class="product_info-section-texts">
+          {% if product.metafields.custom.product_info_fourth_section_title != blank %}
+            <h3 class="product-info-title aos-init" data-aos="fade-up">{{ product.metafields.custom.product_info_fourth_section_title.value }}
+            </h3>
+          {% endif %}
+          {% if product.metafields.custom.product_info_fourth_section_text.value != blank %}
+            <p data-aos="fade-up" class="product-info-desc aos-init">{{ product.metafields.custom.product_info_fourth_section_text.value }}
+            </p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {% if product.metafields.custom.show_product_info_last_section.value %}
+    <div class="product_info-section-heading" style="background-image: url('{{ product.metafields.custom.product_info_last_section_background_image.value | img_url: '1920x' }}');">
+      <h3 class="product_info-section-title aos-init" data-aos="fade-up">{{ product.metafields.custom.product_info_last_section_title.value }}
+      </h3>
+    </div>
+  {% endif %}
+</div>
+{% schema %}
+  {
+    "name": "Product Info",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_product_navigation",
+        "label": "Show product navigation section",
+        "default": true
+      }, {
+        "type": "color",
+        "id": "info_background_color",
+        "label": "Product info background color"
+      }
+    ]
+  }
+{% endschema %}

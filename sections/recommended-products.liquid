@@ -1,0 +1,43 @@
+{% if section.settings.also_like_enable %}
+  <div
+    class="product-recommendations"
+    data-section="{{ section.id }}"
+    data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.recommended_count }}">
+    <div class="page-width recs page-width-collection">
+      {%- if recommendations.performed and recommendations.products_count > 0 -%}
+        <h2 class="recommended_title">{{ section.settings.recommended_title }}</h2>
+        <div class="grid grid--uniform grid--collection rec_carousel">
+          {%- for product in recommendations.products -%}
+            {% include 'product-grid-item' %}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "You May Also Like",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "also_like_enable",
+        "label": "Show You May Also Like products",
+        "default": true
+      }, {
+        "type": "text",
+        "id": "recommended_title",
+        "label": "You May Also Like Section Title"
+      }, {
+        "type": "range",
+        "id": "recommended_count",
+        "label": "Number to show of recommended products",
+        "default": 2,
+        "min": 2,
+        "max": 6,
+        "step": 2
+      }
+    ]
+  }
+{% endschema %}

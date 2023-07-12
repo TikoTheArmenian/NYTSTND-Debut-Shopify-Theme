@@ -1,0 +1,92 @@
+{% if section.settings.checkTextWithImageUno == true %}
+<div class="rich-text-bg-image__wrapper lazy-background" style="background-image: url('{{section.settings.bg_image | img_url: '1800x1800'}}');">
+  <div class="rich-text-bg-image__text page-width">
+  <div class="rich-text-bg-image__text-inner">
+    <h2 data-aos="fade-up">{{section.settings.title}}</h2>
+    <p data-aos="fade-up">{{section.settings.text}}</p>
+  </div>
+  </div>
+</div>
+{% endif %}
+
+<style>
+  .rich-text-bg-image__wrapper{
+  	min-height: 600px;
+    width: 100%;
+  	background-size: cover;
+    background-position: right;
+    background-repeat: no-repeat;
+  }
+  .rich-text-bg-image__text{
+  	max-width: 1100px;
+    margin: 0 auto;
+    padding: 170px 25px;
+  }
+  .rich-text-bg-image__text-inner{
+    width: 40%;
+    text-shadow: 3px 1px black;
+    color: {{ section.settings.text_color }};
+  }
+  
+  .rich-text-bg-image__text h2{
+  	font-size: 40px;
+    line-height: 1.25;
+    margin-bottom: 25px;
+  }
+  @media screen and (max-width: 993px){
+  .rich-text-bg-image__text-inner{
+    width: 53%;
+  }
+  }
+  @media screen and (max-width: 768px){
+  .rich-text-bg-image__text-inner{
+    width: 100%;
+  }
+    .rich-text-bg-image__text{
+    padding: 119px 25px;
+    }
+  }
+  
+</style>
+{% schema %}
+  {
+    "name": "Hero section",
+    "settings": [
+		{
+        "type": "checkbox",
+        "id": "checkTextWithImageUno",
+        "label": "Enable",
+		"default": true
+      	},
+			{
+            "type": "image_picker",
+            "id": "bg_image",
+            "label": "Background image"
+			},
+			{
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+			},
+			{
+            "type": "text",
+            "id": "text",
+            "label": "Text"
+			},
+			{
+            "type": "color",
+            "id": "text_color",
+            "label": "Text color",
+			"default":"#ffffff"
+			}
+
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+

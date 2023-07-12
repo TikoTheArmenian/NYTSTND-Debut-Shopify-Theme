@@ -1,0 +1,129 @@
+{% comment %}
+
+  Do NOT change this file.
+  Please add following code in theme.liquid almost at the end, BEFORE the line {% render 'special-offers' %}
+
+
+  <script data-cfasync="false" data-no-instant>
+  window.saso_config = {
+  product_title_max_length: 40,
+  crosssell_never_show_popup: false,
+  show_upsell_only_in: "product, cart",
+  hide_shown_upsells_for: 15, //minutes
+  hide_closed_notifications_for: 10, //minutes
+  upsell_variant_choose_option: "please select",
+  upsell_variant_choose_message: "Please select an option",
+  translate_percent_off: '% Off'
+  }
+  </script>{% endcomment %}
+
+
+<script data-cfasync="false" data-no-instant>
+  window.jQuery || document.write("<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'>\x3C/script>")
+</script>
+
+
+<script type="text/javascript">
+  {% assign saso_page_type = '' %}
+  window.saso = {
+    shop_slug: "{{shop.permanent_domain | remove: '.myshopify.com' }}",
+    money_format: "{{shop.money_format | replace: '"', "'"}}",
+    customer: null,
+    cart: null
+  }
+  window.saso_extras = {}{% if customer %}window.saso.customer = {
+      id: {{customer.id}},
+      tags: {{customer.tags | json}}
+    };{% endif %}{% assign saso_template = template | replace: '.', ' ' | truncatewords: 1, "" %}{% if saso_template contains 'collection' %}
+    {% unless collection.id == blank %}
+      {% assign saso_page_type = 'collection' %}
+      window.saso.collection = {
+        id: {{collection.id}}
+      }
+    {% endunless %}
+  {% endif %}
+
+  {% if saso_template contains 'product' %}
+    {% unless product.id == blank %}
+      {% assign saso_page_type = 'product' %}
+      window.saso.product = {
+        id: {{product.id}},
+        price: {{product.price}}
+      };
+      window.saso.product_collections = []{% for c in product.collections %}window.saso.product_collections.push({{c.id}}){% endfor %}window.saso_extras.product = {{product | json}};{% endunless %}{% endif %}{% if saso_template contains 'cart' %}
+    {% assign saso_page_type = 'cart' %}
+  {% endif %}
+
+  {% if cart %}
+    window.saso.cart = {{cart | json}}
+    delete window
+      .saso
+      .cart
+      .note
+      window
+      .saso
+      .cart_collections = {}{% for item in cart.items %}window.saso.cart_collections["v   {{item.variant_id}}"] = []{% for c in item.product.collections %}window.saso.cart_collections["v   {{item.variant_id}}"].push({{c.id}}){% endfor %}{% endfor %}if (typeof window.saso.cart.items == "object") {
+      for (var i = 0; i < window
+        .saso
+        .cart
+        .items
+        .length; i++) {
+        [
+          "sku",
+          "grams",
+          "vendor",
+          "url",
+          "image",
+          "handle",
+          "requires_shipping",
+          "product_type",
+          "product_description"
+        ].map(function(a) {
+          delete window.saso.cart.items[i][a]
+        })
+      }
+    }
+  {% endif %}
+
+  window.saso.page_type = "{{saso_page_type}}"
+  if (typeof window.location == "object" && typeof window.location.pathname == "string") {
+    if (window.location.pathname.indexOf('/checkouts/') > -1) {
+      window.saso.page_type = "checkout"
+    }
+  }
+</script>
+
+{% if saso_page_type != '' %}
+
+  {{ 'special-offers.scss.css' | asset_url | stylesheet_tag }}
+
+  {% render 'special-offers-templates' %}
+{% endif %}
+
+
+{% if template != 'cart' %}
+  <script data-cfasync="false">
+    jQuery(function() {
+      jQuery(document).on('click', "input[name='checkout']:not(.saso-ignore), input[value='Checkout']:not(.saso-ignore), button[name='checkout']:not(.saso-ignore), [href$='checkout']:not(.saso-ignore), button[value='Checkout']:not(.saso-ignore), input[name='goto_pp'], button[name='goto_pp'], input[name='goto_gc'], button[name='goto_gc']", function(e) {
+        e.preventDefault();
+
+        if (typeof sasoCheckout != "function") {
+          window.location = "/checkout";
+        }
+
+        jQuery.ajax({
+          cache: false,
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+          type: "GET",
+          url: '/cart.js',
+          success: function(res) {
+            window.saso.cart = res
+            sasoCheckout()
+          }
+        })
+
+      });
+    });
+  </script>
+{% endif %}

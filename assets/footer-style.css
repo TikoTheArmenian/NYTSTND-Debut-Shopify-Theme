@@ -1,0 +1,21 @@
+
+footer,
+footer h1,
+footer h2,
+footer h3,
+footer h4,
+footer h5,
+footer p,
+footer div,
+footer span,
+footer a {
+    color: #000;
+}
+
+footer .footer__newsletter-input{
+  background:none;
+}
+
+footer.site-footer {
+  background-color: #fff;
+}

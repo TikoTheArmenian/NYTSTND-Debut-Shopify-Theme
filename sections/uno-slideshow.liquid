@@ -1,0 +1,124 @@
+{% if section.settings.checkSlideUno == true %}
+<div class="slideshowt-container">
+
+{% for block in section.blocks %}
+  <div class="mySlides fade">
+
+    <img src="{{ block.settings.slide-item | img_url: '1800x1200'}}" style="width:100%; height: 100%; object-fit: cover;"/>
+
+  </div>
+ 
+{% endfor %}
+
+</div>
+
+
+<style>
+  #slider-uno--section{
+  	position: relative;
+  }
+.slideshowt-container {
+    width: 100%;
+	position: relative;
+  	margin: auto;
+  	background-position: center;
+  	
+}
+.mySlides {
+  height: 600px;
+	
+}
+
+.active {
+  opacity: 1;
+}
+
+ #slider-uno--section .slick-dotted.slick-slider{
+  margin-bottom: 0 !important;
+  }
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {
+    opacity: .4;
+  } 
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: .4;
+  } 
+  to {
+    opacity: 1;
+  }
+}
+
+
+  @media (max-width: 768px){
+
+  .mySlides {
+  height: auto;
+    height: 350px;
+	
+}
+    .mySlides img{
+     vertical-align: middle;
+    vertical-align: -webkit-baseline-middle;
+      
+    }
+  }
+ @media (max-width: 500px){
+
+  .mySlides {
+    height: 280px;
+	}
+ }
+@media only screen and (max-width: 300px) {
+  .text {
+    font-size: 11px;
+  }
+}
+</style>
+
+
+{% endif %}
+{% schema %}
+  {
+    "name": "Slideshow",
+    "max_blocks": 6,
+    "settings": [
+	{
+        "type": "checkbox",
+        "id": "checkSlideUno",
+        "label": "Enable",
+		"default": true
+      	}
+
+    ],
+    "blocks": [
+
+      {
+        "type": "image",
+        "name": "image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "slide-item",
+            "label": "Slide image"
+
+          }
+
+        ]
+      }
+]
+
+  }
+{% endschema %}

@@ -1,0 +1,205 @@
+{% if section.settings.checkFeatCollUno == true %}
+<style>
+  #featured-new-collection--section{
+  	margin-top: 55px;
+    position: relative;
+  }
+#featured-new-collection--section .collection-badge{
+	display: none;
+}
+
+  .new-page__main-subtitle{
+    font-size: 18px;
+    line-height: 1.44;
+  }
+  
+  .new-featured__blocks{
+  	display: -webkit-box;    
+    display: -moz-box;      
+    display: -ms-flexbox;    
+    display: -webkit-flex;     
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 35px;
+    max-width: 1010px;
+    margin: auto;
+  } 
+  
+  .new-featured__block{
+  width: 33%;
+  }
+  
+  .new-featured__block--image-wrapper{
+    min-height: 240px;
+    position: relative;
+  }
+  
+   .new-featured__block--image-wrapper img{
+position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .new-featured__text{
+  text-align: center;
+  }
+  
+  .new-featured__title{
+    font-size: 18px;
+    font-family: "Jost bold";
+    font-weight: bold;
+    line-height: 1.22;
+  }
+  
+  .new-featured__description{
+    font-size: 14px;
+    line-height: 1.29;
+  }
+  
+  .new-featured__link{
+ 	 padding: 8px 19px;
+    font-size: 13px;
+    font-family: "Jost bold";
+  	font-weight: bold;
+	text-transform: uppercase;
+  	line-height: 1.46;
+    color: #fff;
+  }
+  .new-featured__link:hover{
+  	color: white !important;
+    background: #000000 !important;
+  
+  }
+  
+   @media (max-width: 768px){
+     .new-featured__blocks{
+     padding: 0;
+     }
+  .new-featured__block{
+  	width: 100%;
+    padding-bottom: 40px;
+  }
+     .new-featured__block:nth-child(1){
+     order: 2;
+     }
+      .new-featured__block:nth-child(2){
+     order: 1;
+       
+     }
+      .new-featured__block:nth-child(3){
+     order: 3;
+     }
+     
+     .new-featured__block:nth-child(2) 
+     .new-featured__block--image-wrapper{
+      min-height: 300px;
+     }
+          .new-featured__block:nth-child(1) 
+     .new-featured__block--image-wrapper,
+     .new-featured__block:nth-child(3) 
+     .new-featured__block--image-wrapper{
+      min-height: 270px;
+     }
+   }
+</style>
+<div class="page-width">
+
+  {% if section.settings.title != blank and section.settings.subtitle != blank %}
+    <div class="section-header text-center">
+      <h2 class="new-page__main-title">{{ section.settings.title | escape }}</h2>
+      <p class="new-page__main-subtitle">{{ section.settings.subtitle | escape }}</p>
+    </div>
+  {% endif %}
+ 
+
+
+  <div class="grid new-featured__blocks direction-mobile">
+    {% for block in section.blocks %}
+     {%- assign producti = all_products[block.settings.prod] -%}
+    <div class="new-featured__block"  data-aos="fade-up">
+      <div class="new-featured__block--image-wrapper">
+      {%- if block.settings.image == blank -%}
+        <img src='{{ producti.featured_image | img_url: '500x'}}'/>
+      {%- else -%}
+      <img src="{{ block.settings.image | img_url: '500x300'}}"/>
+      {%- endif -%}
+      </div>
+    <div class="new-featured__text">
+      {% if section.settings.checkProdTitle == true %}
+      <p class="new-featured__title">{{ producti.title }}</p>
+      {% endif %}
+      <p class="new-featured__description">{{ block.settings.textDescription }}</p>
+      <a href="{{ producti.url}}" style="background:{{ block.settings.colorBtn }}" class="new-featured__link">Shop {{ producti.title }}</a>
+    </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Featured product",
+    "max_blocks": 3,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "checkFeatCollUno",
+        "label": "Enable",
+		"default": true
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured collection"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle",
+        "default": "Choose your NytStnd."
+      },
+      {
+        "type": "checkbox",
+        "id": "checkProdTitle",
+        "label": "Show product title",
+		"default": false
+      }
+],
+ "blocks": [
+
+      {
+        "type": "product",
+        "name": "Products",
+        "settings": [
+      {
+        "id": "prod",
+        "type": "product",
+        "label": "Product"
+      },
+      {
+        "id": "image",
+        "type": "image_picker",
+        "label": "Image"
+      },
+      {
+        "id": "textDescription",
+        "type": "text",
+        "label": "Product description"
+      },
+
+      {
+        "id": "colorBtn",
+        "type": "color",
+        "label": "Button color"
+      }
+
+    ]
+}]
+
+  }
+{% endschema %}

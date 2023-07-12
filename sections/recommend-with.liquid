@@ -1,0 +1,32 @@
+{% if section.settings.recommended_enable %}
+    <div class="recommend_with" data-section="{{ section.id }}">
+            <div class="page-width">
+                {% if product.metafields.custom.recommended.value != blank %}
+                  <h2 class="recommended_title">{{ section.settings.recommended_title }}</h2>
+                {% endif %}
+                <div class="grid grid--uniform grid--collection like_carousel">
+                    {%- for product in product.metafields.custom.recommended.value -%}
+                        {% include 'product-item' %}
+                    {%- endfor -%}
+                </div>
+            </div>
+    </div>
+{% endif %}
+{% schema %}
+{
+  "name": "Recommended products",
+  "settings": [
+   {
+     "type": "checkbox",
+     "id": "recommended_enable",
+     "label": "Show recommended products",
+     "default": true
+   },
+   {
+     "type": "text",
+     "id": "recommended_title",
+     "label": "Recomended Products Title"
+   }
+  ]
+}
+{% endschema %}

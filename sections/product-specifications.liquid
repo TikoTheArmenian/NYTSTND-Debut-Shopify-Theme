@@ -1,0 +1,32 @@
+{% if section.settings.show_specifications %}
+      {%- assign product_tags = product.tags -%}
+    <div class="page-width" id="specifications" data-section="{{ section.id }}">
+        {% unless product.tags contains 'blanks' %}
+          <div class="product-specifications">
+              <h2 class="product_specifications-title">{{ section.settings.section_title }}</h2>
+              <div class="product-single__description rte" itemprop="description">
+                {{ product.description }}
+              </div>
+          </div>
+        {% endunless %}
+  </div>
+{% endif%}
+
+{% schema %}
+  {
+    "name": "Product specifications",
+    "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_specifications",
+      "label": "Show Product Specifications",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Specifications section title"
+    }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,159 @@
+{% if section.settings.checkTwosideUno == true %}
+<style>
+  .rich-text-twoSide__wrapper{
+    max-width: 1100px;
+    margin: 0 auto;
+    color: #fff;
+	display: -webkit-box;    
+    display: -moz-box;      
+    display: -ms-flexbox;    
+    display: -webkit-flex;     
+    display: flex; 
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: row;
+    padding-top: 70px;
+  } 
+
+  .rich-text-twoSide__block{
+  	width: 40%;
+    animation-name: page-fade-in-up-out;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    
+  }
+  
+  .rich-text-twoSide__text{
+    font-size: 16px;
+	line-height: 1.38;
+    letter-spacing: normal;
+    color: #a5a5a5;
+    animation-name: heroContentIn;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+  }
+  
+  
+    @media (max-width: 768px){
+
+   .rich-text-twoSide__wrapper{
+    height: auto;
+    padding: 55px 25px;
+    }
+ .rich-text-twoSide__block{
+  	width: 100%;
+  }
+  .rich-text-twoSide__block:nth-child(2){
+    padding: 40px 0;
+    text-align: center;
+  }
+    }
+  
+</style>
+
+
+<div class="rich-text-twoSide__main-wrapper" style="background-color:{{ section.settings.bgColor}}; padding: 20px 0 90px 0;">
+
+<div class="rich-text-twoSide__wrapper page-width direction-mobile">
+    {% if section.settings.middleImage != blank %}
+  	<div class="rich-text-twoSide__block">
+  		<img src="{{ section.settings.middleImage | img_url: '900x900'}}">
+  	</div>
+  {% else %}
+    <div class="rich-text-twoSide__block text-left">
+      <h2 data-aos="fade-up">{{ section.settings.middleTitle }}</h2>
+      <div class="rich-text-twoSide__text" data-aos="fade-up">{{ section.settings.middleDescription }}</div>
+  	</div>
+  {% endif %}
+  	<div class="rich-text-twoSide__block text-left">
+      <h2 data-aos="fade-up">{{ section.settings.rightTitle }}</h2>
+      <div class="rich-text-twoSide__text" data-aos="fade-up">{{ section.settings.rightDescription }}</div>
+  	</div>
+
+  </div>
+<div class="rich-text-twoSide__wrapper page-width direction-mobile">  
+	<div class="rich-text-twoSide__block text-left">
+      <h2 data-aos="fade-up">{{ section.settings.leftTitle }}</h2>
+      <div class="rich-text-twoSide__text" data-aos="fade-up">{{ section.settings.leftDescription }}</div>
+  	</div>
+
+    {% if section.settings.imageTwo != blank %}
+  	<div class="rich-text-twoSide__block">
+  		<img src="{{ section.settings.imageTwo | img_url: '900x900'}}">
+  	</div>
+
+
+  {% endif %}
+</div>
+ 
+
+</div>
+
+{% endif %}
+{% schema %}
+  {
+    "name": "Rich text-two side",
+    "settings": [
+		{
+        "type": "checkbox",
+        "id": "checkTwosideUno",
+        "label": "Enable",
+		"default": true
+      	},
+          {
+            "type": "color",
+            "id": "bgColor",
+            "label": "Background color"
+			},
+         	{
+			"type": "text",
+            "id": "leftTitle",
+            "label": "Left title"
+			},
+			{
+			"type": "richtext",
+            "id": "leftDescription",
+            "label": "Left text"
+			},
+ 			{
+            "type": "image_picker",
+            "id": "middleImage",
+            "label": "Middle image"
+			},
+			{
+            "type": "image_picker",
+            "id": "imageTwo",
+            "label": "Image two"
+			},
+			{
+			"type": "text",
+            "id": "middleTitle",
+            "label": "Middle title"
+			},
+			{
+			"type": "richtext",
+            "id": "middleDescription",
+            "label": "Middle text"
+			},
+			{
+			"type": "text",
+            "id": "rightTitle",
+            "label": "Right title"
+			},
+			{
+			"type": "richtext",
+            "id": "rightDescription",
+            "label": "Right text"
+			}
+]
+  }
+{% endschema %}
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+

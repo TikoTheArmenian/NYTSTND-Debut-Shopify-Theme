@@ -1,0 +1,124 @@
+
+{% capture form_id %}AddToCartForm-{{ section_id }}{% endcapture %}
+
+{% form 'product', product, id: form_id, class: 'product-single__form' %}
+  {% unless product.options.size == 1 and product.variants[0].title == 'Default Title' %}
+    {% for option in product.options_with_values %}
+      {% if settings.variant_type == 'button' %}
+        {% include 'variant-button', section_id: section_id, option_drop: option, product_variant: product.variants %}
+      {% else %}
+        {% include 'variant-dropdown', section_id: section_id %}
+      {% endif %}
+    {% endfor %}
+  {% endunless %}
+  {% if settings.quantity_enable %}
+    <div class="prenton product__quantity product__quantity--{{ settings.variant_type }}">
+      <label for="Quantity-{{ section_id }}" class="product__label-title">{{ 'products.product.quantity' | t }}</label>
+      <div class="js-qty__wrapper">
+        <button type="button" class="js-qty__adjust js-qty__adjust--minus" data-id="" data-qty="0" aria-label="Reduce item quantity by one">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-minus" viewBox="0 0 20 20">
+              <path fill="#444" d="M17.543 11.029H2.1A1.032 1.032 0 0 1 1.071 10c0-.566.463-1.029 1.029-1.029h15.443c.566 0 1.029.463 1.029 1.029 0 .566-.463 1.029-1.029 1.029z"></path>
+            </svg>
+            <span class="icon__fallback-text" aria-hidden="true">-</span>
+        </button>
+        <input data-quantity="{{ current_variant.inventory_quantity }}" type="text" id="Quantity-{{ section_id }}" class="js-qty__num" value="1" min="1" data-id="" aria-label="quantity" pattern="[0-9]*" name="quantity">
+        <button type="button" class="js-qty__adjust js-qty__adjust--plus" data-id="" data-qty="2" aria-label="Increase item quantity by one">
+            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-plus" viewBox="0 0 20 20">
+              <path fill="#444" d="M17.409 8.929h-6.695V2.258c0-.566-.506-1.029-1.071-1.029s-1.071.463-1.071 1.029v6.671H1.967C1.401 8.929.938 9.435.938 10s.463 1.071 1.029 1.071h6.605V17.7c0 .566.506 1.029 1.071 1.029s1.071-.463 1.071-1.029v-6.629h6.695c.566 0 1.029-.506 1.029-1.071s-.463-1.071-1.029-1.071z"></path>
+            </svg>
+            <span class="icon__fallback-text" aria-hidden="true">+</span>
+        </button>
+      </div>
+      <input type="number" hidden="hidden" id="Quantity-{{ section_id }}" name="quantity" value="1" min="1" class="js-qty__fallback">
+    </div>
+  {% endif %}
+
+
+
+<select name="id" id="ProductSelect-{{ section_id }}" class="product-single__variant">
+    {% for variant in product.variants %}
+      {% if variant.available %}
+        <option {% if variant == product.selected_or_first_available_variant %}
+          selected="selected" {% endif %}
+          value="{{ variant.id }}">
+          {{ variant.title }} - {{ variant.price | money_with_currency }}
+        </option>
+      {% else %}
+        <option disabled="disabled" value="{{variant.id}}">
+          {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+        </option>
+      {% endif %}
+    {% endfor %}
+  </select>
+
+  <div
+    id="ProductInventory-{{ section_id }}"
+    class="product__inventory {% unless inventory_visible %}hide{% endunless %}"
+    >
+    {% if current_variant.available %}
+      {{ 'products.product.stock_label' | t: count: current_variant.inventory_quantity }}
+    {% endif %}
+  </div>
+
+  {% comment %} ete draca continue ev qanaky 0-e uremn cuyc ta sold out
+   ete draca continue ev qanaky 0ic cacr e uremn cuyc ta pre order
+   ete drac chi aysinqn havasr e denay ev producti qanaky drakan tiva 0-ic mec uremn lini add to cart {% endcomment %}
+
+  {%- assign enable_dynamic_buttons = false -%}
+  {% if settings.enable_payment_button and template != 'product.preorder' %}
+    {%- assign enable_dynamic_buttons = true -%}
+  {% endif %}
+<div id="product-pages-banners"></div>
+
+    {% assign isSoldOut = current_variant.inventory_policy %}
+    {% assign quantity = current_variant.inventory_quantity %}
+    <div class="payment-buttons">
+   
+     <button
+      {% if product.empty? %}type="button"{% else %}type="submit"{% endif %}
+      name="add"
+      id="AddToCart-{{ section_id }}"
+      class="btn btn--full add-to-cart{% if enable_dynamic_buttons %} btn--secondary{% endif %} {% if isSoldOut == "continue" and quantity == 0 %} sold-out {% endif %} btn-add-to-cart {% if product.tags contains 'preorder' and current_variant.available %} preorder-btn {% endif %}"
+      {% unless current_variant.available %} disabled="disabled"{% endunless %}>
+      <span id="AddToCartText-{{ section_id }}">
+        {% if current_variant.available %}
+          {% if product.tags contains 'preorder' %}
+             {{ 'products.product.preorder' | t }}
+          {% else %}
+            {{ 'products.product.add_to_cart' | t }}
+          {% endif %}
+        {% else %}
+          {{ 'products.product.sold_out' | t }}
+        {% endif %}
+      </span>
+    </button>
+    <span class="product_error_msg hide">This was the last item in the stock</span>
+    <!-- <form method="post" action="/cart/add" style="visibility:hidden">
+      <button type="submit" class="asda asd a" ><span class="plus-vertical"></span><span class="plus-horizontal"></span></button>
+    </form> -->
+
+{% render 'zoorix-product-main' %}
+
+    {% if enable_dynamic_buttons and current_variant.available %}
+      {% unless product.tags contains 'preorder' %}
+        <!-- {{ form | payment_button }} -->
+        <div class="payment_button-container">
+          <div class="payment_button">
+            <button type="button" {% unless current_variant.available %} disabled="disabled"{% endunless %} class="shopify-payment-button__now" data-testid="Checkout-button">
+              Buy it now
+            </button>
+          </div>
+        </div>
+      {% endunless %}
+    {% endif %}
+    </div>
+{% endform %}
+
+<script>  	  
+      const product = window.location.href.split("products/")
+      const variantsData = product[1] && product[1].split("/") && product[1].split("/")[1];
+      const color = variantsData && variantsData.split("#")[0];
+  	  const wood = variantsData && variantsData.split("#")[1];
+      const colorVariationFromURL = color && (color.toLowerCase() =="black" || color.toLowerCase() =="white") ? color : "Black";
+  	  const woodVariationFromURL = wood || "Oak";  	  
+</script>

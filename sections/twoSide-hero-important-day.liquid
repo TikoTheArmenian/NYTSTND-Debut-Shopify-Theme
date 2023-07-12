@@ -1,0 +1,143 @@
+{% if section.settings.checkTwoSideImg == true %}
+<style>
+  .twoImgBlocks{
+  	display: -webkit-box;    
+    display: -moz-box;      
+    display: -ms-flexbox;    
+    display: -webkit-flex;     
+    display: flex; 
+  }
+  
+  .twoImgBlock{
+  	width: 50%;
+    height: 600px;
+    background-size: 100%;
+    background-position: center;
+      background-repeat: no-repeat;
+    padding: 20px;
+      position: relative;
+  }
+  .twoImgBlock__text{
+    text-align: center;
+    width: 90%;
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+  }
+  
+  .twoImgBlock__text .mega-title{
+    text-transform: unset;
+  }
+  @media screen and (max-width: 1200px) and (min-width: 769px){
+    .twoImgBlock{
+    background-size: 100% 100%;
+    }
+  }
+    @media screen and (max-width: 600px){
+    .twoImgBlock{
+    background-size: 100% 100%;
+    }
+  }
+  @media (max-width: 768px){
+    .twoImgBlocks{
+		flex-direction: column; 
+  } 
+    
+   .twoImgBlock{
+       width: 100%;
+      height: 360px;
+       
+  }
+  
+  }
+
+</style>
+<div class="twoImgBlocks" >
+  
+  {% for block in section.blocks %}
+  
+  <div class="twoImgBlock" style="background-image: url({{ block.settings.image | img_url: "1200x1200" }})">
+     <div class="twoImgBlock__text">
+  {% if block.settings.title != blank %}
+   
+        <h2 class="h1 new__mega-title mega-title">{{ block.settings.title | escape }}</h2>
+      {% endif %}
+      {% if block.settings.text != blank %}
+        <div class="rte-setting mega-subtitle">{{ block.settings.text }}</div>
+      {% endif %}
+      {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+        <a href="{{ block.settings.button_link }}" class="btn hero__btn" style="margin-top: 25px;">
+          {{ block.settings.button_label }}
+        </a>
+    
+      {% endif %}
+       </div>
+  </div>
+  
+  {% endfor %}
+  
+</div>
+
+{% endif %}
+{% schema %}
+  {
+    "name": "Two side images section",
+    "class": "index-section index-section--flush",
+	"max_blocks": 2,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "checkTwoSideImg",
+        "label": "Enable",
+		"default": true
+      }
+],
+"blocks": [
+
+      {
+        "type": "image",
+        "name": "Images",
+        "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Image with text overlay"
+      },
+
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }
+]
+}
+
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

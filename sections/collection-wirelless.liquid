@@ -1,0 +1,52 @@
+<div class="wirelless_collection-page" style="background-color: {{ section.settings.background_color }};">
+    {% if section.settings.wirless_title != blank and section.settings.wirless_text != blank %}
+    <div class="wirless_text-desc">
+        <div class="wirless_text-block" style="background-color: {{ section.settings.text_block_color }};">
+            <h3 class="wirless_block-title">{{ section.settings.wirless_title }}</h3>
+        </div>
+        <div class="wirless_desc-block" style="background-color: {{ section.settings.text_block_color }};">
+            <p class="wirless_block-text">{{ section.settings.wirless_text }}</p>
+        </div>
+    </div>
+    {% endif %}
+    {% if section.settings.wirless_image != blank %}        
+        <div class="wirless_image-block">
+            <img src="{{ section.settings.wirless_image | img_url: '2000x' }}" alt="image">
+        </div>
+    {% endif %}
+</div>
+
+{% schema %}
+{
+    "name": "Collection wirelless",
+    "settings": [
+    {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#000000"
+    },
+    {
+        "type": "color",
+        "id": "text_block_color",
+        "label": "Text Block Background color",
+        "default": "#ffffff"
+    },
+    {
+        "type": "text",
+        "id": "wirless_title",
+        "label": "Block Title"
+    },
+    {
+        "type": "text",
+        "id": "wirless_text",
+        "label": "Block Text"
+    },
+    {
+        "type": "image_picker",
+        "id": "wirless_image",
+        "label": "Block image"
+    }
+    ]
+}
+{% endschema %}

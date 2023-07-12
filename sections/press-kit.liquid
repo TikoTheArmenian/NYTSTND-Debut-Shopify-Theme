@@ -1,0 +1,44 @@
+<h3 class="press-page-title">{{ section.settings.kitSectionTitle }}
+</h3>
+{{ section.settings.kitSectionText }}
+<div class="press-button-container">
+  <a class="press-kit-link" target="_blank" href="{{ section.settings.kitLink }}">{{ section.settings.kitBtnLabel }}
+  </a>
+</div>
+{% if section.settings.kitSectionTextEnd != blank %}
+  {{ section.settings.kitSectionTextEnd }}
+{% endif %}
+
+
+{% schema %}
+  {
+    "name": "Press Kit section",
+    "class": "index-section index-section--flush press-kit-container",
+    "settings": [
+      {
+        "type": "text",
+        "id": "kitSectionTitle",
+        "label": "Press Kit Title"
+      },
+      {
+        "type": "richtext",
+        "id": "kitSectionText",
+        "label": "Press Kit Text"
+      },
+      {
+        "type": "url",
+        "id": "kitLink",
+        "label": "Press Kit Download Link"
+      },
+      {
+        "type": "text",
+        "id": "kitBtnLabel",
+        "label": "Press Kit Button Label"
+      }, {
+        "type": "richtext",
+        "id": "kitSectionTextEnd",
+        "label": "Press Kit Text"
+      }
+    ]
+  }
+{% endschema %}

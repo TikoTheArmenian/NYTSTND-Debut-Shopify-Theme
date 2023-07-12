@@ -1,0 +1,43 @@
+<div class="page-width">
+    {% if section.settings.title != blank %}
+        <div class="section-header">
+            <h2>{{ section.settings.title }}</h2>
+        </div>
+    {% endif %}
+    {% if section.settings.video_url != blank %}
+      <div>
+        <video preload="auto" width="100%" controls src="{{ section.settings.video_url }}" poster='{{ section.settings.poster }}'></video>
+      </div>
+    {% endif %}
+</div>
+
+{% schema %}
+  {
+    "name": "Video home",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "text",
+        "id": "video_url",
+        "label": "Video link",
+        "info": "Some info here"
+      },
+      {
+        "type": "text",
+        "id": "poster",
+        "label": "Video Poster"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Video Home",
+        "category": "Video"
+      }
+    ]
+  }
+{% endschema %}

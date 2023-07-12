@@ -1,0 +1,66 @@
+<div class="page-width page-width-collection">
+    <div class="collection_featured-block">
+      <div class="collection_featured-logo_block">
+          {% if section.settings.show_image and section.settings.logo_image != blank %} 
+              <img src="{{ section.settings.logo_image | img_url }}" alt="logo">
+          {% endif %}
+          {% if section.settings.block_title != blank %}            
+              <h3 class="collection_featured-title">
+                  {{ section.settings.block_title }}
+              </h3>
+          {% endif %}
+        </div>
+        {% if section.settings.company_images != blank %}
+            <img src="{{ section.settings.company_images | img_url: '3000x'}}" class="hide_mobile" alt="companies">
+        {% endif %}
+        <div class="mobile_images">
+            {% for item in section.blocks %}
+              {% if item.type == 'image'%}
+                <img src="{{ item.settings.image_item | img_url: '2000x' }}" alt="">
+              {% endif %} 
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Featured On",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_image",
+        "label": "Show logo image",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "Logo image"
+      },
+      {
+        "type": "text",
+        "id": "block_title",
+        "label": "Enter Block title"
+      },
+      {
+        "type": "image_picker",
+        "id": "company_images",
+        "label": "Select company image"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image_item",
+            "label": "Image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

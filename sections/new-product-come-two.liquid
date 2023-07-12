@@ -1,0 +1,98 @@
+{% if section.settings.checkProdTwocome == true %}
+<style>
+  .new-page{
+  	padding-top: 56px; 
+    padding-bottom: 42px; 
+  
+  }
+  
+  .new-page .new-page__main-subtitle{
+  font-weight: 500;
+  }
+  
+  .new-prod-come__img-wrapper{
+  min-height: 250px;
+  }
+  .new-prod-come__link{
+    margin-top: 30px;
+    color: #fff;
+    padding: 13px 32px;
+    font-family: Jost;
+    font-size: 18px;
+    font-weight: bold;
+	line-height: 1.44;
+    letter-spacing: 1.35px;
+  }
+  .new-prod-come__link:hover{
+  background: #000 !important;
+    color: #fff !important;
+  }
+</style>
+
+
+
+
+<div class="new-page text-center">
+  <div class="page-width">
+  <div class="text-center">
+    <h2 class="new-page__main-title">{{ section.settings.title }}</h2>
+    <p class="new-page__main-subtitle">{{ section.settings.subtitle }}</p>
+  </div>
+  <div class="new-prod-come__img-wrapper text-center">
+  	<img src="{{ section.settings.image | img_url: "900x900" }}">
+  </div>
+  
+  <a href="{{ section.settings.link }}" class="new-prod-come__link" style="background:{{ section.settings.colorBtn }}">{{ section.settings.link_text }}</a>
+</div>
+</div>
+
+{% endif %}
+
+{% schema %}
+  {
+    "name": "New product",
+    "settings": [
+{
+        "type": "checkbox",
+        "id": "checkProdTwocome",
+        "label": "Enable",
+		"default": true
+      },
+{
+        "type":"text",
+        "id":"title",
+        "label":"Title"
+},
+{
+        "type":"text",
+        "id":"subtitle",
+        "label":"Subtitle"
+},
+{
+        "type":"image_picker",
+        "id":"image",
+        "label":"Image"
+},
+{
+        "type":"url",
+        "id":"link",
+        "label":"Link"
+},
+{
+        "type":"text",
+        "id":"link_text",
+        "label":"Label"
+},      {
+        "id": "colorBtn",
+        "type": "color",
+        "label": "Button color"
+      }
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

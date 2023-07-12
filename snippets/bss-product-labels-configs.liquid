@@ -1,0 +1,10 @@
+<script>
+              if (typeof BSS_PL == 'undefined') {
+                  var BSS_PL = {};
+              }
+              BSS_PL.customerTags = {% if customer %}'{%for tag in customer.tags%}{{ tag }},{% endfor %}'{% else %}'null'{% endif %}
+              BSS_PL.configData = [];
+              BSS_PL.storeId = 4746;
+              BSS_PL.currentPlan = "false";
+              </script>
+          

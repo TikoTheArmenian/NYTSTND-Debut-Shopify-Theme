@@ -1,0 +1,534 @@
+{% unless section.settings.thumbnail_position %}
+  {%- assign thumbnail_position = 'beside' -%}
+{% endunless %}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign product_thumb_size = '180x' -%}
+{%- assign product_zoom_size = '1800x1800' -%}
+{%- assign product_image_size = '1080x' -%}
+{%- assign product_title = product.metafields.custom.product_title.value | downcase -%}
+{% if product.title contains 'QUAD' %}
+  {% if product.title contains "USB-C" or "Lightning" %}
+    {% assign product_replaced_title = product.title | replace: "USB-C", " " | replace: "Lightning", " " -%}
+  {% endif %}
+{% endif %}
+
+{% case section.settings.image_size %}
+  {% when 'small' %}
+    {%- assign product_image_width = 'medium-up--two-fifths' -%}
+    {%- assign product_description_width = 'medium-up--three-fifths' -%}
+    {%- assign product_image_size = '480x' -%}
+  {% when 'medium' %}
+    {%- assign product_image_width = 'medium-up--one-half' -%}
+    {%- assign product_description_width = 'medium-up--one-half' -%}
+    {%- assign product_image_size = '720x' -%}
+  {% when 'large' %}
+    {%- assign product_image_width = 'medium-up--three-fifths' -%}
+    {%- assign product_description_width = 'medium-up--two-fifths' -%}
+    {%- assign product_image_size = '1080x' -%}
+{% endcase %}
+
+{%- assign product_img_structure = product.featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+<div id="ProductSection-{{ product.id }}"
+  class="product-section"
+  data-section="{{ section.id }}"
+  itemscope itemtype="http://schema.org/Product"
+  data-section-id="{{ product.id }}"
+  data-section-type="product-template"
+  data-product-handle="{{ product.handle }}"
+  data-product-url="{{ product.url | within: collection }}"
+  data-aspect-ratio="{{ 100 | divided_by: product.featured_image.aspect_ratio }}"
+  data-img-url="{{ product_img_structure }}"
+  {% if settings.product_zoom_enable %}
+    data-image-zoom="true"
+  {% endif %}
+  {% if settings.inventory_enable %}
+    data-inventory="true"
+  {% endif %}
+  {% unless isModal %}
+    data-enable-history-state="true"
+  {% endunless %}
+  {% if isModal %}
+    data-lazyload-content="true"
+  {% endif %}>{% render 'preorder-now-collection-item', product: product %}
+
+  <!-- {% include 'product-template-variables' %} -->
+
+  <div class="page-content page-content--product" data-variant-id="{{ product.variants[0].id }}">
+    <div class="medium-up--wrap-wide product_main-page-container">
+      <div class="grid grid-items-center{% unless section.settings.image_position == 'left' %} grid--product-images-right{% endunless %}">
+        <div class="show-mobile grid__item {{ product_description_width }}">
+          <div class="product-single__meta product__description-info">
+            {% if settings.show_breadcrumbs and isModal != true %}
+              {% include 'breadcrumbs' %}
+            {% endif %}
+
+            {% if settings.vendor_enable %}
+              <div class="product-single__vendor" itemprop="brand">{{ product.vendor }}</div>
+            {% endif %}
+
+            {% if isModal %}
+              <p class="product-single__title" itemprop="name">
+                {% if product.title contains 'QUAD' %}
+                  {{ product_replaced_title }}
+                {% else %}
+                  {{ product.title }}
+                {% endif %}</p>
+              <p class="product-single__desc">{{ product.metafields.custom.description.value }}</p>
+            {% else %}
+              <h2 class="product-single__title" itemprop="name">
+                {% if product.title contains 'QUAD' %}
+                  {{ product_replaced_title }}
+                {% else %}
+                  {{ product.title }}
+                {% endif %}
+              </h2>
+              <p class="product-single__desc">{{ product.metafields.custom.description.value }}</p>
+            {% endif %}
+            <div class="product__price-info">
+              <h4>
+                {%- assign hide_sale_price = false -%}
+                <span id="PriceA11y-{{ product.id }}" class="visually-hidden"> {{ 'products.general.regular_price' | t }}</span>
+                <span class="product__price-wrap-{{ product.id }}{% if hide_sale_price %} hide{% endif %}{% unless current_variant.compare_at_price > current_variant.price %} hide{% endunless %}">
+                  <span id="ComparePrice-{{ product.id }}" class="product__price product__price--compare">
+                    {% if current_variant.compare_at_price > current_variant.price %}
+                      {{ current_variant.compare_at_price | money }}
+                    {% endif %}
+                  </span>
+                </span>
+                <span id="ComparePriceA11y-{{ product.id }}" class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+                <span id="ProductPrice-{{ product.id }}" class="product__price{% if current_variant.compare_at_price > current_variant.price %} on-sale{% endif %}">
+                  {{ current_variant.price | money }}
+                </span>
+
+                {% capture saved_amount %}{{ current_variant.compare_at_price | minus: current_variant.price | money }}{% endcapture %}
+                <span id="SavePrice-{{ product.id }}" class="tt1 product__price-savings{% if hide_sale_price %} hide{% endif %}">
+                  {% if current_variant.compare_at_price > current_variant.price %}
+                    {{ 'products.general.save_html' | t: saved_amount: saved_amount }}
+                  {% endif %}
+                </span>
+              </h4>
+
+              {% if isModal %}
+                {%- assign review_link = product.url | within: collection | append: '#Reviews-' | append: product.id -%}
+              {% else %}
+                {%- assign review_link = '#Reviews-' | append: product.id -%}
+              {% endif %}
+              <a href="{{ review_link }}" class="product-single__review-link">
+                {% render 'okendo-reviews-product-rating-summary', product: product %}
+              </a>
+            </div>
+            {% if settings.sku_enable %}
+              <p id="Sku-{{ product.id }}" class="product-single__sku">
+                {% if current_variant.sku %}
+                  {{ current_variant.sku }}
+                {% endif %}
+              </p>
+            {% endif %}
+            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+              {% if settings.inventory_enable %}
+                <script>
+                  // Store inventory quantities in JS because they're no longer
+                  // available directly in JS when a variant changes.
+                  // Have an object that holds all potential products so it works
+                  // with quick view or with multiple featured products.
+                  window.inventories = window.inventories || {};
+                  window.inventories['{{product.id}}'] = {};
+                  var inv_qty = {};
+                    {% for variant in product.variants %}
+                    window.inventories['{{product.id}}'][{{variant.id}}] = {{ variant.inventory_quantity | default: 0 }};
+                    {% endfor %}
+                </script>
+                {%- assign inventory_visible = false -%}
+                {% if current_variant.inventory_management == 'shopify' %}
+                  {% if current_variant.inventory_quantity < 10 %}
+                    {%- assign inventory_visible = true -%}
+                  {% endif %}
+                {% endif %}
+                {% if current_variant.inventory_quantity == 0 %}
+                  {%- assign inventory_visible = false -%}
+                {% endif %}
+              {% endif %}
+
+              <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+              <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+              <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+            </div>
+            {% if section.settings.social_enable %}
+              {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+            {% endif %}
+          </div>
+        </div>
+
+        {% if section.settings.image_position == 'left' %}
+          <div class="grid__item grid__product_container {{ product_image_width }}">
+            {% include 'product-images', section_id: product.id, isModal: isModal, thumbnail_position: section.settings.thumbnail_position %}
+          </div>
+        {% endif %}
+
+      <div class="grid__item {{ product_description_width }}" style="position: relative; min-height: 665px;">
+        <div class="product-single__meta product__description-info">
+          {% if settings.show_breadcrumbs and isModal != true %}
+            {% include 'breadcrumbs' %}
+          {% endif %}
+
+          {% if settings.vendor_enable %}
+            <div class="product-single__vendor" itemprop="brand">{{ product.vendor }}</div>
+          {% endif %}
+
+          <div class="show-desctop">
+            {% if isModal %}
+              <p class="h2 product-single__title" itemprop="name">
+                {% if product.title contains 'QUAD' %}
+                  {{ product_replaced_title }}
+                {% else %}
+                  {{ product.title }}
+                {% endif %}
+              </p>
+              <p class="product-single__desc">{{ product.metafields.custom.description.value }}</p>
+            {% else %}
+              <h1 class="h2 product-single__title" itemprop="name">
+              {% if product.title contains 'QUAD' %}
+                {{ product_replaced_title }}
+              {% else %}
+                {{ product.title }}
+              {% endif %}
+              </h1>
+              <p class="product-single__desc">{{ product.metafields.custom.description.value }}</p>
+            {% endif %}
+            <div class="product__price-info">
+              <h4>
+                <span id="PriceA11y-{{ product.id }}" class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                <span class="product__price-wrap-{{ product.id }} {% unless current_variant.compare_at_price > current_variant.price %} hide{% endunless %}">
+                  <span id="ComparePrice-{{ product.id }}" class="product__price product__price--compare">
+                    {% if current_variant.compare_at_price > current_variant.price %}
+                      {{ current_variant.compare_at_price | money }}
+                    {% endif %}
+                  </span>
+                </span>
+                <span id="ComparePriceA11y-{{ product.id }}" class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+                <span id="ProductPrice-{{ product.id }}" class="asd product__price{% if current_variant.compare_at_price > current_variant.price %} on-sale{% endif %}">
+                  {{ current_variant.price | money }}
+                </span>
+
+                {% capture saved_amount %}{{ current_variant.compare_at_price | minus: current_variant.price | money }}{% endcapture %}
+                <span id="SavePrice-{{ product.id }}" class="tt2 product__price-savings{% if hide_sale_price %} hide{% endif %}">
+                    {% if current_variant.compare_at_price > current_variant.price %}
+                  {{ 'products.general.save_html' | t: saved_amount: saved_amount }}
+                    {% endif %}
+                </span>
+              </h4>
+              {% if isModal %}
+                {%- assign review_link = product.url | within: collection | append: '#Reviews-' | append: product.id -%}
+              {% else %}
+                {%- assign review_link = '#Reviews-' | append: product.id -%}
+              {% endif %}
+              <a href="{{ review_link }}" class="product-single__review-link">
+                {% render 'okendo-reviews-product-rating-summary', product: product %}
+              </a>
+            </div>
+          </div>
+          <afterpay-placement
+            data-locale="en_US"
+            data-currency="{{ shop.curency }}"
+            data-amount="{{ product.price | money }}"
+          ></afterpay-placement>
+{% comment %} Start for product options {% endcomment %}
+{% comment %} {% for product_tray in product.metafields.custom.product_for_tray.value %}
+  {{ product_tray.handle }}-handle
+{% endfor %} {% endcomment %}
+            {% if product_title contains 'quad' or product_title contains 'trio' or product_title contains 'duo' %}
+              {%- assign tray_handles = product.metafields.custom.product_for_tray.value | map: 'handle' -%}
+
+              {% capture tray_notray_product %}
+                {% if product.metafields.custom.tray.value == true %}
+                  {{ tray_handles[0] }}
+                {% else %}
+                  {{ tray_handles[1] }}
+                {% endif %}
+              {% endcapture %}
+
+              <a href="{{ shop.url }}/products/{{ tray_notray_product | replace: ' ', '' }}">
+                <div id="ProductTray-{{ product.id }}" class="product__tray-container">
+                  <label for="tray" class="product__tray-checkbox">
+                    {{ section.settings.tray_checkbox_text }}
+                    <input id="tray" class="product__tray-input" {% if product.metafields.custom.tray.value == true %}checked{% endif %} type="checkbox">
+                    <span class="product__tray-checkmark"></span>
+                  </label>
+                  {%- assign img_url = section.settings.tray_checkbox_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                  <img width="100" height="100"
+                    data-src="{{ img_url }}"
+                    class="product__tray-checkbox-img lazyload"
+                    data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1920]"
+                    data-sizes="auto"
+                    data-aspectratio="{{ section.settings.tray_checkbox_image.aspect_ratio }}"
+                    alt="tray_image"
+                  >
+                </div>
+              </a>
+            {% endif %}
+            {% if product.metafields.custom.colors.value != blank and product.metafields.custom.images.value != blank and product.metafields.custom.colors_label.value != blank %}
+              <div id="ColorOption-{{ product.id }}" class="product__colors">
+                <label for="" class="product__label-title">{{ section.settings.color_options_label }}</label>
+                <div id="product_colors-container" class="product__color-variants">
+                  {%- liquid
+                    assign color_item_handles = product.metafields.custom.colors.value | map: 'handle'
+                    assign product_available_products_items = color_item_handles | size
+                  -%}
+
+                  {% for color_image in product.metafields.custom.images.value limit: product_available_products_items %}
+                    <a class="product__color-item" data-handle="/products/{{ color_item_handles[forloop.index0] }}" href="{{ shop.url }}/products/{{ color_item_handles[forloop.index0] }}">
+                      <img class="product__color-img" src="{{ color_image | image_url: width: color_image.width }}">
+                      <span class="product__color-variant-label">{{ product.metafields.custom.colors_label.value[forloop.index0] | replace: "/", "/<br>" }}</span>
+                    </a>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+            {% if settings.sku_enable %}
+              <p id="Sku-{{ product.id }}" class="product-single__sku">
+                {% if current_variant.sku %}
+                  {{ current_variant.sku }}
+                {% endif %}
+              </p>
+            {% endif %}
+
+          {% if product.title contains 'QUAD' and product.metafields.custom.product_cords.value != blank %}
+            <div id="ProductCord-{{ product.id }}"class="product__card-container">
+              <label class="product__label-title">{{ section.settings.product_cord_label }}</label>
+              <span class="product_select_cord">Please select</span>
+              <div class="product_cord-select-container">
+                <div class="product-cord-variants-wrapper">
+                  <div class="product_select-header">Select a cord type</div>
+                  <div class="product-select-variants">
+                    {%- assign cord_handles = product.metafields.custom.product_cords.value | map: 'handle' -%}
+
+                    {% for cord_product in product.metafields.custom.product_cords.value %}
+                      {% assign cord_product_title = cord_product.title | upcase %}
+                      {% if cord_product_title contains 'USB-C' %}
+                        <a href="{{ shop.url }}/products/{{ cord_handles[0] }}" class="product-select-variant">
+                          USB-C
+                        </a>
+                      {% else %}
+                        <a href="{{ shop.url }}/products/{{ cord_handles[1] }}" class="product-select-variant">
+                          Lightning
+                        </a>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="product-cord-variants-arrow" width="14" height="8.651" viewBox="0 0 14 8.651">
+                  <g id="right-chevron" transform="translate(14) rotate(90)">
+                    <g id="Group_604" data-name="Group 604">
+                      <path id="Path_232" data-name="Path 232" d="M1.651,0,0,1.651,5.349,7,0,12.349,1.651,14l7-7Z" fill="#101010"></path>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          {% endif %}
+
+{% comment %} End for product options {% endcomment %}
+
+            {% unless isModal %}
+              {% comment %}
+                Shopify's product form attaches a number of tracking
+                scripts that cause slower load times and false statistics.
+                Quick view modals request these on-demand.
+              {% endcomment %}
+              {% include 'product-form', section_id: product.id %}
+
+              {% if section.settings.hide_product %}
+                <div class="product-button">
+                    {%- for block in section.blocks -%}
+                      <div class="product--info-block">
+                        {% if block.settings.new_image != blank %}
+                          <img class="image-block" src="{{block.settings.new_image | img_url}}" alt="">
+                        {% endif %}
+                        <p class="new_text">{{ block.settings.block_text }}</p>
+                      </div>
+                      {%- endfor -%}
+                  </div>
+                {% endif %}
+            {% else %}
+              <div id="ProductFormHolder-{{ product.id }}" class="product-form-holder" data-url="{{ product.url }}"></div>
+            {% endunless %}    
+          </div>
+          {% if section.settings.social_enable %}
+            {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+          {% endif %}
+        </div>
+        {% unless section.settings.image_position == 'left' %}
+        <div class="grid__item grid__product_container {{ product_image_width }}">
+          {% include 'product-images', section_id: product.id, isModal: isModal, thumbnail_position: section.settings.thumbnail_position %}
+        </div>
+        {% endunless %}
+      </div>
+
+      {% if section.settings.description_style == 'full' %}
+        <div class="product-single__description-full rte" itemprop="description">
+          {{ product.description }}
+        </div>   
+      {% endif %}
+    </div>
+
+    {% if collection %}
+      {% unless isModal %}
+        <div class="text-center page-content page-content--bottom">{% render 'preorder-now-collection-item', product: product %}
+          <a href="{% if collection.handle == 'frontpage' %}/{% else %}{{ collection.url }}{% endif %}" class="btn btn--small return-link">
+            {% include 'icon-arrow-left' %} {{ 'products.general.collection_return' | t: collection: collection.title }}
+          </a>
+        </div>
+      {% endunless %}
+    {% endif %}
+
+    <script>
+      theme.settings.recentlyViewedEnabled = {{ section.settings.recently_viewed_enable | default: 'false' }};
+    </script>
+
+    <script type="application/json" id="ProductJson-{{ product.id }}">
+      {{ product | json }}
+    </script>
+     
+  </div>
+</div>
+
+<script type="application/json" id="variants-images-json">
+  {
+  {% for variant in product.variants  %}
+    {% if variant.metafields.global.images != blank %}
+      "{{variant.id}}" : {{ variant.metafields.global.images.array }}
+    {% endif %}
+  {% endfor %}
+  };
+</script>
+
+{% schema %}
+  {
+    "name": "Product template",
+    "settings": [
+      {
+        "type": "select",
+        "id": "image_position",
+        "label": "Images position",
+        "default": "right",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "image_size",
+        "label": "Image size",
+        "default": "medium",
+        "options": [
+          {
+            "value": "small",
+            "label": "Small"
+          },
+          {
+            "value": "medium",
+            "label": "Medium"
+          },
+          {
+            "value": "large",
+            "label": "Large"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "tray_checkbox_text",
+        "label": "Tray Checkbox Label",
+        "default": "Tray"
+      },
+      {
+        "type": "image_picker",
+        "id": "tray_checkbox_image",
+        "label": "Image for Tray checkbox"
+      },
+      {
+        "type": "text",
+        "id": "color_options_label",
+        "label": "Color options label",
+        "default": "Color options"
+      },
+      {
+        "type": "text",
+        "id": "product_cord_label",
+        "label": "Cord option label",
+        "default": "CHOOSE IPAD CORD"
+      },
+      {
+        "type": "select",
+        "id": "thumbnail_position",
+        "label": "Thumbnail position",
+        "default": "beside",
+        "options": [
+          {
+            "value": "beside",
+            "label": "Next to image"
+          },
+          {
+            "value": "below",
+            "label": "Below image"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "description_style",
+        "label": "Description position",
+        "default": "default",
+        "options": [
+          {
+            "value": "default",
+            "label": "Next to images"
+          },
+          {
+            "value": "full",
+            "label": "Below images"
+          }
+        ]
+      },
+      {
+        "id": "hide_product",
+        "type": "checkbox",
+        "label": "Show product info blocks",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "social_enable",
+        "label": "Enable social sharing",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Product info blocks",
+        "type": "text",
+        "settings":[
+          {
+            "id": "block_text",
+            "type": "text",
+            "label": "Add text"
+          },
+          {
+            "id": "new_image",
+            "type": "image_picker",
+            "label": "Add image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% render 'zoorix-product-bottom' %}

@@ -1,0 +1,106 @@
+{%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+
+{% unless product.empty? %}
+  <div class="product__photos product__photos-{{ section_id }} product__photos--{{ thumbnail_position }}">
+
+    <div class="product__main-photos" data-aos>
+      <div
+        id="ProductPhotos-{{ section_id }}"
+        class="product-photo_container"
+        style="display: flex; align-items: center; max-height: inherit; justify-content: center;">
+
+        {%- assign is_featured = false -%}
+        {% if featured_image == image %}
+          {%- assign is_featured = true -%}
+        {% endif %}
+        {%- assign image_alt = image.alt -%}
+
+        {% assign image_order = 10 %}
+        {% unless product.tags contains 'blanks' %}
+          <div class="carousel carousel-nav">
+            {% for image in product.images %}
+              {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+              <div class="carousel-cell-item">
+                <img
+                  class="lazyload"
+                  style="display: block!important;opacity: 1!important;"
+                  data-src="{{ img_url }}"
+                  data-widths="[100, 360, 540, 720, 900]"
+                  data-aspectratio="{{ image.aspect_ratio }}"
+                  data-sizes="auto"
+                  alt="{{ image_alt | escape }}">
+              </div>
+            {% endfor %}
+            {% for video in product.metafields.custom.product_video.value %}
+              {{ video | video_tag: image_size: "900x", autoplay: true, loop: true, class: 'carousel-video-item lazyload' }}
+            {% endfor %}
+          </div>
+        {% endunless %}
+        <div class="carousel {% if product.tags contains 'blanks' %}carousel-main-gift-card {% else %} carousel-main {% endif %}">
+          {% for image in product.images %}
+            {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <div
+              href="{{ image | image_url | width: 2000}}"
+              class="carousel-cell MagicZoom"
+              data-options="zoomPosition: top; expand: off;"
+              data-mobile-options="expand: off; zoomMode: zoom;">
+              <img
+                class="lazyload"
+                data-src="{{ img_url }}"
+                data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 1920]"
+                data-aspectratio="{{ img_url.aspect_ratio }}"
+                data-sizes="auto"
+                alt="{{ image_alt | escape }}">
+            </div>
+          {% endfor %}
+          {% for video in product.metafields.custom.product_video.value %}
+            {{ video | video_tag: controls: true, image_size: "1920x", autoplay: true, loop: true, class: 'carousel-main-video-item lazyload' }}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% else %}
+  <div class="product__photos product__photos-{{ section_id }}">
+    <div class="product__main-photos" style="width: 100%">
+      <div id="ProductPhotos-{{ section_id }}">
+        <div data-index="{{ forloop.index0 }}">
+          <a href="#">
+            {{ 'collection-5' | placeholder_svg_tag: 'placeholder-svg' }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endunless %}
+
+<script>/*
+      const items = Array.from(document.getElementsByClassName("variant-image"))
+
+
+      items.forEach(item=>{
+        item.style.display = 'none';
+      })
+      
+      const currentVariantImages = [product.selected_or_first_available_variant.metafields.global.images];
+      
+      currentVariantImages.array && currentVariantImages.array.forEach(imgId=>{
+		document.getElementById(imgId).style.display = 'block';
+      })
+      */
+
+/*
+      if("{{product.selected_or_first_available_variant.title}}".toLowerCase().indexOf('white')>-1){
+        const whiteItems = Array.from(document.getElementsByClassName("variant-white"))
+        whiteItems.forEach(item=>{
+          item.style.display = 'block';
+        })
+      }
+      else{
+        const blackItems = Array.from(document.getElementsByClassName("variant-black"))
+        blackItems.forEach(item=>{
+          item.style.display = 'block';
+        })
+      }
+      */
+</script>

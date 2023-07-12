@@ -1,0 +1,173 @@
+
+<div class="rich-text-bg-image__wrapper_right lazy-background" style="background-image: url('{{section.settings.bg_image | img_url: '1800x1800'}}');">
+  <div class="rich-text-bg-image__text-right page-width small--hide" data-aos="fade-left">
+  <div class="rich-text-bg-image__text-inner">
+    {% if section.settings.text != blank %}
+    <p>{{section.settings.text}}</p>
+    {% endif %}
+    {% if section.settings.btn_text != blank %}
+    <a href="{{section.settings.btn_link}}">{{section.settings.btn_text}}</a>
+    {% endif %}
+  </div>
+  </div>
+</div>
+<div class="rich-text-bg-image__text-right rich-text-bg-image__text-mobile page-width medium-up--hide" data-aos="zoom-out">
+  <div class="rich-text-bg-image__text-inner">
+    {% if section.settings.text != blank %}
+    <p>{{section.settings.text}}</p>
+    {% endif %}
+    {% if section.settings.btn_text != blank %}
+    <a href="{{section.settings.btn_link}}">{{section.settings.btn_text}}</a>
+    {% endif %}
+  </div>
+  </div>
+
+<style>
+  .rich-text-bg-image__wrapper_right{
+    margin: 20px;
+  	min-height: 500px;
+    position: relative;
+    overflow-x: hidden;
+  	background-size: cover;
+    background-position: right;
+    background-repeat: no-repeat;
+  }
+  .rich-text-bg-image__text-right{
+    position: absolute;
+    left: 65%;
+    opacity: 0.7;
+    height: 100%;
+    width: 35%;
+    background: rgba(0, 0, 0, 0.7);
+  }
+   .rich-text-bg-image__text-mobile{
+  position: unset;
+    width: 100%;
+    min-height: 200px;
+    background: #000000;
+  }
+  .rich-text-bg-image__text-inner{
+    width: 50%;
+    color: {{ section.settings.text_color }};
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .rich-text-bg-image__text-inner p{
+  	padding-bottom: 20px;
+  }
+  
+  .rich-text-bg-image__text-inner a{
+  	background: #fff;
+    padding: 10px 20px;
+    font-weight: bold;
+  }
+  .rich-text-bg-image__text h2{
+  	font-size: 40px;
+    line-height: 1.25;
+  }
+  
+  @media screen and (max-width: 1439px){
+    .rich-text-bg-image__text-right{
+    width: 40%;
+      left: 60%;
+    }
+    .rich-text-bg-image__text-inner{
+  width: 60%;
+    }
+  }
+   @media screen and (max-width: 1200px){
+    .rich-text-bg-image__wrapper_right{
+    min-height: 430px;
+    }
+   }
+  @media screen and (max-width: 993px){
+    .rich-text-bg-image__wrapper_right{
+    min-height: 400px;
+    }
+    .rich-text-bg-image__text-right{
+    width: 50%;
+      left: 50%;
+    }
+  .rich-text-bg-image__text-inner{
+    width: 80%;
+  }
+  }
+  
+  @media screen and (max-width: 768px){
+    .rich-text-bg-image__wrapper_right{
+    min-height: 400px;
+    }
+    
+  .rich-text-bg-image__text-inner{
+    width: 90%;
+  }
+   
+  }
+  
+   @media screen and (max-width:  767px){
+    .rich-text-bg-image__wrapper_right{
+    min-height: 200px;
+      margin: 20px 0 0;
+      min-height: 287px;
+    background-position: center;
+    }
+     .rich-text-bg-image__text-right{
+    width: 100%;
+       margin-bottom: 20px;
+    }
+   }
+  @media screen and (max-width:  500px){
+  .rich-text-bg-image__wrapper_right{
+    	min-height: 150px;
+  }
+  }
+  
+</style>
+{% schema %}
+  {
+    "name": "Hero section",
+    "settings": [
+			{
+            "type": "image_picker",
+            "id": "bg_image",
+            "label": "Background image"
+			},
+			{
+            "type": "text",
+            "id": "text",
+            "label": "Text"
+			},
+			{
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button label"
+			},
+			{
+            "type": "url",
+            "id": "btn_link",
+            "label": "Button link"
+			},
+			{
+            "type": "color",
+            "id": "text_color",
+            "label": "Text color",
+			"default":"#ffffff"
+			}
+
+],
+		"presets": [{
+        "name": "Hero with text block right",
+        "category": "Image"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

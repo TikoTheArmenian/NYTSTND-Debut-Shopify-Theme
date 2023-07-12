@@ -1,0 +1,58 @@
+<h2 class="press-page-title">{{ section.settings.pressSubheading }}
+</h2>
+<div class="press-page-items-container">
+  {%- for block in section.blocks -%}
+    <div class="press-page-item">
+      <div class="press-img-container">
+        <a href="{{ block.settings.blockLink }}">
+          <img class="press-item-logo" src="{{ block.settings.blockImage | image_url: width: 1920 }}">
+        </a>
+      </div>
+      {{ block.settings.blockText }}
+      <div class="press-button-container">
+        <a class="press-item-link" href="{{ block.settings.blockLink }}">{{ block.settings.blockLabel }}
+        </a>
+      </div>
+    </div>
+  {%- endfor -%}
+</div>
+
+
+{% schema %}
+  {
+    "name": "Press blocks",
+    "class": "index-section index-section--flush press-page",
+    "settings": [
+      {
+        "type": "text",
+        "id": "pressSubheading",
+        "label": "Press SubHeading"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "page_block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "blockImage",
+            "label": "Block Logo Image"
+          }, {
+            "type": "richtext",
+            "id": "blockText",
+            "label": "Block Description"
+          }, {
+            "type": "url",
+            "id": "blockLink",
+            "label": "Block Link"
+          }, {
+            "type": "text",
+            "id": "blockLabel",
+            "label": "Link Label"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

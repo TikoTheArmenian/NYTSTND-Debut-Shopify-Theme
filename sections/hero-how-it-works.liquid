@@ -1,0 +1,31 @@
+{% if section.settings.checkHeroSectionWorks %}
+  <div class="section-hero" style="background-image: url('{{ section.settings.heroImage | img_url: '2000x' }}')">
+    <div class="section-hero-img">
+      <h1 class="section-hero-title">{{ section.settings.heroTitle }}
+      </h1>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Hero section",
+    "class": "index-section index-section--flush",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "checkHeroSectionWorks",
+        "label": "Enable hero section",
+        "default": true
+      }, {
+        "type": "image_picker",
+        "id": "heroImage",
+        "label": "Hero Image"
+      }, {
+        "type": "text",
+        "id": "heroTitle",
+        "label": "Heading"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,72 @@
+<div class="quad-works-blocks">
+  {%- for block in section.blocks -%}
+    <h2 class="quad-works-block-title">{{ block.settings.blockTitle }}
+    </h2>
+    <div class="quad-works-images-block">
+      <div class="quad-works-img-container">
+        {% if block.settings.pageText != blank %}
+          <p class="quad-works-description">
+            {{ block.settings.pageText }}
+          </p>
+        {% else %}
+          <img class="quad-works-img" src="{{ block.settings.pageimageFirst | img_url: '1920x' }}" alt="{{ block.settings.pageimageFirst.alt }}">
+        {% endif %}
+      </div>
+      <div class="quad-works-img-container">
+        {% if block.settings.pageTextSecound != blank %}
+          <p class="quad-works-descripion">
+            {{ block.settings.pageTextSecound }}
+          </p>
+        {% else %}
+          <img class="quad-works-img" src="{{ block.settings.pageImageSecound | img_url: '1920x' }}" alt="{{ block.settings.pageImageSecound.alt }}">
+        {% endif %}
+      </div>
+    </div>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+  {
+    "name": "Images block section",
+    "class": "index-section index-section--flush",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "page_block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "blockTitle",
+            "label": "Block Title"
+          },
+          {
+            "type": "header",
+            "content": "First Image or Description block"
+          },
+          {
+            "type": "image_picker",
+            "id": "pageimageFirst",
+            "label": "First Image"
+          },
+          {
+            "type": "richtext",
+            "id": "pageText",
+            "label": "Or Description"
+          }, {
+            "type": "header",
+            "content": "Secound Image or Description block"
+          }, {
+            "type": "image_picker",
+            "id": "pageImageSecound",
+            "label": "Secound Image"
+          }, {
+            "type": "richtext",
+            "id": "pageTextSecound",
+            "label": "Or Description"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

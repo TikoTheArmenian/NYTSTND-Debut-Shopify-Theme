@@ -1,0 +1,135 @@
+{% if section.settings.checkSlideImp == true %}
+<div class="slideshowt-container">
+    
+{% for block in section.blocks %}
+  <div class="mySlides fade">
+
+    <img src="{{ block.settings.slide-item | img_url: '1800x1200' }}" style="width:100%; height: 100%; object-fit: cover;"/>
+
+  </div>
+ 
+{% endfor %}
+ 
+</div>
+
+
+<style>
+  #slider-new--section{
+  	position: relative;
+  }
+.slideshowt-container {
+    width: 100%;
+	position: relative;
+  	margin: auto;
+  	background-position: center;
+  	
+}
+.mySlides {
+  height: 600px;
+	
+}
+
+.active {
+  opacity: 1;
+}
+
+ #slider-new--section .slick-dotted.slick-slider{
+  margin-bottom: 0 !important;
+  }
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {
+    opacity: .4;
+  } 
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: .4;
+  } 
+  to {
+    opacity: 1;
+  }
+}
+   
+  @media (max-width: 768px){
+
+ 
+  .mySlides {
+  height: auto;
+	
+}
+  .mySlides img{
+     vertical-align: middle;
+    vertical-align: -webkit-baseline-middle;
+      
+    }
+    .slide_dot {
+  height: 8px;
+  width: 8px;
+  
+}
+ .slide_dot--wrapper{
+
+    bottom: 15px;
+
+  }
+
+  
+  }
+
+@media only screen and (max-width: 300px) {
+  .text {
+    font-size: 11px;
+  }
+}
+</style>
+
+
+
+{% endif %}
+{% schema %}
+  {
+    "name": "Slideshow new",
+    "max_blocks": 6,
+    "settings": [
+		{
+        "type": "checkbox",
+        "id": "checkSlideImp",
+        "label": "Enable",
+		"default": true
+      	}
+
+    ],
+    "blocks": [
+
+      {
+        "type": "image",
+        "name": "image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "slide-item",
+            "label": "Slide image"
+
+          }
+
+        ]
+      }
+],
+ "presets": [{
+      "name": "Slide new",
+      "category": "Custom"
+    }]
+
+  }
+{% endschema %}

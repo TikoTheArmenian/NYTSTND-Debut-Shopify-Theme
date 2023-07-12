@@ -1,0 +1,162 @@
+{%- assign swatch_file_extension = 'png' -%}
+{%- assign is_color = false -%}
+{%- assign is_wood = false -%}
+{%- assign is_wireless = false -%}
+{%- assign color_swatch_drop = option_drop -%}
+{%- assign color_option_index = 0 -%}
+{%- assign option_index = forloop.index -%}
+
+{% if settings.product_color_swatches %}
+  {% for option in product.options_with_values %}
+    {% if option == color_swatch_drop %}
+      {%- assign color_option_index = forloop.index0 -%}
+      {%- assign downcased_option = color_swatch_drop.name | downcase -%}
+      {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
+        {%- assign is_color = true -%}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% if downcased_option contains 'wood'%}
+  {%- assign is_wood = true -%}
+{% endif %}
+
+{% if downcased_option contains 'wireless'%}
+  {%- assign is_wireless = true -%}
+{% endif %}
+
+
+<div class="variant-wrapper variant-wrapper--{{ settings.variant_type }} js">
+  <label class="variant__label prenton{% if option.name == 'Default' or option.name == 'Title' %} hidden-label{% endif %}" for="ProductSelect-{{ section_id }}-option-{{ forloop.index0 }}">
+    {{ option.name }}
+    :
+    {% if is_color  %}
+      <span class="variant__label-info">
+        <span id="VariantColorLabel-{{ section_id }}-{{ forloop.index0 }}" data-option-index="{{ color_option_index }}">
+          {{ option.selected_value }}
+        </span>
+      </span>
+    {% endif %}
+
+    {% if is_wood %}
+      <span class="variant__label-info">
+        <span id="VariantWoodLabel-{{ section_id }}-{{ option_index }}" data-option-index="{{ option_index }}">
+          {{ option.selected_value }}
+        </span>
+      </span>
+    {% endif %}
+
+    {% if is_wireless %}
+      <span class="variant__label-info">
+        <span id="VariantWirelessLabel-{{ section_id }}-{{ option_index }}" data-option-index="{{ option_index }}">
+          {{ option[3].value[0] }}
+          {{ option.selected_value }}
+        </span>
+      </span>
+    {% endif %}
+
+  </label>
+  <fieldset class="variant-input-wrap" name="{{ option.name }}" id="ProductSelect-{{ section_id }}-option-{{ forloop.index0 }}">
+    {%- assign option_index = forloop.index -%}
+
+
+    {% if is_wood %}
+
+      {% for variant in product.variants  %}
+        {%- assign variant_is_selected = true -%}
+        {% for i in (1..3) %}
+          {% unless option_index == i%}
+            {% assign fieldName = "option" | append: i %}
+            {% assign the_option_index = i | plus: -1 %}
+            {% assign the_option = product.options_with_values[the_option_index] %}
+            {% if variant[fieldName] != blank and variant[fieldName] != the_option.selected_value%}
+              {%- assign variant_is_selected = false -%}
+            {% endif %}
+          {% endunless %}
+        {% endfor %}
+
+        <span id="options_variant_{{variant.id}}" style="display:none" class="wood-option-item" data-shown=false>
+          {% assign fieldName = "option" | append: option_index %}
+          {% assign wood_opt_value = variant[fieldName] %}
+          {%- assign img_url = variant.image | img_url: '1x1' | replace: '_1x1.', '_320x.' -%}
+
+          <input type="radio" {% if option.selected_value == wood_opt_value and variant_is_selected%} checked="checked"{% endif %}
+            {% unless variant_label_state %} disabled="disabled"{% endunless %}
+            value="{{ wood_opt_value | escape }}" data-index="option{{ option_index }}" name="{{ option.name }}" class="wood_variant_input variant__input--wood-swatch-{{ section_id }} variant__input-{{ section_id }}{% unless variant_label_state %} disabled{% endunless %}" data-wood-name="{{ wood_opt_value | escape }}" data-wood-index="{{ option_index }}" id="ProductSelect-{{ section_id }}-option-{{ option.name | handleize }}-{{ wood_opt_value | url_encode }}-{{variant.id}}">
+          <label for="ProductSelect-{{ section_id }}-option-{{ option.name | handleize }}-{{ wood_opt_value | url_encode }}-{{variant.id}}" class="variant__button-label{% unless variant_label_state %} disabled{% endunless %}"></label>
+
+        </span>
+        <span style="position:fixed;visibility:hidden;background-image:url({{ img_url }})"></span>
+        <style>
+
+          #options_variant_{{ variant.id }}label:after {
+            background-image: url('{{img_url}}');
+            background-size: cover;
+          }
+        </style>
+      {% endfor %}
+
+
+
+    {% else %}
+      {% for value in option.values %}
+        {%- assign variant_label_state = true -%}
+        {% if product.options.size == 1 %}
+          {% unless product.variants[forloop.index0].available %}
+            {% unless is_color %}
+              {%- assign variant_label_state = false -%}
+            {% endunless %}
+          {% endunless %}
+        {% endif %}
+        <input type="radio" {% if option.selected_value == value %} checked="checked"{% endif %}
+          {% unless variant_label_state %} disabled="disabled"{% endunless %}
+          value="{{ value | escape }}" data-index="option{{ option_index }}" data-id="{{ forloop.index0 }}" data-variant-id="{{ product_variant[forloop.index0].id }}" name="{{ option.name }}" class="variant-button variant__input-{{ section_id }}{% unless variant_label_state %} disabled{% endunless %}{% if is_color %} variant__input--color-swatch-{{ section_id }}{% endif %} {% if is_wireless %} variant__input--wireless-swatch-{{ section_id }}{% endif %}" {% if is_color %} data-color-name="{{ value | escape }}"{% endif %}
+          {% if is_color %} data-color-index="{{ color_option_index }}"{% endif %}
+          {% if is_wireless %} data-wireless-name="{{ value | escape }}"{% endif %}
+          {% if is_wireless %} data-wireless-index="{{ option_index }}"{% endif %}
+          id="ProductSelect-{{ section_id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}">
+        {% if is_color %}
+          {%- assign color_image = value | handle | append: '.' | append: swatch_file_extension | asset_img_url: '50x' | prepend: 'https:' | split: '?' | first -%}
+          {%- assign color_swatch_fallback = value | split: ' ' | last | handle -%}
+          <label for="ProductSelect-{{ section_id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}" class="variant__button-label variant__color-swatch color-swatch--{{ value | handle }}{% unless variant_label_state %} disabled{% endunless %}" style="background-image: url({{ color_image }}); background-color: {{ color_swatch_fallback }};">
+            {{ value | escape }}
+          </label>
+        {% else %}
+          {% if value == 'USB-C' or value == 'Lightning' %}
+            <label data-id="{{ forloop.index0 }}" for="ProductSelect-{{ section_id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}" class="variantCord variant__button-label{% unless variant_label_state %} disabled{% endunless %}">{{ value | escape }}
+              {% if value == 'USB-C' %}<img src="https://cdn.shopify.com/s/files/1/1688/1581/files/lightning.jpg?v=1584277923"/>{% endif %}
+              {% if value == 'Lightning' %}<img src="https://cdn.shopify.com/s/files/1/1688/1581/files/usbc.jpg?v=1584277923"/>{% endif %}
+            </label>
+          {% else %}
+
+            <label data-id="{{ forloop.index0 }}" for="ProductSelect-{{ section_id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}" class="variantCord variantWireless variant__button-label{% unless variant_label_state %} disabled{% endunless %}">
+              {% if value == 'Optimized for iPhone 12 (MagSafe+Qi)' %}<img src="https://cdn.shopify.com/s/files/1/1688/1581/files/MagSafe_1.jpg?v=1622038656"/>{% endif %}
+              {% if value == 'Optimized for iPhone X, 11 (Qi)' %}<img src="https://cdn.shopify.com/s/files/1/1688/1581/files/noMagSafe.jpg?v=1622038657"/>{% endif %}
+              {% if value == '$75' %}
+                <img src="https://cdn.shopify.com/s/files/1/1688/1581/files/75_-black.png?v=1640111285"/>{% endif %}
+              {% if value == '$100' %}
+                <img src="https://cdn.shopify.com/s/files/1/1688/1581/files/100_-green.png?v=1640111285"/>{% endif %}
+              {% if value == '$125' %}
+                <img src="https://cdn.shopify.com/s/files/1/1688/1581/files/125_-silver.png?v=1640111285"/>{% endif %}
+              {% if value == '$150' %}
+                <img src="https://cdn.shopify.com/s/files/1/1688/1581/files/150_-gold.png?v=1640111285"/>{% endif %}
+            </label>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  </fieldset>
+
+  {% if downcased_option contains 'wood'%}
+
+    <div data-wood-opt-id="{{option_index}}" id="wood-option-wraper">
+      {% for variant in product.variants  %}
+        <div id="options_variant_{{variant.id}}" style="display:none" class="wood-option-item">{{variant.title}}
+        </div>
+      {% endfor %}
+    </div>
+
+  {% endif %}
+
+</div>
