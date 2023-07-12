@@ -1528,6 +1528,8 @@ lazySizesConfig.expFactor = 4;
       }
     }
 
+
+
     function init() {
 
       $(selectors.trigger).each(function() {
@@ -5998,7 +6000,22 @@ if (window.location.search.includes('variant')) {
   variantId = document.querySelector('[data-variant-id]') && document.querySelector('[data-variant-id]').getAttribute('data-variant-id');
 }
 
+function disableSoldOutColorOptions() {
+  // Make an API call to get the product availability
+  // Assuming you have a function getProductAvailability that takes a product handle and returns a promise with the availability
+  const productColorItems = document.querySelectorAll('.product__color-item');
+  for (const productColorItem of productColorItems) {
+    getProductAvailability(productColorItem.dataset.handle).then(availability => {
+      if (!availability) {
+        // add class to indicate the item is not available
+        productColorItem.classList.add('not-available');
+      }
+    });
+  }
+}
+
 function init() {
+  disableSoldOutColorOptions(); // new line here
   makeSoldOutButtonDisabled();
   generateYouMayAlsoLikeProducts();
   addFadeToTexts();
