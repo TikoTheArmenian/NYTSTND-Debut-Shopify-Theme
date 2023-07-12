@@ -6013,6 +6013,20 @@ function disableSoldOutColorOptions() {
     });
   }
 }
+window.onload = function() { // NOT IDEAL SOLUTION
+  const colorItems = document.querySelectorAll('.product__color-item');
+  colorItems.forEach((item) => {
+    let handle = item.getAttribute('data-handle').split('/').pop();
+    fetch(`/products/${handle}.json`)
+      .then(response => response.json())
+      .then(data => {
+        let isAvailable = data.product.variants.some(variant => variant.available);
+        if (!isAvailable) {
+          item.classList.add('not-available');
+        }
+      });
+  });
+} 
 
 function init() {
   disableSoldOutColorOptions(); // new line here
