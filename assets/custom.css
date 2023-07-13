@@ -62,11 +62,7 @@ div[data-section-id="header"] {
   position: fixed;
 }
 
-.site-nav__dropdown:not(.megamenu) {
-  background-color: #ff0000;
-  right: 48%;
-  /* Add your additional styles for the dropdown here */
-}
+
 
 .site-nav__dropdown.megamenu {
   background-color: #fff;
