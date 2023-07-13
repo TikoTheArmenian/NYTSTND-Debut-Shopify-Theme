@@ -552,7 +552,7 @@ header .site-header__logo img {
 
 .site-nav__link.js-drawer-open-cart .cart-link__bubble:hover {
   color: #159747;
-  background-color: white;
+  background-color: 159747;
   border-color: #159747;
   cursor: pointer;
 }
