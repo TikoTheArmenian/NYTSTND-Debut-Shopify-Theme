@@ -62,6 +62,10 @@ div[data-section-id="header"] {
   position: fixed;
 }
 
+.megamenu.site-nav__dropdown a[href="/collections/clearance"] {
+  background-color: red;
+}
+
 /* CSS code for dropdown with href="/collections/clearance" */
 .site-nav__dropdown.new-menu-header_1 a[href="/collections/clearance"] {
   background-color: red;
