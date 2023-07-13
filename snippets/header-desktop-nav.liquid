@@ -12,9 +12,6 @@
   aria-label="Primary"
   {% endunless %}>
   {% for link in nav.links %}
-    <div>
-      {% link %}
-    </div>
     {%- assign child_list_handle = link.title | handleize -%}
     {%- assign has_dropdown = false -%}
     {%- assign is_megamenu = false -%}
@@ -38,7 +35,7 @@
 
 
     {% if has_dropdown %}
-      <div class="site-nav__dropdown {% unless is_megamenu %}dropdown_item-nav{% endunless %}">
+      <div class="site-nav__dropdown link.title {% unless is_megamenu %}dropdown_item-nav{% endunless %}">
         <div class="page_width">
           <div class="grid__item megamenu-item-wrapper">
             {% for link_child in link.links %}
