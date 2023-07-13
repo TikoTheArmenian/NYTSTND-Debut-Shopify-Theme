@@ -10,10 +10,28 @@
         <div class="grid__item medium-up--four-fifths grid__item--content">
           {% section 'collection-promotions' %}
           {% section 'collection-template' %}
-          {% section 'logo-list-slideshow' %}
+          {% comment %} {% section 'logo-list-slideshow' %}  ALREADY INCLUDED IN page-QUAD-collection-info-snippet{% endcomment %}
         </div>
       </div>
     </div>
-    {% section 'collection-wirelless' %}
   </div>
 </div>
+
+
+
+{% comment %} {% if collection.handle == 'uno' %}
+{% include 'page-UNO-collection-info-snippet' %}
+{% endif %}
+
+<!-- No corresponding page for DUO -->
+
+{% if collection.handle == 'trio' %}
+{% include 'page-TRIO-collection-info-snippet' %}
+{% endif %} {% endcomment %}{% if collection.handle == 'quad' %}
+  {% include 'page-QUAD-collection-info-snippet' %}
+{% endif %}
+
+{% comment %} {% section 'logo-list-slideshow' %} {% endcomment %}
+<!-- already in page-QUAD-collection-info-snippet -->
+
+{% section 'collection-wirelless' %}
