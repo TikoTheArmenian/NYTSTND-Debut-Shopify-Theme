@@ -64,16 +64,20 @@ div[data-section-id="header"] {
 
 .dropdown_item-nav {
   background-color: #00ff59;
+  right: -50%;
 }
 
 /* Styles specific to the dropdown with clearance link */
 .dropdown_item-nav a[href="/collections/clearance"] {
-  right: 42% !important; 
+  right: 530% !important;
+  position: relative;
   background-color: #0091ff;
 }
 
 /* Styles specific to the dropdown without clearance link */
 .dropdown_item-nav a:not([href="/collections/clearance"]) {
+  right: 380%;
+  position: relative;
   background-color: #ff0095;
 }
 
