@@ -5,12 +5,7 @@
   {%- assign offset = 0 -%}
 {% endunless %}
 
-<ul
-  class="site-nav site-navigation small--hide"
-  {% unless disable_aria %}
-  role="navigation"
-  aria-label="Primary"
-  {% endunless %}>
+<ul class="site-nav site-navigation small--hide" {% unless disable_aria %}role="navigation"aria-label="Primary"{% endunless %}>
   {% for link in nav.links %}
     {%- assign child_list_handle = link.title | handleize -%}
     {%- assign has_dropdown = false -%}
@@ -23,7 +18,6 @@
     {% endif %}
 
     <li {% if has_dropdown %}id="shop-nav-dropdown__link"aria-haspopup="true"{% endif %} class="site-nav__item site-nav__expanded-item{% if has_dropdown %} site-nav--has-dropdown{% endif %}{% if is_megamenu %} site-nav--is-megamenu{% endif %}">
-      {{ link.title }}
       <a href="{{ link.url }}" class="site-nav__link site-nav__link--underline">
         {{ link.title }}
       </a>
@@ -34,7 +28,6 @@
       {%- endif -%}
     </li>
 
-
     {% if has_dropdown %}
       <div class="site-nav__dropdown {% unless is_megamenu %}dropdown_item-nav{% endunless %}">
         <div class="page_width">
@@ -42,7 +35,10 @@
             {% for link_child in link.links %}
               {% if link_child.links != blank %}
                 <div class="megamenu-item-block megamenu-all grid__item medium-up--one-quarter">
-                  <a class="megamenu-item-block-link" href="{{ link_child.url }}">
+                  <a
+                    class="megamenu-item-block-link"
+                    href="{{ link_child.url }}"
+                    data-link="{{ link_child.url }}">
                     <div class="megamenu-image megamenu-img-{{ forloop.index }}"></div>
                   </a>
                   <div class="megamenu-item_nested">
@@ -57,18 +53,18 @@
                   </div>
                 </div>
               {% else %}
-                <a class="megamenu-all megamenu-item-btn {% if link_child.url == '/collections/shop-all' or link_child.url == '/collections/all' %}shopall{% endif %}" href="{{ link_child.url }}">{{ link_child.title }}</a>
+                <a
+                  class="megamenu-all megamenu-item-btn {% if link_child.url == '/collections/shop-all' or link_child.url == '/collections/all' %}shopall{% endif %}"
+                  href="{{ link_child.url }}"
+                  data-link="{{ link_child.url }}">{{ link_child.title }}</a>
               {% endif %}
             {% endfor %}
           </div>
         </div>
       </div>
     {% endif %}
-
   {% endfor %}
 </ul>
-
-
 
 <script>
   $(document).ready(function() {
@@ -97,42 +93,45 @@
         .parent()
         .find('.img-left a[data-type="' + $(this).data('type') + '-oak"]')
         .removeClass('hide');
+
+// Log the link when a dropdown link is clicked
+      var link = $(this).data('link');
+      console.log('Dropdown link:', link);
+    });
+
+    $('.color-buttons a').on('mouseover', function() {
+      $(this)
+        .parent()
+        .parent()
+        .find('.img-left a')
+        .addClass('hide');
+      $(this)
+        .parent()
+        .parent()
+        .find('.img-left a[data-type="' + $(this).data('type') + '"]')
+        .removeClass('hide');
+    });
+
+    $('.color-buttons a').on('mouseout', function() {
+      var type = $(this)
+        .parent()
+        .parent()
+        .parent()
+        .find('.megamenu-type-buttons a.active')
+        .data('type');
+      $(this)
+        .parent()
+        .parent()
+        .find('.img-left a')
+        .addClass('hide');
+      $(this)
+        .parent()
+        .parent()
+        .find('.img-left a[data-type="' + type + '-oak"]')
+        .removeClass('hide');
     });
   });
-
-  $('.color-buttons a').on('mouseover', function() {
-    $(this)
-      .parent()
-      .parent()
-      .find('.img-left a')
-      .addClass('hide');
-    $(this)
-      .parent()
-      .parent()
-      .find('.img-left a[data-type="' + $(this).data('type') + '"]')
-      .removeClass('hide');
-  });
-
-  $('.color-buttons a').on('mouseout', function() {
-    var type = $(this)
-      .parent()
-      .parent()
-      .parent()
-      .find('.megamenu-type-buttons a.active')
-      .data('type');
-    $(this)
-      .parent()
-      .parent()
-      .find('.img-left a')
-      .addClass('hide');
-    $(this)
-      .parent()
-      .parent()
-      .find('.img-left a[data-type="' + type + '-oak"]')
-      .removeClass('hide');
-  });
 </script>
-
 
 <style>
   .sale_off {
