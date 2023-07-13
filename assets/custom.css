@@ -62,13 +62,21 @@ div[data-section-id="header"] {
   position: fixed;
 }
 
-.custom-dropdown {
+/* Dropdown 1 */
+.new-menu-header_1 .dropdown_item-nav {
   up: 40px;
 }
 
-/* Styles for the regular dropdown menu */
-.regular-dropdown {
-  /* Regular dropdown styles here */
+/* Dropdown 2 */
+.new-menu-header_2 .dropdown_item-nav {
+  /* CSS styles specific to Dropdown 2 */
+  /* Add your custom styles here */
+}
+
+/* Dropdown 3 */
+.new-menu-header_3 .dropdown_item-nav {
+  /* CSS styles specific to Dropdown 3 */
+  /* Add your custom styles here */
 }
 
 .site-nav__dropdown.megamenu {

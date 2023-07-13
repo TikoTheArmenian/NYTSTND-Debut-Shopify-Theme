@@ -5,7 +5,7 @@
   {%- assign offset = 0 -%}
 {% endunless %}
 
-<ul class="site-nav site-navigation small--hide" {% unless disable_aria %}role="navigation"aria-label="Primary"{% endunless %}>
+<ul class="site-nav site-navigation small--hide" {% unless disable_aria %}role="navigation" aria-label="Primary"{% endunless %}>
   {% for link in nav.links %}
     {%- assign child_list_handle = link.title | handleize -%}
     {%- assign has_dropdown = false -%}
@@ -17,7 +17,7 @@
       {% endif %}
     {% endif %}
 
-    <li {% if has_dropdown %}id="shop-nav-dropdown__link"aria-haspopup="true"{% endif %} class="site-nav__item site-nav__expanded-item{% if has_dropdown %} site-nav--has-dropdown{% endif %}{% if is_megamenu %} site-nav--is-megamenu{% endif %}">
+    <li {% if has_dropdown %}id="shop-nav-dropdown__link" aria-haspopup="true"{% endif %} class="site-nav__item site-nav__expanded-item{% if has_dropdown %} site-nav--has-dropdown{% endif %}{% if is_megamenu %} site-nav--is-megamenu{% endif %}">
       <a href="{{ link.url }}" class="site-nav__link site-nav__link--underline">
         {{ link.title }}
       </a>
@@ -29,65 +29,42 @@
     </li>
 
     {% if has_dropdown %}
-      {% comment %} Custom Dropdown Menu {% endcomment %}
-      {% if link.title == 'Clearance' %}
-        <div class="site-nav__dropdown dropdown_item-nav new-menu-header_1 custom-dropdown">
-          <div class="page_width">
-            <div class="grid__item megamenu-item-wrapper">
-              {% for link_child in link.links %}
-                {% if link_child.links != blank %}
-                  <div class="megamenu-item-block megamenu-all grid__item medium-up--one-quarter">
-                    <a class="megamenu-item-block-link" href="{{ link_child.url }}">
-                      <div class="megamenu-image megamenu-img-{{ forloop.index }}"></div>
-                    </a>
-                    <div class="megamenu-item_nested">
-                      <a class="megamenu-title" href="{{ link_child.url }}">{{ link_child.title }}</a>
-                      {% for link_child_nested in link_child.links %}
-                        <a class="megamenu-item_mested-list" href="{{ link_child_nested.url }}">{{ link_child_nested.title }}
-                          {% if link_child_nested.title contains 'M' %}
-                            <span class="megamenu-item_nested-badge">NEW</span>
-                          {% endif %}
-                        </a>
-                      {% endfor %}
-                    </div>
+      {% case forloop.index %}
+        {% when 1 %}
+          <div class="site-nav__dropdown dropdown_item-nav new-menu-header_1">
+        {% when 2 %}
+          <div class="site-nav__dropdown dropdown_item-nav new-menu-header_2">
+        {% when 3 %}
+          <div class="site-nav__dropdown dropdown_item-nav new-menu-header_3">
+        {% else %}
+          <div class="site-nav__dropdown dropdown_item-nav">
+      {% endcase %}
+        <div class="page_width">
+          <div class="grid__item megamenu-item-wrapper">
+            {% for link_child in link.links %}
+              {% if link_child.links != blank %}
+                <div class="megamenu-item-block megamenu-all grid__item medium-up--one-quarter">
+                  <a class="megamenu-item-block-link" href="{{ link_child.url }}">
+                    <div class="megamenu-image megamenu-img-{{ forloop.index }}"></div>
+                  </a>
+                  <div class="megamenu-item_nested">
+                    <a class="megamenu-title" href="{{ link_child.url }}">{{ link_child.title }}</a>
+                    {% for link_child_nested in link_child.links %}
+                      <a class="megamenu-item_mested-list" href="{{ link_child_nested.url }}">{{ link_child_nested.title }}
+                        {% if link_child_nested.title contains 'M' %}
+                          <span class="megamenu-item_nested-badge">NEW</span>
+                        {% endif %}
+                      </a>
+                    {% endfor %}
                   </div>
-                {% else %}
-                  <a class="megamenu-all megamenu-item-btn {% if link_child.url == '/collections/shop-all' or link_child.url == '/collections/all' %}shopall{% endif %}" href="{{ link_child.url }}">{{ link_child.title }}</a>
-                {% endif %}
-              {% endfor %}
-            </div>
+                </div>
+              {% else %}
+                <a class="megamenu-all megamenu-item-btn {% if link_child.url == '/collections/shop-all' or link_child.url == '/collections/all' %}shopall{% endif %}" href="{{ link_child.url }}">{{ link_child.title }}</a>
+              {% endif %}
+            {% endfor %}
           </div>
         </div>
-      {% else %}
-        {% comment %} Regular Dropdown Menu {% endcomment %}
-        <div class="site-nav__dropdown dropdown_item-nav new-menu-header_1 regular-dropdown">
-          <div class="page_width">
-            <div class="grid__item megamenu-item-wrapper">
-              {% for link_child in link.links %}
-                {% if link_child.links != blank %}
-                  <div class="megamenu-item-block megamenu-all grid__item medium-up--one-quarter">
-                    <a class="megamenu-item-block-link" href="{{ link_child.url }}">
-                      <div class="megamenu-image megamenu-img-{{ forloop.index }}"></div>
-                    </a>
-                    <div class="megamenu-item_nested">
-                      <a class="megamenu-title" href="{{ link_child.url }}">{{ link_child.title }}</a>
-                      {% for link_child_nested in link_child.links %}
-                        <a class="megamenu-item_mested-list" href="{{ link_child_nested.url }}">{{ link_child_nested.title }}
-                          {% if link_child_nested.title contains 'M' %}
-                            <span class="megamenu-item_nested-badge">NEW</span>
-                          {% endif %}
-                        </a>
-                      {% endfor %}
-                    </div>
-                  </div>
-                {% else %}
-                  <a class="megamenu-all megamenu-item-btn {% if link_child.url == '/collections/shop-all' or link_child.url == '/collections/all' %}shopall{% endif %}" href="{{ link_child.url }}">{{ link_child.title }}</a>
-                {% endif %}
-              {% endfor %}
-            </div>
-          </div>
-        </div>
-      {% endif %}
+      </div>
     {% endif %}
   {% endfor %}
 </ul>
@@ -162,16 +139,5 @@
     font-size: 0.7em;
     padding: 0 3px;
     background-color: #FF003B;
-  }
-
-  /* Styles for the custom dropdown menu */
-  .custom-dropdown {
-    up: 40px;
-  }
-
-  /* Styles for the regular dropdown menu */
-  .regular-dropdown {
-    ;
-    /* Regular dropdown styles here */
   }
 </style>
