@@ -5,12 +5,7 @@
   {%- assign offset = 0 -%}
 {% endunless %}
 
-<ul
-  class="site-nav site-navigation small--hide"
-  {% unless disable_aria %}
-  role="navigation"
-  aria-label="Primary"
-  {% endunless %}>
+<ul class="site-nav site-navigation small--hide" {% unless disable_aria %}role="navigation"aria-label="Primary"{% endunless %}>
   {% for link in nav.links %}
     {%- assign child_list_handle = link.title | handleize -%}
     {%- assign has_dropdown = false -%}
@@ -35,12 +30,6 @@
 
 
     {% if has_dropdown %}
-      {% link.title %}
-      {% assign is_offers_dropdown = false %}
-      {% if link.title == 'Offers' %}
-        {% assign is_offers_dropdown = true %}
-      {% endif %}
-
       <div class="site-nav__dropdown {% unless is_megamenu %}dropdown_item-nav{% endunless %}">
         <div class="page_width">
           <div class="grid__item megamenu-item-wrapper">
@@ -69,11 +58,8 @@
         </div>
       </div>
     {% endif %}
-
   {% endfor %}
 </ul>
-
-
 
 <script>
   $(document).ready(function() {
@@ -137,7 +123,6 @@
       .removeClass('hide');
   });
 </script>
-
 
 <style>
   .sale_off {
