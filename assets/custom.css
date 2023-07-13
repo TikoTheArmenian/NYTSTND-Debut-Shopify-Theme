@@ -74,7 +74,7 @@ div[data-section-id="header"] {
 
 /* Styles specific to the dropdown without clearance link */
 .dropdown_item-nav a:not([href="/collections/clearance"]) {
-  background-color: #4f5a47;
+  background-color: #ff0095;
 }
 
 .site-nav__dropdown.megamenu {
