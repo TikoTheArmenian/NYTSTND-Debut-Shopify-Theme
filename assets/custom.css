@@ -62,20 +62,7 @@ div[data-section-id="header"] {
   position: fixed;
 }
 
-/* Dropdown 1 */
-.new-menu-header_1 .dropdown_item-nav {
-  right: 66%;
-}
 
-/* Dropdown 2 */
-.new-menu-header_2 .dropdown_item-nav {
-  right: 43%;
-}
-
-/* Dropdown 3 */
-.new-menu-header_3 .dropdown_item-nav {
-  right: 20%;
-}
 
 .site-nav__dropdown.megamenu {
   background-color: #fff;
