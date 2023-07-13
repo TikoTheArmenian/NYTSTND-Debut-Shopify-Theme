@@ -62,18 +62,18 @@ div[data-section-id="header"] {
   position: fixed;
 }
 
-.megamenu.site-nav__dropdown a[href="/collections/clearance"] {
-  background-color: red;
+.dropdown_item-nav {
+  background-color: #00ff59;
 }
 
-/* CSS code for dropdown with href="/collections/clearance" */
-.site-nav__dropdown.new-menu-header_1:has([href="/collections/clearance"]) {
-  background-color: red;
+/* Styles specific to the dropdown with clearance link */
+.dropdown_item-nav a[href="/collections/clearance"] {
+  background-color: #0091ff;
 }
 
-/* CSS code for dropdown without href="/collections/clearance" */
-.site-nav__dropdown.new-menu-header_1 a:not([href="/collections/clearance"]) {
-  /* Add your specific styles here */
+/* Styles specific to the dropdown without clearance link */
+.dropdown_item-nav a:not([href="/collections/clearance"]) {
+  background-color: #4f5a47;
 }
 
 .site-nav__dropdown.megamenu {
