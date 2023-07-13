@@ -12,7 +12,9 @@
   aria-label="Primary"
   {% endunless %}>
   {% for link in nav.links %}
-    {% link %}
+    <div>
+      {% link %}
+    </div>
     {%- assign child_list_handle = link.title | handleize -%}
     {%- assign has_dropdown = false -%}
     {%- assign is_megamenu = false -%}
