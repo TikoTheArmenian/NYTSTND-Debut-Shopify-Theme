@@ -8,21 +8,21 @@
 <ul
   class="site-nav site-navigation small--hide"
   {% unless disable_aria %}
-  role="navigation"
-  aria-label="Primary"
-  {% endunless %}>
-  {% for link in nav.links %}
-    {%- assign child_list_handle = link.title | handleize -%}
-    {%- assign has_dropdown = false -%}
-    {%- assign is_megamenu = false -%}
-    {% if link.links != blank %}
-      {%- assign has_dropdown = true -%}
-      {% if link.levels > 1 %}
-        {%- assign is_megamenu = true -%}
+    role="navigation" aria-label="Primary"
+  {% endunless %}
+  >
+    {% for link in nav.links %}
+      {%- assign child_list_handle = link.title | handleize -%}
+      {%- assign has_dropdown = false -%}
+      {%- assign is_megamenu = false -%}
+      {% if link.links != blank %}
+        {%- assign has_dropdown = true -%}
+        {% if link.levels > 1 %}
+          {%- assign is_megamenu = true -%}
+        {% endif %}
       {% endif %}
-    {% endif %}
 
-    <li {% if has_dropdown %}id="shop-nav-dropdown__link"aria-haspopup="true"{% endif %} class="site-nav__item site-nav__expanded-item{% if has_dropdown %} site-nav--has-dropdown{% endif %}{% if is_megamenu %} site-nav--is-megamenu{% endif %}">
+    <li {% if has_dropdown %}id="shop-nav-dropdown__link" aria-haspopup="true"{% endif %} class="site-nav__item site-nav__expanded-item{% if has_dropdown %} site-nav--has-dropdown{% endif %}{% if is_megamenu %} site-nav--is-megamenu{% endif %}">
       <a href="{{ link.url }}" class="site-nav__link site-nav__link--underline">
         {{ link.title }}
       </a>
@@ -35,28 +35,27 @@
 
 
     {% if has_dropdown %}
-      {% is_megamenu %}
       <div class="site-nav__dropdown {% unless is_megamenu %}dropdown_item-nav{% endunless %}">
         <div class="page_width">
           <div class="grid__item megamenu-item-wrapper">
             {% for link_child in link.links %}
               {% if link_child.links != blank %}
-                <div class="megamenu-item-block megamenu-all grid__item medium-up--one-quarter">
+                <div class="megamenu-item-block megamenu-all grid__item medium-up--one-quarter">   
                   <a class="megamenu-item-block-link" href="{{ link_child.url }}">
                     <div class="megamenu-image megamenu-img-{{ forloop.index }}"></div>
                   </a>
                   <div class="megamenu-item_nested">
                     <a class="megamenu-title" href="{{ link_child.url }}">{{ link_child.title }}</a>
-                    {% for link_child_nested in link_child.links %}
-                      <a class="megamenu-item_mested-list" href="{{ link_child_nested.url }}">{{ link_child_nested.title }}
+                      {% for link_child_nested in link_child.links %}
+                        <a class="megamenu-item_mested-list" href="{{ link_child_nested.url }}">{{ link_child_nested.title }}
                         {% if link_child_nested.title contains 'M' %}
                           <span class="megamenu-item_nested-badge">NEW</span>
                         {% endif %}
-                      </a>
-                    {% endfor %}
+                        </a>
+                      {% endfor %}
                   </div>
                 </div>
-              {% else %}
+                {% else %}
                 <a class="megamenu-all megamenu-item-btn {% if link_child.url == '/collections/shop-all' or link_child.url == '/collections/all' %}shopall{% endif %}" href="{{ link_child.url }}">{{ link_child.title }}</a>
               {% endif %}
             {% endfor %}
@@ -65,7 +64,7 @@
       </div>
     {% endif %}
 
-  {% endfor %}
+    {% endfor %}
 </ul>
 
 
@@ -75,71 +74,35 @@
     $('.megamenu-type-buttons a').on('click', function() {
       $(this).parent().find('a').removeClass('active');
       $(this).addClass('active');
-
-      $(this)
-        .parent()
-        .parent()
-        .find('.types-block .color-buttons')
-        .addClass('hide');
-      $(this)
-        .parent()
-        .parent()
-        .find('.types-block .color-buttons.' + $(this).data('type'))
-        .removeClass('hide');
-
-      $(this)
-        .parent()
-        .parent()
-        .find('.img-left a')
-        .addClass('hide');
-      $(this)
-        .parent()
-        .parent()
-        .find('.img-left a[data-type="' + $(this).data('type') + '-oak"]')
-        .removeClass('hide');
+      
+      $(this).parent().parent().find('.types-block .color-buttons').addClass('hide');
+      $(this).parent().parent().find('.types-block .color-buttons.' + $(this).data('type')).removeClass('hide');
+      
+      $(this).parent().parent().find('.img-left a').addClass('hide');
+      $(this).parent().parent().find('.img-left a[data-type="'+ $(this).data('type') + '-oak"]').removeClass('hide');
     });
   });
-
-  $('.color-buttons a').on('mouseover', function() {
-    $(this)
-      .parent()
-      .parent()
-      .find('.img-left a')
-      .addClass('hide');
-    $(this)
-      .parent()
-      .parent()
-      .find('.img-left a[data-type="' + $(this).data('type') + '"]')
-      .removeClass('hide');
+  
+  $('.color-buttons a').on('mouseover', function() {  
+      $(this).parent().parent().find('.img-left a').addClass('hide');
+      $(this).parent().parent().find('.img-left a[data-type="' + $(this).data('type') + '"]').removeClass('hide');
   });
-
-  $('.color-buttons a').on('mouseout', function() {
-    var type = $(this)
-      .parent()
-      .parent()
-      .parent()
-      .find('.megamenu-type-buttons a.active')
-      .data('type');
-    $(this)
-      .parent()
-      .parent()
-      .find('.img-left a')
-      .addClass('hide');
-    $(this)
-      .parent()
-      .parent()
-      .find('.img-left a[data-type="' + type + '-oak"]')
-      .removeClass('hide');
+  
+  $('.color-buttons a').on('mouseout', function() {   
+    var type= $(this).parent().parent().parent().find('.megamenu-type-buttons a.active').data('type');
+      $(this).parent().parent().find('.img-left a').addClass('hide');
+      $(this).parent().parent().find('.img-left a[data-type="'+ type + '-oak"]').removeClass('hide');
   });
 </script>
 
 
 <style>
-  .sale_off {
-    color: #fff;
-    font-weight: 600;
+  .sale_off{
+  color: #fff;
+  font-weight: 600;
     font-size: 0.7em;
     padding: 0 3px;
     background-color: #FF003B;
   }
+
 </style>
