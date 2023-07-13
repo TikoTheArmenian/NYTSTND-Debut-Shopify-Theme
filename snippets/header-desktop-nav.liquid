@@ -5,7 +5,10 @@
   {%- assign offset = 0 -%}
 {% endunless %}
 
-<ul class="site-nav site-navigation small--hide" {% unless disable_aria %}role="navigation"aria-label="Primary"{% endunless %}>
+<ul
+  class="site-nav site-navigation small--hide"
+  role="navigation"
+  aria-label="Primary">
   {% for link in nav.links %}
     {%- assign child_list_handle = link.title | handleize -%}
     {%- assign has_dropdown = false -%}
@@ -19,7 +22,7 @@
 
     <li {% if has_dropdown %}id="shop-nav-dropdown__link"aria-haspopup="true"{% endif %} class="site-nav__item site-nav__expanded-item{% if has_dropdown %} site-nav--has-dropdown{% endif %}{% if is_megamenu %} site-nav--is-megamenu{% endif %}">
       <a href="{{ link.url }}" class="site-nav__link site-nav__link--underline">
-        {{ link.title | escape }}
+        {{ link.title }}
       </a>
       {%- if has_dropdown -%}
         <span class="site-nav__dropdown-icon">
@@ -28,30 +31,34 @@
       {%- endif -%}
     </li>
 
-
     {% if has_dropdown %}
       <div class="site-nav__dropdown {% unless is_megamenu %}dropdown_item-nav{% endunless %}">
         <div class="page_width">
           <div class="grid__item megamenu-item-wrapper">
             {% for link_child in link.links %}
               {% if link_child.links != blank %}
-                <div class="megamenu-item-block megamenu-all grid__item medium-up--one-quarter">
-                  <a class="megamenu-item-block-link" href="{{ link_child.url }}">
-                    <div class="megamenu-image megamenu-img-{{ forloop.index }}"></div>
-                  </a>
-                  <div class="megamenu-item_nested">
-                    <a class="megamenu-title" href="{{ link_child.url }}">{{ link_child.title | escape }}</a>
-                    {% for link_child_nested in link_child.links %}
-                      <a class="megamenu-item_mested-list" href="{{ link_child_nested.url }}">{{ link_child_nested.title | escape }}
-                        {% if link_child_nested.title contains 'M' %}
-                          <span class="megamenu-item_nested-badge">NEW</span>
-                        {% endif %}
-                      </a>
-                    {% endfor %}
+                <!-- Add a unique class or ID to the "Clearance" menu item -->
+                {% if link_child.title == 'Clearance' %}
+                  <div class="megamenu-item-block megamenu-all grid__item medium-up--one-quarter">
+                    <a class="megamenu-item-block-link special-menu-item" href="{{ link_child.url }}">
+                      <div class="megamenu-image megamenu-img-{{ forloop.index }}"></div>
+                    </a>
+                    <div class="megamenu-item_nested">
+                      <a class="megamenu-title" href="{{ link_child.url }}">{{ link_child.title }}</a>
+                      {% for link_child_nested in link_child.links %}
+                        <a class="megamenu-item_mested-list" href="{{ link_child_nested.url }}">{{ link_child_nested.title }}
+                          {% if link_child_nested.title contains 'M' %}
+                            <span class="megamenu-item_nested-badge">NEW</span>
+                          {% endif %}
+                        </a>
+                      {% endfor %}
+                    </div>
                   </div>
-                </div>
               {% else %}
-                <a class="megamenu-all megamenu-item-btn {% if link_child.url == '/collections/shop-all' or link_child.url == '/collections/all' %}shopall{% endif %}" href="{{ link_child.url }}">{{ link_child.title | escape }}</a>
+                  <!-- Other menu items -->
+                {% endif %}
+              {% else %}
+                <a class="megamenu-all megamenu-item-btn {% if link_child.url == '/collections/shop-all' or link_child.url == '/collections/all' %}shopall{% endif %}" href="{{ link_child.url }}">{{ link_child.title }}</a>
               {% endif %}
             {% endfor %}
           </div>
@@ -60,6 +67,8 @@
     {% endif %}
   {% endfor %}
 </ul>
+
+
 
 <script>
   $(document).ready(function() {
@@ -123,6 +132,7 @@
       .removeClass('hide');
   });
 </script>
+
 
 <style>
   .sale_off {
