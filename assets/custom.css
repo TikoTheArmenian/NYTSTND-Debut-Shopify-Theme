@@ -67,7 +67,7 @@ div[data-section-id="header"] {
 }
 
 /* CSS code for dropdown with href="/collections/clearance" */
-.site-nav__dropdown.new-menu-header_1 a[href="/collections/clearance"] {
+.site-nav__dropdown.new-menu-header_1:has([href="/collections/clearance"]) {
   background-color: red;
 }
 
