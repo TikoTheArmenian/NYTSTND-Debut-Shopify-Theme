@@ -62,8 +62,13 @@ div[data-section-id="header"] {
   position: fixed;
 }
 
-.new-menu-header_1.dropdown_item-nav {
-  right: 43%;
+.custom-dropdown {
+  up: 40px;
+}
+
+/* Styles for the regular dropdown menu */
+.regular-dropdown {
+  /* Regular dropdown styles here */
 }
 
 .site-nav__dropdown.megamenu {
