@@ -62,6 +62,11 @@ div[data-section-id="header"] {
   position: fixed;
 }
 
+/* CSS for the "Offers" dropdown */
+.dropdown_item-nav.is-offers-dropdown {
+    right: 48%;
+  }
+
 .site-nav__dropdown.megamenu {
   background-color: #fff;
 }

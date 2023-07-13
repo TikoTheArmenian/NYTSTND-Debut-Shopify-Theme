@@ -35,9 +35,14 @@
 
 
     {% if has_dropdown %}
-      {% if is_megamenu != true %}
-        <div>HELP</div>
+      {% comment %}
+      Check if the dropdown was made with link.title = "Offers"
+      {% endcomment %}
+      {% assign is_offers_dropdown = false %}
+      {% if link.title == 'Offers' %}
+        {% assign is_offers_dropdown = true %}
       {% endif %}
+
       <div class="site-nav__dropdown {% unless is_megamenu %}dropdown_item-nav{% endunless %}">
         <div class="page_width">
           <div class="grid__item megamenu-item-wrapper">
