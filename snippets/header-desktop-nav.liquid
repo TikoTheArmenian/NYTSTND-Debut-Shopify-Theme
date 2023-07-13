@@ -35,9 +35,7 @@
 
 
     {% if has_dropdown %}
-      {% comment %}
-      Check if the dropdown was made with link.title = "Offers"
-      {% endcomment %}
+      {% link.title %}
       {% assign is_offers_dropdown = false %}
       {% if link.title == 'Offers' %}
         {% assign is_offers_dropdown = true %}
