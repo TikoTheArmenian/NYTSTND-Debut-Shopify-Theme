@@ -62,7 +62,15 @@ div[data-section-id="header"] {
   position: fixed;
 }
 
+/* CSS code for dropdown with href="/collections/clearance" */
+.site-nav__dropdown.new-menu-header_1 a[href="/collections/clearance"] {
+  background-color: red;
+}
 
+/* CSS code for dropdown without href="/collections/clearance" */
+.site-nav__dropdown.new-menu-header_1 a:not([href="/collections/clearance"]) {
+  /* Add your specific styles here */
+}
 
 .site-nav__dropdown.megamenu {
   background-color: #fff;
