@@ -68,7 +68,7 @@ div[data-section-id="header"] {
 
 /* Styles specific to the dropdown with clearance link */
 .dropdown_item-nav a[href="/collections/clearance"] {
-  right: 48%;
+  right: 42% !important; 
   background-color: #0091ff;
 }
 
