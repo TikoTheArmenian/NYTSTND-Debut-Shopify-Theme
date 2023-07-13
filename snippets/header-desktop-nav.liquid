@@ -40,6 +40,7 @@
           <div class="grid__item megamenu-item-wrapper">
             {% for link_child in link.links %}
               {% if link_child.links != blank %}
+                {{ link_child.url }}
                 <div class="megamenu-item-block megamenu-all grid__item medium-up--one-quarter">
                   <a class="megamenu-item-block-link" href="{{ link_child.url }}">
                     <div class="megamenu-image megamenu-img-{{ forloop.index }}"></div>
