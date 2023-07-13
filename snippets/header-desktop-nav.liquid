@@ -19,7 +19,7 @@
 
     <li {% if has_dropdown %}id="shop-nav-dropdown__link"aria-haspopup="true"{% endif %} class="site-nav__item site-nav__expanded-item{% if has_dropdown %} site-nav--has-dropdown{% endif %}{% if is_megamenu %} site-nav--is-megamenu{% endif %}">
       <a href="{{ link.url }}" class="site-nav__link site-nav__link--underline">
-        {{ link.title }}
+        {{ link.title | escape }}
       </a>
       {%- if has_dropdown -%}
         <span class="site-nav__dropdown-icon">
@@ -40,9 +40,9 @@
                     <div class="megamenu-image megamenu-img-{{ forloop.index }}"></div>
                   </a>
                   <div class="megamenu-item_nested">
-                    <a class="megamenu-title" href="{{ link_child.url }}">{{ link_child.title }}</a>
+                    <a class="megamenu-title" href="{{ link_child.url }}">{{ link_child.title | escape }}</a>
                     {% for link_child_nested in link_child.links %}
-                      <a class="megamenu-item_mested-list" href="{{ link_child_nested.url }}">{{ link_child_nested.title }}
+                      <a class="megamenu-item_mested-list" href="{{ link_child_nested.url }}">{{ link_child_nested.title | escape }}
                         {% if link_child_nested.title contains 'M' %}
                           <span class="megamenu-item_nested-badge">NEW</span>
                         {% endif %}
@@ -51,7 +51,7 @@
                   </div>
                 </div>
               {% else %}
-                <a class="megamenu-all megamenu-item-btn {% if link_child.url == '/collections/shop-all' or link_child.url == '/collections/all' %}shopall{% endif %}" href="{{ link_child.url }}">{{ link_child.title }}</a>
+                <a class="megamenu-all megamenu-item-btn {% if link_child.url == '/collections/shop-all' or link_child.url == '/collections/all' %}shopall{% endif %}" href="{{ link_child.url }}">{{ link_child.title | escape }}</a>
               {% endif %}
             {% endfor %}
           </div>
