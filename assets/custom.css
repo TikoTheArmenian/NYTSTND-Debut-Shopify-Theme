@@ -551,9 +551,15 @@ header .site-header__logo img {
 }
 
 .site-nav__link.js-drawer-open-cart .cart-link__bubble:hover {
-  color: #159747;
-  background-color: 159747;
+  color: white;
+  background-color: #159747;
   border-color: #159747;
+  line-height: 17px;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  right: 12px;
+  top: -10px;
   cursor: pointer;
 }
 
