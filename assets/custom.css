@@ -550,7 +550,7 @@ header .site-header__logo img {
   top: -10px;
 }
 
-.site-nav__link.js-drawer-open-cart .cart-link__bubble:hover {
+/* .site-nav__link.js-drawer-open-cart .cart-link__bubble:hover {
   color: white;
   background-color: #159747;
   border-color: #159747;
@@ -561,7 +561,7 @@ header .site-header__logo img {
   right: 12px;
   top: -10px;
   cursor: pointer;
-}
+} */
 
 p.h4.footer__title.small--hide {
   display: block;
