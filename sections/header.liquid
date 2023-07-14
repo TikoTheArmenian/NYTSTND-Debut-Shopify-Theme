@@ -135,9 +135,11 @@
                 <span class="cart-link">
                   <span class="icon__fallback--text">
                     <img
+                      class="cart-icon"
                       src="{{ 'bag-2x.png' | asset_url }}"
                       alt="Cart Icon"
-                      style="max-width: 100%; max-height: 100%;">
+                      width="24"
+                      height="22.082">
                   </span>
                   <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}">{{ cart.item_count }}</span>
                 </span>
