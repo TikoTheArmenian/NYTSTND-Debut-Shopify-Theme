@@ -41,9 +41,8 @@
           <label for="SortBy" class="hidden-label">
             {{ 'collections.sorting.title' | t }}</label>
 
-
+          <label for="SortBy" style="font-weight: bold;">Sort By:</label>
           <select name="SortBy" id="SortBy">
-            <div class="sort-by-text">Sort By:</div>
             {% if sort_by == collection.default_sort_by %}
               <option value="title-ascending" selected="selected">{{ 'collections.sorting.title' | t }}
               </option>
