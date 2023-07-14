@@ -217,10 +217,10 @@
       "collection-sidebar": {
         "type": "collection-sidebar",
         "settings": {
-          "enable_sidebar": false,
+          "enable_sidebar": true,
           "filter_style": "drawer",
-          "tags_combine": false,
-          "enable_sort": false
+          "tags_combine": true,
+          "enable_sort": true
         }
       },
       "collection-promotions": {
