@@ -38,11 +38,11 @@
       <div class="collection-filter__item collection-filter__item--sort">
         <div class="collection-filter__sort-container">
           {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
-          <label for="SortBy" class="hidden-label">{{ 'collections.sorting.title' | t }}
-          </label>
-          <span class="sort-by-label">
-            <b>Sort By:</b>
-            {{ 'collections.sorting.title' | t }}</span>
+          <label for="SortBy" class="hidden-label">
+            <span class="sort-by-text">Sort By:</span>
+            {{ 'collections.sorting.title' | t }}</label>
+
+
           <select name="SortBy" id="SortBy">
             {% if sort_by == collection.default_sort_by %}
               <option value="title-ascending" selected="selected">{{ 'collections.sorting.title' | t }}

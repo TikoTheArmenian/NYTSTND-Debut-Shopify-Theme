@@ -1184,6 +1184,7 @@ img {
   opacity: 0.5 !important;
 }
 
-.ankap_test_adam {
-  color: #ff3b30;
+/* filter */
+.sort-by-text {
+  font-weight: bold;
 }
