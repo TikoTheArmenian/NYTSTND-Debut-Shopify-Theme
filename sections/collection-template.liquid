@@ -39,11 +39,11 @@
         <div class="collection-filter__sort-container">
           {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
           <label for="SortBy" class="hidden-label">
-            <span class="sort-by-text">Sort By:</span>
             {{ 'collections.sorting.title' | t }}</label>
 
 
           <select name="SortBy" id="SortBy">
+            <span class="sort-by-text">Sort By:</span>
             {% if sort_by == collection.default_sort_by %}
               <option value="title-ascending" selected="selected">{{ 'collections.sorting.title' | t }}
               </option>
@@ -277,3 +277,9 @@
     ]
   }
 {% endschema %}
+
+<style>
+  .sort-by-text {
+    font-weight: bold;
+  }
+</style>
