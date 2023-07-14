@@ -31,7 +31,8 @@
 
 <style>
   .site-nav__link {
-    font-size: {{ settings.type_navigation_size }}px;
+    font-size: {{ settings.type_navigation_size }}
+    px;
 
     {% if settings.type_navigation_size < 18 %}
       padding-left: 10px;
@@ -47,7 +48,7 @@
 
   {% unless overlay_header %}
     {% if section.settings.toolbar_currencies or section.settings.toolbar_social or section.settings.toolbar_menu != blank %}
-      {% include 'toolbar', overlay_header: overlay_header  %}
+      {% include 'toolbar', overlay_header: overlay_header %}
     {% endif %}
   {% endunless %}
 
@@ -56,16 +57,12 @@
 
       {% if overlay_header %}
         {% if section.settings.toolbar_currencies or section.settings.toolbar_social or section.settings.toolbar_menu != blank %}
-          {% include 'toolbar', overlay_header: overlay_header  %}
+          {% include 'toolbar', overlay_header: overlay_header %}
         {% endif %}
       {% endif %}
-      <header
-        class="site-header{% if settings.type_navigation_style == 'heading' %} site-header--heading-style{% endif %}"
-        data-sticky="{{ sticky_header }}">
+      <header class="site-header{% if settings.type_navigation_style == 'heading' %} site-header--heading-style{% endif %}" data-sticky="{{ sticky_header }}">
         <div class="page-width">
-          <div
-            class="header-layout header-layout--{{ section.settings.main_menu_alignment }}"
-            data-logo-align="{{ logo_alignment }}">
+          <div class="header-layout header-layout--{{ section.settings.main_menu_alignment }}" data-logo-align="{{ logo_alignment }}">
 
             {% if logo_alignment == 'left' %}
               <div class="header-item header-item--logo">
@@ -92,7 +89,7 @@
                   {% endif %}
                 {% endif %}
 
-                {% if section.settings.main_menu_alignment == 'center-left' or section.settings.main_menu_alignment == 'left-right'%}
+                {% if section.settings.main_menu_alignment == 'center-left' or section.settings.main_menu_alignment == 'left-right' %}
                   {% render 'header-desktop-nav', nav: section.settings.main_menu_link_list %}
                 {% endif %}
 
@@ -117,30 +114,31 @@
                 </div>
               {% endif %}
             {% endif %}
-  
+
             {% if section.settings.main_menu_alignment == 'left' or section.settings.main_menu_alignment == 'left-center' or section.settings.main_menu_alignment == 'left-drawer' or section.settings.main_menu_alignment == 'left-right' %}
               <div class="header-item header-item--icons--nav {% if section.settings.main_menu_alignment == 'left' or section.settings.main_menu_alignment == 'left-center' or  section.settings.main_menu_alignment == 'left-right' %} medium-up--hide{% endif %}">
-              <button
-                type="button"
-                class="site-nav__link site-nav__link--icon js-drawer-open-nav"
-                aria-controls="NavDrawer">
-                {% include 'icon-hamburger' %}
-                <span class="icon__fallback-text">{{ 'general.drawers.navigation' | t }}</span>
-              </button>
+                <button
+                  type="button"
+                  class="site-nav__link site-nav__link--icon js-drawer-open-nav"
+                  aria-controls="NavDrawer">
+                  {% include 'icon-hamburger' %}
+                  <span class="icon__fallback-text">{{ 'general.drawers.navigation' | t }}</span>
+                </button>
               </div>
             {% endif %}
-            
+
             <div class="header-item header-item--icons--cart header-item--icons">
-              <a href="/cart" class="site-nav__link site-nav__link--icon js-drawer-open-cart js-no-transition" aria-controls="CartDrawer">
+              <a
+                href="/cart"
+                class="site-nav__link site-nav__link--icon js-drawer-open-cart js-no-transition"
+                aria-controls="CartDrawer">
                 <span class="cart-link">
-                 
                   <span class="icon__fallback--text">
-                    <svg id="shopping-cart_1_" data-name="shopping-cart" xmlns="http://www.w3.org/2000/svg" width="24" height="22.082" viewBox="0 0 24 22.082">
-<!--                       <g id="Group_8" data-name="Group 8">
-                        <path id="Path_7" data-name="Path 7" d="M18.86,37.363H9.33l-.553-2.214h12.5L24,24.239H6.049L5.1,20.46H0v1.566H3.881L7.735,37.439a2.59,2.59,0,1,0,3,1.489h5.746a2.589,2.589,0,1,0,2.378-1.566Zm-5.406-3.779H11.716l-.388-3.107h2.126v3.107ZM19.308,25.8h2.686l-.777,3.107h-2.3Zm-.584,4.672h2.1l-.777,3.107H18.336ZM15.02,25.8h2.71l-.388,3.107H15.02V25.8Zm0,4.672h2.126l-.388,3.107H15.02V30.477ZM13.454,25.8v3.107H11.132L10.744,25.8h2.71Zm-7.014,0H9.166l.388,3.107H7.217Zm1.168,4.672H9.75l.388,3.107H8.385Zm.75,10.5a1.024,1.024,0,1,1,1.024-1.024A1.025,1.025,0,0,1,8.359,40.976Zm10.5,0a1.024,1.024,0,1,1,1.024-1.024A1.025,1.025,0,0,1,18.86,40.976Z" transform="translate(0 -20.46)" fill="#101010"/>
-                      </g> -->
-                      <path xmlns="http://www.w3.org/2000/svg" d="M2 24V6.13996H6.94444V1H17.0556V6.13996H22V24H2ZM15.2778 6.13996V2.6614H8.72222V6.13996H15.2778Z" fill="#101010"/>
-                    </svg>                    
+                    <img
+                      src="{{ 'bag-2x.png' | asset_url }}"
+                      alt="Cart Icon"
+                      width="24"
+                      height="22.082">
                   </span>
                   <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}">{{ cart.item_count }}</span>
                 </span>
@@ -148,7 +146,7 @@
             </div>
 
             {% comment %} <div class="header-item header-item--icons">
-              {% include 'header-icons' %}
+            {% include 'header-icons' %}
             </div> {% endcomment %}
           </div>
 
@@ -161,15 +159,28 @@
         <div class="site-header__search-container">
           <div class="site-header__search">
             <div class="page-width">
-              <form action="/search" method="get" class="site-header__search-form" role="search">
+              <form
+                action="/search"
+                method="get"
+                class="site-header__search-form"
+                role="search">
                 {% if settings.search_results == 'products' %}
-                  <input type="hidden" name="type" value="product">
+                  <input
+                    type="hidden"
+                    name="type"
+                    value="product">
                 {% endif %}
                 <button type="submit" class="text-link site-header__search-btn">
                   {% include 'icon-search' %}
                   <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
                 </button>
-                <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" class="site-header__search-input" aria-label="{{ 'general.search.placeholder' | t }}">
+                <input
+                  type="search"
+                  name="q"
+                  value="{{ search.terms | escape }}"
+                  placeholder="{{ 'general.search.placeholder' | t }}"
+                  class="site-header__search-input"
+                  aria-label="{{ 'general.search.placeholder' | t }}">
               </form>
               <button type="button" class="js-search-header-close text-link site-header__search-btn">
                 {% include 'icon-close' %}
@@ -218,20 +229,16 @@
           {
             "value": "center-left",
             "label": "Logo center, menu left"
-          },
-          {
+          }, {
             "value": "left-right",
             "label": "Logo left, menu right"
-          },
-          {
+          }, {
             "value": "center-split",
             "label": "Logo center, menu split"
-          },
-          {
+          }, {
             "value": "center",
             "label": "Logo center, menu below"
-          },
-          {
+          }, {
             "value": "center-drawer",
             "label": "Logo center, menu drawer"
           }
@@ -246,8 +253,7 @@
           {
             "value": "normal",
             "label": "Normal"
-          },
-          {
+          }, {
             "value": "sticky",
             "label": "Sticky"
           }
@@ -258,45 +264,37 @@
         "id": "sticky_index",
         "label": "Overlay header over home page",
         "default": false
-      },
-      {
+      }, {
         "type": "checkbox",
         "id": "sticky_collection",
         "label": "Overlay header over collection",
         "info": "(if collection image is enabled)",
         "default": false
-      },
-      {
+      }, {
         "type": "checkbox",
         "id": "header_search_enable",
         "label": "Show search icon"
-      },
-      {
+      }, {
         "type": "header",
         "content": "Toolbar"
-      },
-      {
+      }, {
         "type": "link_list",
         "id": "toolbar_menu",
         "label": "Navigation",
         "info": "This menu won't show dropdown items"
-      },
-      {
+      }, {
         "type": "checkbox",
         "id": "toolbar_social",
         "label": "Show social icons"
-      },
-      {
+      }, {
         "type": "checkbox",
         "id": "toolbar_currencies",
         "label": "Show currency converter",
         "info": "Must be enabled in 'Cart and currencies'"
-      },
-      {
+      }, {
         "type": "header",
         "content": "Announcement bar"
-      },
-      {
+      }, {
         "type": "checkbox",
         "id": "announcement_compact",
         "label": "Use compact style"
@@ -312,14 +310,12 @@
             "type": "image_picker",
             "id": "logo",
             "label": "Logo"
-          },
-          {
+          }, {
             "type": "image_picker",
             "id": "logo-inverted",
             "label": "White logo",
             "info": "Used when on top of an image"
-          },
-          {
+          }, {
             "type": "range",
             "id": "desktop_logo_width",
             "label": "Desktop logo width",
@@ -328,8 +324,7 @@
             "max": 400,
             "step": 10,
             "unit": "px"
-          },
-          {
+          }, {
             "type": "range",
             "id": "mobile_logo_width",
             "label": "Mobile logo width",
@@ -341,8 +336,7 @@
             "info": "Set as a max-width, may appear smaller"
           }
         ]
-      },
-      {
+      }, {
         "type": "announcement",
         "name": "Announcement",
         "limit": 3,
@@ -352,14 +346,12 @@
             "id": "text",
             "label": "Heading",
             "default": "Hassle-free returns"
-          },
-          {
+          }, {
             "type": "text",
             "id": "link_text",
             "label": "Text",
             "default": "30-day postage paid returns"
-          },
-          {
+          }, {
             "type": "url",
             "id": "link",
             "label": "Link"
