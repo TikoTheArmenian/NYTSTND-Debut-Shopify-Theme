@@ -19,19 +19,21 @@
 
 {% if section.settings.enable_sidebar == false or section.settings.filter_style == 'drawer' %}
   {% comment %}
-    Override grid styles if sidebar is disabled
-  {% endcomment %}
-  <style>
-    .collection-content .grid__item--sidebar { width: 0; }
-    .collection-content .grid__item--content { width: 100%; }
+  Override grid styles if sidebar is disabled
+  {% endcomment %}<style>
+    .collection-content .grid__item--sidebar {
+      width: 0;
+    }
+    .collection-content .grid__item--content {
+      border: none;
+    }
   </style>
 {% endif %}
 
 {% if section.settings.enable_sidebar and section.settings.filter_style != 'drawer' %}
   {% comment %}
-    Sidebar enabled but not in drawer mode, only show filter button on mobile
-  {% endcomment %}
-  <style>
+  Sidebar enabled but not in drawer mode, only show filter button on mobile
+  {% endcomment %}<style>
     @media screen and (min-width: 768px) {
       .collection-filter__item--drawer {
         display: none;
@@ -45,10 +47,10 @@
 
 {% unless section.settings.enable_sidebar %}
   {% comment %}
-    Disable sidebar & filter features
-  {% endcomment %}
-  <style>
+  Disable sidebar & filter features
+  {% endcomment %}<style>
     .collection-filter__item--drawer {
+      border: none;
       display: none;
     }
     .collection-filter__item--count {
@@ -75,8 +77,7 @@
         "id": "enable_sidebar",
         "label": "Enable filter",
         "default": true
-      },
-      {
+      }, {
         "type": "select",
         "id": "filter_style",
         "label": "Filter style",
@@ -85,19 +86,16 @@
           {
             "value": "sidebar",
             "label": "Sidebar"
-          },
-          {
+          }, {
             "value": "drawer",
             "label": "Drawer"
           }
         ]
-      },
-      {
+      }, {
         "type": "checkbox",
         "id": "tags_combine",
         "label": "Enable tag combinations"
-      },
-      {
+      }, {
         "type": "checkbox",
         "id": "enable_sort",
         "label": "Show sort options",
@@ -114,23 +112,20 @@
             "id": "title",
             "label": "Heading",
             "default": "Tag Group"
-          },
-          {
+          }, {
             "type": "textarea",
             "id": "tag_list",
             "label": "Tag list (one per line)",
             "default": "First tag \nSecond tag \nThird tag",
             "info": "Tags are case sensitive and must match your product tag exactly"
-          },
-          {
+          }, {
             "type": "checkbox",
             "id": "collapsed",
             "label": "Collapsed",
             "default": false
           }
         ]
-      },
-      {
+      }, {
         "type": "tags_all",
         "name": "All tags",
         "settings": [
@@ -139,16 +134,14 @@
             "id": "title",
             "label": "Heading",
             "default": "Tags"
-          },
-          {
+          }, {
             "type": "checkbox",
             "id": "collapsed",
             "label": "Collapsed",
             "default": false
           }
         ]
-      },
-      {
+      }, {
         "type": "menu",
         "name": "Menu",
         "settings": [
@@ -156,35 +149,30 @@
             "type": "text",
             "id": "title",
             "label": "Heading"
-          },
-          {
+          }, {
             "type": "link_list",
             "id": "menu",
             "label": "Choose a menu",
             "default": "main-menu"
           }
         ]
-      },
-      {
+      }, {
         "type": "subcollections",
         "name": "Subcollections",
         "settings": [
           {
             "type": "paragraph",
             "content": "Links to collections from your menu will appear here. "
-          },
-          {
+          }, {
             "type": "checkbox",
             "id": "enable_subsubcollections",
             "label": "Show third-level items",
             "default": true
-          },
-          {
+          }, {
             "type": "checkbox",
             "id": "enable_count",
             "label": "Enable count"
-          },
-          {
+          }, {
             "type": "checkbox",
             "id": "collapsed",
             "label": "Collapsed",
