@@ -44,8 +44,8 @@
           <div style="display: flex; align-items: center; padding-left: 10px;">
             <img
             <img src="{{ 'filter.png' | asset_url }}" alt="Filter" style="height: 20px; width: 20px; margin-right: 10px;">
-            <div style="border-right: 1px solid grey; height: 20px; margin-right: 10px;"></div>
-            <label for="SortBy" style="font-weight: bold; margin-right: 10px; align-self: center;">Sort By:</label>
+            <div style="border-right: 1px solid rgb(161, 161, 161); opacity: .3; height: 20px; margin-right: 10px;"></div>
+            <label for="SortBy" style="font-weight: bold; margin-right: -6px; margin-top: 5px; align-self: center;">Sort By:</label>
             <select name="SortBy" id="SortBy">
               {% if sort_by == collection.default_sort_by %}
                 <option value="title-ascending" selected="selected">{{ 'collections.sorting.title' | t }}
