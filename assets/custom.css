@@ -1183,8 +1183,3 @@ img {
 .product__color-item.not-available .product__color-img {
   opacity: 0.5 !important;
 }
-
-/* filter */
-.sort-by-text {
-  font-weight: bold;
-}
