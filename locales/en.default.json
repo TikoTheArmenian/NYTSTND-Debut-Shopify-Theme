@@ -135,7 +135,7 @@
         "other": "{{ count }} products"
       }
     },
-    "sorting": {
+    "sorting": {w
       "title": "Sort",
       "featured": "Featured",
       "best_selling": "Best Selling",
