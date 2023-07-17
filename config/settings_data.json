@@ -217,7 +217,7 @@
       "collection-sidebar": {
         "type": "collection-sidebar",
         "settings": {
-          "enable_sidebar": true,
+          "enable_sidebar": false,
           "filter_style": "drawer",
           "tags_combine": true,
           "enable_sort": true
