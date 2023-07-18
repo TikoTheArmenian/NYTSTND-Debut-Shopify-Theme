@@ -286,4 +286,21 @@
   .sort-by-text {
     font-weight: bold;
   }
+
+    /* CSS for non-mobile devices */
+    @media screen and (min-width: 768px) {
+      .collection-filter__item--drawer {
+        position: relative;
+        float: left;
+        left: 24%;
+      }
+    }
+    /* CSS for non-mobile devices */
+    @media screen and (max-width: 767px) {
+      .collection-filter__item--drawer {
+        float: left;
+        left: 15%;
+        float: left;
+      }
+    }
 </style>
