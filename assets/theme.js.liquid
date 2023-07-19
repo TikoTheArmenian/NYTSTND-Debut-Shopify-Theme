@@ -6383,16 +6383,20 @@ $(document).on('change', '.collection-filter select', function() {
 });
 
 $(document).ready(function() {
+  console.log('ran');
   var screenWidth = $(window).width();
 
   if (screenWidth < 450) {
+    console.log('small');
       var variantValue = $('.product__title-variant').html();
       var variantValueParts = variantValue.split('<br/>');
       var secondPart = variantValueParts[1];
       var secondPartLength = secondPart.length;
 
       if (secondPartLength <= 23) {
+        console.log('lengt')
           var variantValueDisplay = variantValueParts[0] + '<br/>' + secondPart + '<br/>&nbsp;';
+          console.log(variantValueDisplay)
           $('.product__title-variant').html(variantValueDisplay);
       }
   }
