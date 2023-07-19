@@ -1199,8 +1199,7 @@ img {
 
 /* out of stock */
 
-.product-section.out-of-stock {
-  /* make the product appear greyed out */
-  filter: grayscale(100%);
-  opacity: 0.5;
+.out-of-stock {
+  color: grey;
+  pointer-events: none;
 }
