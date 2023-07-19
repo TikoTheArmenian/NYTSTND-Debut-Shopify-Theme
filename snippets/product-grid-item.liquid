@@ -134,7 +134,8 @@
           {% endfor %}
         {% endif %}
       </div>
-      {% product.metafields.custom.variant.value %
+
+      <div>{% product.metafields.custom.variant.value %</div>
 
       <div class="grid-product__title grid-product__title--{{ settings.type_product_style }}">
         <div class="product_desc {% if product.metafields.custom.variant.value == blank %}grid-product_no-variant{% endif %}">
