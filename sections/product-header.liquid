@@ -276,7 +276,6 @@
                   -%}
 
                   {% for color_image in product.metafields.custom.images.value limit: product_available_products_items %}
-                    {{ product.available }}
 
                   <a class="product__color-item" 
                      data-handle="/products/{{ color_item_handles[forloop.index0] }}" 
