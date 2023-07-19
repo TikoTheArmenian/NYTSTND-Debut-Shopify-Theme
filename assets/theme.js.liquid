@@ -6358,6 +6358,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   
   selectElements.forEach(function(selectElement) {
       selectElement.style.width = 'auto';
+      console.log(selectElement);
       selectElement.style.width = selectElement.scrollWidth + 'px';
       
       selectElement.addEventListener('change', function() {
