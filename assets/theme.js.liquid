@@ -6392,12 +6392,10 @@ $(document).ready(function() {
             var variantValue = $(this).html();
             var variantValueParts = variantValue.split('<br>');
             
-            console.log(variantValueParts);
-            console.log(variantValueParts.length);
             if (variantValueParts.length > 1) {
               if(!(screenWidth<385 && 
-                variantValueParts.length <= 23 && 
-                variantValueParts.length > 21))
+                variantValueParts[1].length <= 23 && 
+                variantValueParts[1].length > 21))
               {
                 var secondPart = variantValueParts[1];
                 var secondPartLength = secondPart.length;
