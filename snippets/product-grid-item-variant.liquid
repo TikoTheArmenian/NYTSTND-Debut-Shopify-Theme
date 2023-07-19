@@ -55,24 +55,24 @@
           </div>
         {% endif %}
         {% if fixed_aspect_ratio %}
-          <div
-            id="prod-image--{{ product.id }}"
+          <div id="prod-image--{{ product.id }}"
             class="grid__image-ratio grid__image-ratio--{{ settings.product_grid_image_size }} lazyload"
             data-bgset="{% include 'bgset', image: product.featured_image %}"
-            data-sizes="auto"></div>
+            data-sizes="auto">
+          </div>
         {% else %}
-          <div class="image-wrap" style="height: 0; padding-bottom: {{ 100 | divided_by: product.featured_image.aspect_ratio }}%;">
-            {%- assign img_url = product.featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-            <img
-              class="grid-product__image lazyload"
-              data-src="{{ img_url }}"
-              data-widths="[180, 360, 540, 720, 900, 1080]"
-              data-aspectratio="{{ product.featured_image.aspect_ratio }}"
-              data-sizes="auto"
-              alt="{{ product.featured_image.alt | escape }}">
+          <div class="image-wrap"
+            style="height: 0; padding-bottom: {{ 100 | divided_by: product.featured_image.aspect_ratio }}%;"
+            >
+            {%- assign img_url = product.featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}            
+            <img class="grid-product__image lazyload"
+                data-src="{{ img_url }}"
+                data-widths="[180, 360, 540, 720, 900, 1080]"
+                data-aspectratio="{{ product.featured_image.aspect_ratio }}"
+                data-sizes="auto"
+                alt="{{ product.featured_image.alt | escape }}">
             <noscript>
-              <img
-                class="grid-product__image lazyloaded"
+              <img class="grid-product__image lazyloaded"
                 src="{{ product.featured_image | img_url: '400x' }}"
                 alt="{{ product.featured_image.alt | escape }}">
             </noscript>
@@ -81,17 +81,17 @@
 
         {% unless sold_out %}
           {% if settings.product_hover_image and product.images.size > 3 %}
-
+            
 
             {% for image in product.images offset: 2 limit: 1 %}
               {%- assign black_image = image -%}
             {% endfor %}
-            <div
-              id="variant-hover--{{product.id}}-black"
+            <div id="variant-hover--{{product.id}}-black"
               class="grid-product__secondary-image small--hide lazyload"
               data-bgset="{% include 'bgset', image: black_image %}"
-              data-sizes="auto"></div>
-
+              data-sizes="auto">
+            </div>
+            
           {% endif %}
         {% endunless %}
 
@@ -108,7 +108,9 @@
                   {%- assign values = values | append: ',' | append: value %}
                   {%- assign values = values | split: ',' %}
                   {% if variant.image %}
-                    <div class="grid-product__color-image grid-product__color-image--{{ product.id }}--{{variant.id}} small--hide"></div>
+                    <div
+                      class="grid-product__color-image grid-product__color-image--{{ product.id }}--{{variant.id}} small--hide">
+                    </div>
                   {% endif %}
                 {% endunless %}
               {% endfor %}
@@ -118,38 +120,30 @@
       </div>
 
       <div class="grid-product__meta">
-        {% assign title_length = product.title | size %}
-        {% if title_length <= 230 %}
-          {% assign first_part = product.title %}
-          {% assign second_part = '/n' %}
-          <div class="grid-product__title grid-product__title--{{ settings.type_product_style }}">{{ first_part }}<br>{{ second_part }}</div>
-        {% else %}
           <div class="grid-product__title grid-product__title--{{ settings.type_product_style }}">{{ product.title }}</div>
-        {% endif %}
-        {% if settings.vendor_enable %}
+          {% if settings.vendor_enable %}
           <div class="grid-product__vendor">{{ product.vendor }}</div>
-        {% endif %}
-        <div class="grid-product__price">
-          {% if on_sale %}
+          {% endif %}
+          <div class="grid-product__price">
+            {% if on_sale %}
             <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
             <span style="text-decoration: line-through;">{{ product.compare_at_price | money }}</span>
-          {% endif %}
-          {% if product.price_varies %}
+            {% endif %}
+            {% if product.price_varies %}
             {%- assign price = product.price_min | money -%}
             {{ 'products.general.from_text_html' | t: price: price }}
-          {% else %}
-            {{ product.price | money }}
-            {% if on_sale %}
-              {% if settings.product_save_amount %}
-                {% capture saved_amount %}
-                  {{ product.compare_at_price | minus: product.price | money }}{% endcapture %}
-                <span class="grid-product__price--savings">{{ 'products.general.save_html' | t: saved_amount: saved_amount }}</span>
+            {% else %}
+              {{ product.price  | money }}
+              {% if on_sale %}
+                {% if settings.product_save_amount %}
+                  {% capture saved_amount %}{{ product.compare_at_price | minus: product.price | money }}{% endcapture %}
+                  <span class="grid-product__price--savings">{{ 'products.general.save_html' | t: saved_amount: saved_amount }}</span>
+                {% endif %}
               {% endif %}
             {% endif %}
-          {% endif %}
-        </div>
-        {% render 'okendo-reviews-product-rating-summary', product: product %}
-      </div>
+          </div>
+          {% render 'okendo-reviews-product-rating-summary', product: product %}          
+       </div>
     </a>
   </div>
   {% if settings.collection_color_swatches %}
@@ -160,7 +154,7 @@
 
 <!-- White -->
 {% for image in product.images offset: 1 limit: 1 %}
-  {%- assign featured_white = image -%}
+              {%- assign featured_white = image -%}
 {% endfor %}
 <div class="grid__item grid-product {{ grid_item_width }}{% if settings.quick_shop_enable and sold_out == false %} grid-product__has-quick-shop{% endif %}" data-aos="row-of-{{ per_row }}">
   <div class="grid-product__content">
@@ -189,24 +183,24 @@
           </div>
         {% endif %}
         {% if fixed_aspect_ratio %}
-          <div
-            id="prod-image--{{ product.id }}"
+          <div id="prod-image--{{ product.id }}"
             class="grid__image-ratio grid__image-ratio--{{ settings.product_grid_image_size }} lazyload"
             data-bgset="{% include 'bgset', image: featured_white %}"
-            data-sizes="auto"></div>
+            data-sizes="auto">
+          </div>
         {% else %}
-          <div class="image-wrap" style="height: 0; padding-bottom: {{ 100 | divided_by: product.featured_image.aspect_ratio }}%;">
-            {%- assign img_url = featured_white | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-            <img
-              class="grid-product__image lazyload"
-              data-src="{{ img_url }}"
-              data-widths="[180, 360, 540, 720, 900, 1080]"
-              data-aspectratio="{{ featured_white.aspect_ratio }}"
-              data-sizes="auto"
-              alt="{{ featured_white.alt | escape }}">
+          <div class="image-wrap"
+            style="height: 0; padding-bottom: {{ 100 | divided_by: product.featured_image.aspect_ratio }}%;"
+            >
+            {%- assign img_url = featured_white | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}            
+            <img class="grid-product__image lazyload"
+                data-src="{{ img_url }}"
+                data-widths="[180, 360, 540, 720, 900, 1080]"
+                data-aspectratio="{{ featured_white.aspect_ratio }}"
+                data-sizes="auto"
+                alt="{{ featured_white.alt | escape }}">
             <noscript>
-              <img
-                class="grid-product__image lazyloaded"
+              <img class="grid-product__image lazyloaded"
                 src="{{ featured_white | img_url: '400x' }}"
                 alt="{{ featured_white.alt | escape }}">
             </noscript>
@@ -218,11 +212,11 @@
             {% for image in product.images offset: 3 limit: 1 %}
               {%- assign white_image = image -%}
             {% endfor %}
-            <div
-              id="variant-hover--{{product.id}}-white"
+            <div id="variant-hover--{{product.id}}-white"
               class="grid-product__secondary-image small--hide lazyload"
               data-bgset="{% include 'bgset', image: white_image %}"
-              data-sizes="auto"></div>
+              data-sizes="auto">
+            </div>
           {% endif %}
         {% endunless %}
 
@@ -239,7 +233,9 @@
                   {%- assign values = values | append: ',' | append: value %}
                   {%- assign values = values | split: ',' %}
                   {% if variant.image %}
-                    <div class="grid-product__color-image grid-product__color-image--{{ product.id }}--{{variant.id}} small--hide"></div>
+                    <div
+                      class="grid-product__color-image grid-product__color-image--{{ product.id }}--{{variant.id}} small--hide">
+                    </div>
                   {% endif %}
                 {% endunless %}
               {% endfor %}
@@ -249,31 +245,30 @@
       </div>
 
       <div class="grid-product__meta">
-        <div class="grid-product__title grid-product__title--{{ settings.type_product_style }}">{{ product.title }}</div>
-        {% if settings.vendor_enable %}
+          <div class="grid-product__title grid-product__title--{{ settings.type_product_style }}">{{ product.title }}</div>          
+          {% if settings.vendor_enable %}
           <div class="grid-product__vendor">{{ product.vendor }}</div>
-        {% endif %}
-        <div class="grid-product__price">
-          {% if on_sale %}
+          {% endif %}
+          <div class="grid-product__price">
+            {% if on_sale %}
             <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
             <span style="text-decoration: line-through;">{{ product.compare_at_price | money }}</span>
-          {% endif %}
-          {% if product.price_varies %}
+            {% endif %}
+            {% if product.price_varies %}
             {%- assign price = product.price_min | money -%}
             {{ 'products.general.from_text_html' | t: price: price }}
-          {% else %}
-            {{ product.price | money }}
-            {% if on_sale %}
-              {% if settings.product_save_amount %}
-                {% capture saved_amount %}
-                  {{ product.compare_at_price | minus: product.price | money }}{% endcapture %}
-                <span class="grid-product__price--savings">{{ 'products.general.save_html' | t: saved_amount: saved_amount }}</span>
+            {% else %}
+              {{ product.price  | money }}
+              {% if on_sale %}
+                {% if settings.product_save_amount %}
+                  {% capture saved_amount %}{{ product.compare_at_price | minus: product.price | money }}{% endcapture %}
+                  <span class="grid-product__price--savings">{{ 'products.general.save_html' | t: saved_amount: saved_amount }}</span>
+                {% endif %}
               {% endif %}
             {% endif %}
-          {% endif %}
-        </div>
-        {% render 'okendo-reviews-product-rating-summary', product: product %}
-      </div>
+          </div>
+          {% render 'okendo-reviews-product-rating-summary', product: product %}
+       </div>
     </a>
   </div>
   {% if settings.collection_color_swatches %}
