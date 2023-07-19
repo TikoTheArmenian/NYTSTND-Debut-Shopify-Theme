@@ -6360,11 +6360,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
       selectElement.style.width = 'auto';
       for(var i = 0; i < selectElement.options.length; i++) {
           if(selectElement.options[i].innerText.select ) {
+            console.log(options[i]);
             selectElement.style.width = selectElement.options[i].text + 'px';
+            break;
           }
       }
-      console.log(selectElement);
-      selectElement.style.width = selectElement.scrollWidth + 'px';
+      //selectElement.style.width = selectElement.scrollWidth + 'px';
       
       selectElement.addEventListener('change', function() {
           this.style.width = 'auto';
