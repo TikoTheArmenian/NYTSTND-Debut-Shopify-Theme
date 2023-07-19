@@ -1199,7 +1199,7 @@ img {
 
 /* out of stock */
 
-.product__color-variants .product__color-item.out-of-stock {
+.product__color-variants .product__color-item.out-of-stock .product__color-img {
   opacity: 0.5 !important;
   pointer-events: none !important;
 }
