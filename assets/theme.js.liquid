@@ -6353,31 +6353,35 @@ if (location.pathname === '/cart') {
   updateCartQuantity();
 }
 
-window.addEventListener('DOMContentLoaded', (event) => {
+// Run the function when the document is ready
+$(document).ready(function() {
+  adjustSelectWidth();
+});
+
+function adjustSelectWidth() {
   var selectElements = document.querySelectorAll('.collection-filter select');
 
-  selectElements.forEach(function(selectElement, index) {
-      // Apply the stored width if it exists
-      var storedWidth = localStorage.getItem('selectWidth' + index);
-      console.log('Retrieved stored width for select element ' + index + ':', storedWidth);
-
-      if (storedWidth) {
-          selectElement.style.width = storedWidth;
-          console.log('Applied stored width to select element ' + index);
-      }
-
-      selectElement.addEventListener('change', function() {
-          console.log('Change event triggered for select element ' + index);
-          this.style.width = 'auto';
-          this.style.width = this.scrollWidth + 'px';
-          console.log('Updated width of select element ' + index + ':', this.style.width);
-
-          // Store the width in localStorage
-          localStorage.setItem('selectWidth' + index, this.style.width);
-          console.log('Stored width of select element ' + index + ' in localStorage');
-      });
+  selectElements.forEach(function(selectElement) {
+      // Create a temporary element to measure the width
+      var tempElement = document.createElement('span');
+      tempElement.innerHTML = selectElement.options[selectElement.selectedIndex].text;
+      
+      // Add the temporary element to the body
+      document.body.appendChild(tempElement);
+      
+      // Set the select width to the width of the temporary element
+      selectElement.style.width = `${tempElement.getBoundingClientRect().width}px`;
+      
+      // Remove the temporary element
+      document.body.removeChild(tempElement);
   });
+}
+
+// Update the width when an option is selected
+$(document).on('change', '.collection-filter select', function() {
+  adjustSelectWidth();
 });
+
 
 
 
