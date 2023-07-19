@@ -30,15 +30,15 @@
 {% endif %} {% endcomment %}{% if collection.handle == 'quad' %}
   {% include 'page-QUAD-collection-info-snippet' %}
 {% endif %}
-{% if collection.handle == 'trio' %}
-  {% include 'logo-list-slideshow' %}
+{% comment %} {% if collection.handle == 'trio' %}
+{% include 'logo-list-slideshow' %}
 {% endif %}
 {% if collection.handle == 'uno' %}
-  {% include 'logo-list-slideshow' %}
+{% include 'logo-list-slideshow' %}
 {% endif %}
 {% if collection.handle == 'duo' %}
-  {% include 'logo-list-slideshow' %}
-{% endif %}
+{% include 'logo-list-slideshow' %}
+{% endif %} {% endcomment %}
 
 {% comment %} {% section 'logo-list-slideshow' %} {% endcomment %}
 <!-- already in page-QUAD-collection-info-snippet -->
