@@ -217,7 +217,7 @@
       "collection-sidebar": {
         "type": "collection-sidebar",
         "settings": {
-          "enable_sidebar": true,
+          "enable_sidebar": false,
           "filter_style": "drawer",
           "tags_combine": true,
           "enable_sort": true
@@ -894,22 +894,34 @@
       },
       "1581584292419": {
         "type": "slideshow",
-        "disabled": true,
         "blocks": {
           "1581584292419-0": {
             "type": "image",
             "settings": {
+              "image": "shopify:\/\/shop_images\/UNO-black.webp",
               "alignment": "top",
-              "title": "Unique Technology",
-              "text": "5-coil full area energy surface inside",
-              "button_label": "SHOP NOW",
-              "button_link": "shopify:\/\/collections\/all"
+              "title": "UNO FLASH SALE",
+              "text": "Where Style Meets Unmatched Charging Excellence!",
+              "button_label": "Grab 20% Off + Gift Now",
+              "button_link": "shopify:\/\/collections\/uno"
             }
           },
           "f6d2b36a-b338-4d89-9ba1-687172e7248a": {
             "type": "image",
             "settings": {
-              "image": "shopify:\/\/shop_images\/QUADT_ceccc6a0-c657-417b-85ca-8bda95bb7592.jpg",
+              "image": "shopify:\/\/shop_images\/QUAD-t-saddle-lc-header_f548cf40-5767-457e-9397-e61b00818697.jpg",
+              "alignment": "top",
+              "title": "LIFE UNCLUTTERED",
+              "text": "Wireless Charger 4-1: Handcrafted with premium wood and leather",
+              "button_label": "SHOP NOW",
+              "button_link": "shopify:\/\/collections\/all"
+            }
+          },
+          "fd67233a-2c74-4690-9824-73af0bb37e71": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify:\/\/shop_images\/TRIO_WO_b4fcb95b-7458-4c27-adc0-29a824fb216d.jpg",
               "alignment": "top",
               "title": "Image slide",
               "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -920,16 +932,18 @@
         },
         "block_order": [
           "1581584292419-0",
-          "f6d2b36a-b338-4d89-9ba1-687172e7248a"
+          "f6d2b36a-b338-4d89-9ba1-687172e7248a",
+          "fd67233a-2c74-4690-9824-73af0bb37e71"
         ],
         "settings": {
           "autoplay": true,
           "autoplay_speed": "5000",
-          "text_size": "medium"
+          "text_size": "large"
         }
       },
       "1593705825703": {
         "type": "hero-video",
+        "disabled": true,
         "settings": {
           "title": "Wireless Charging Station",
           "title_size": 55,
@@ -1780,7 +1794,7 @@
           "67f72d0e-64d9-43d1-a2e1-e6392ea5d175": {
             "type": "text",
             "settings": {
-              "block_text": "FREE Standard shipping or 2-day Express shipping available",
+              "block_text": "FREE shipping on all US orders $99+",
               "new_image": "shopify:\/\/shop_images\/Shipping_86d19f7c-246d-4129-b4b4-7afae26ceea0.png"
             }
           },
@@ -2291,10 +2305,9 @@
       }
     },
     "content_for_index": [
-      "1593705825703",
+      "1581584292419",
       "1570103362597",
       "1572545926129",
-      "1581584292419",
       "16561944335dfd22eb",
       "fdf9adf8-c152-4f87-8a7a-6ff9791c74e0",
       "1634215792b6e88901",
@@ -2303,7 +2316,8 @@
       "445e285a-6adc-46b2-8e0f-457f9b3f163b",
       "87f8e9b4-1dcb-416f-96f1-0a5096e1b864",
       "1645225025cb743b4a",
-      "1569488738608"
+      "1569488738608",
+      "1593705825703"
     ],
     "blocks": {
       "11349500561483629931": {
