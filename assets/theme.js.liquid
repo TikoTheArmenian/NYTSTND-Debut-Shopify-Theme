@@ -6360,7 +6360,6 @@ $(document).ready(function() {
 
 function adjustSelectWidth() {
   var selectElements = document.querySelectorAll('.collection-filter select');
-  console.log(selectElements);
 
   selectElements.forEach(function(selectElement) {
       // Create a temporary element to measure the width
@@ -6371,7 +6370,6 @@ function adjustSelectWidth() {
       document.body.appendChild(tempElement);
       
       // Set the select width to the width of the temporary element
-      console.log(tempElement);
       selectElement.style.width = `${tempElement.getBoundingClientRect().width + 50}px`;
 
       // Remove the temporary element
