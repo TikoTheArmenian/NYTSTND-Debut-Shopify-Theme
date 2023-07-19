@@ -6391,7 +6391,7 @@ $(document).ready(function() {
           console.log('tes1');
             var variantValue = $(this).html();
             console.log(variantValue);
-            var variantValueParts = variantValue.split('<br/>');
+            var variantValueParts = variantValue.split('<br>');
             
             if (variantValueParts.length > 1) {
               console.log('tes2');
@@ -6401,7 +6401,7 @@ $(document).ready(function() {
                 console.log(secondPart);
 
                 if (secondPartLength <= 23) {
-                    var variantValueDisplay = variantValueParts[0] + '<br/>' + secondPart + '<br/>&nbsp;';
+                    var variantValueDisplay = variantValueParts[0] + '<br>' + secondPart + '<br/>&nbsp;';
                     $(this).html(variantValueDisplay);
                 }
             }
