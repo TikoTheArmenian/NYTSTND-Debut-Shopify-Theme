@@ -6389,16 +6389,20 @@ $(document).ready(function() {
       $('.product__title-variant').each(function() {
           var variantValue = $(this).html();
           var variantValueParts = variantValue.split('<br/>');
-          var secondPart = variantValueParts[1];
-          var secondPartLength = secondPart.length;
+          
+          if (variantValueParts.length > 1) {
+              var secondPart = variantValueParts[1];
+              var secondPartLength = secondPart.length;
 
-          if (secondPartLength <= 23) {
-              var variantValueDisplay = variantValueParts[0] + '<br/>' + secondPart + '<br/>&nbsp;';
-              $(this).html(variantValueDisplay);
+              if (secondPartLength <= 23) {
+                  var variantValueDisplay = variantValueParts[0] + '<br/>' + secondPart + '<br/>&nbsp;';
+                  $(this).html(variantValueDisplay);
+              }
           }
       });
   }
 });
+
 
 
 
