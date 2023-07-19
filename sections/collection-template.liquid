@@ -45,7 +45,7 @@
             <img
             <img src="{{ 'filter.png' | asset_url }}" alt="Filter" style="height: 20px; width: 20px; margin-right: 10px;">
             <div style="border-right: 1px solid rgb(161, 161, 161); opacity: .3; height: 20px; margin-right: 10px;"></div>
-            <label for="SortBy" style="font-weight: bold; margin-right: -6px; margin-top: 7px; align-self: center;">Sort By:</label>
+            <label for="SortBy" class="sort-by-label" style="font-weight: bold; margin-right: -6px; margin-top: 7px; align-self: center;">Sort By:</label>
             <select name="SortBy" id="SortBy">
               {% if sort_by == collection.default_sort_by %}
                 <option value="title-ascending" selected="selected">{{ 'collections.sorting.title' | t }}
@@ -283,27 +283,25 @@
 {% endschema %}
 
 <style>
-  .sort-by-text {
-    font-weight: bold;
-  }
-
   /* CSS for non-mobile devices */
   @media screen and (min-width: 768px) {
+    .sort-by-label {
+      width: auto; /* or whatever width you want for non-mobile devices */
+    }
     .collection-filter {
       position: relative;
       left: 12%;
     }
   }
+
   /* CSS for mobile devices */
   @media screen and (max-width: 767px) {
+    .sort-by-label {
+      width: 204px;
+    }
     .collection-filter {
       position: relative;
-      left: 0%;
-    }
-
-    /* New rule for SortBy label */
-    .hidden-label[for="SortBy"] {
-      width: 204px;
+      left: 0%;     
     }
   }
 </style>
