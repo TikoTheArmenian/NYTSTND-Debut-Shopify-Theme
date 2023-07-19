@@ -6353,4 +6353,39 @@ if (location.pathname === '/cart') {
   updateCartQuantity();
 }
 
+// Run the function when the document is ready
+$(document).ready(function() {
+  adjustSelectWidth();
+});
+
+function adjustSelectWidth() {
+  var selectElements = document.querySelectorAll('.collection-filter select');
+  console.log(selectElements);
+
+  selectElements.forEach(function(selectElement) {
+      // Create a temporary element to measure the width
+      var tempElement = document.createElement('span');
+      tempElement.innerHTML = selectElement.options[selectElement.selectedIndex].text;
+      
+      // Add the temporary element to the body
+      document.body.appendChild(tempElement);
+      
+      // Set the select width to the width of the temporary element
+      console.log(tempElement);
+      selectElement.style.width = `${tempElement.getBoundingClientRect().width + 50}px`;
+
+      // Remove the temporary element
+      document.body.removeChild(tempElement);
+  });
+}
+
+// Update the width when an option is selected
+$(document).on('change', '.collection-filter select', function() {
+  adjustSelectWidth();
+});
+
+
+
+
+
 //////////END JS ADDED BY BN//////////

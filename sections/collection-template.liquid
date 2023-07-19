@@ -286,4 +286,20 @@
   .sort-by-text {
     font-weight: bold;
   }
+
+    /* CSS for non-mobile devices */
+    @media screen and (min-width: 768px) {
+      .collection-filter {
+        position: relative;
+        left: 12%;
+      }
+    }
+    /* CSS for mobile devices */
+    @media screen and (max-width: 767px) {
+      .collection-filter {
+        position: relative;
+        
+        left: 0%;     
+         }
+    }
 </style>
