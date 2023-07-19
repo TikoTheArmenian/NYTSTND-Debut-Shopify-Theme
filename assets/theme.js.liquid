@@ -6405,7 +6405,7 @@ $(document).ready(function() {
               var secondPart = variantValueParts[1];
               var secondPartLength = secondPart.length;
 
-              if (secondPartLength <= 22) {
+              if (secondPartLength <= maxlength) {
                   var variantValueDisplay = variantValueParts[0] + '<br>' + secondPart + '<br> &nbsp;';
                   $(this).html(variantValueDisplay);
               }
