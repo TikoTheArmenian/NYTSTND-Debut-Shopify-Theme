@@ -6387,17 +6387,21 @@ $(document).ready(function() {
 
     if (screenWidth < 450 && screenWidth > 303) {
         $('.product__title-variant').each(function() {
+
           
             var variantValue = $(this).html();
             var variantValueParts = variantValue.split('<br>');
             
             if (variantValueParts.length > 1) {
+              if(!(screenWidth<385 && variantValueParts.length == 23))
+              {
                 var secondPart = variantValueParts[1];
                 var secondPartLength = secondPart.length;
                 if (secondPartLength <= 23) {
                     var variantValueDisplay = variantValueParts[0] + '<br>' + secondPart + '<br/>&nbsp;';
                     $(this).html(variantValueDisplay);
                 }
+              }
             }
         });
     }
