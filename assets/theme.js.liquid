@@ -6370,7 +6370,7 @@ function adjustSelectWidth() {
       document.body.appendChild(tempElement);
       
       // Set the select width to the width of the temporary element
-      console.log(tempElement.getBoundingClientRect());
+      console.log(tempElement);
       selectElement.style.width = `${tempElement.getBoundingClientRect().width}px`;
 
       // Remove the temporary element
