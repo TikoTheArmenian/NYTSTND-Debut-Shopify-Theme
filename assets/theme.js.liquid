@@ -6393,7 +6393,9 @@ $(document).ready(function() {
             var variantValueParts = variantValue.split('<br>');
             
             if (variantValueParts.length > 1) {
-              if(!(screenWidth<385 && variantValueParts.length == 23))
+              if(!(screenWidth<385 && 
+                variantValueParts.length <= 23 && 
+                variantValueParts.length > 21))
               {
                 var secondPart = variantValueParts[1];
                 var secondPartLength = secondPart.length;
