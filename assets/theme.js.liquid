@@ -6382,6 +6382,22 @@ $(document).on('change', '.collection-filter select', function() {
   adjustSelectWidth();
 });
 
+$(document).ready(function() {
+  var screenWidth = $(window).width();
+
+  if (screenWidth < 450) {
+      var variantValue = $('.product__title-variant').html();
+      var variantValueParts = variantValue.split('<br/>');
+      var secondPart = variantValueParts[1];
+      var secondPartLength = secondPart.length;
+
+      if (secondPartLength <= 23) {
+          var variantValueDisplay = variantValueParts[0] + '<br/>' + secondPart + '<br/>&nbsp;';
+          $('.product__title-variant').html(variantValueDisplay);
+      }
+  }
+});
+
 
 
 

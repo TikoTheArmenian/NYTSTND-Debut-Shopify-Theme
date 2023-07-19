@@ -135,54 +135,27 @@
         {% endif %}
       </div>
 
-      {% assign variant_value_parts = product.metafields.custom.variant.value | split: '<br/>' %}
-      {% assign second_part = variant_value_parts[1] %}
-      {% assign second_part_length = second_part | size %}
-
-      {% if second_part_length <= 23 %}
-        {% assign variant_value_display = variant_value_parts[0] | append: '<br/>' | append: second_part | append: '<br/>&nbsp;' %}
-      {% else %}
-        {% assign variant_value_display = product.metafields.custom.variant.value %}
-      {% endif %}
-
       <div class="grid-product__title grid-product__title--{{ settings.type_product_style }}">
         <div class="product_desc {% if product.metafields.custom.variant.value == blank %}grid-product_no-variant{% endif %}">
-          <h4 class="product__title-variant">{{ variant_value_display }}</h4>
+          <h4 class="product__title-variant">{{ product.metafields.custom.variant.value }}</h4>
           {% render 'product-price', product: product, product_grid: true %}
         </div>
-        <!-- <a href="/products/{{ product.handle }}" class="product__item-btn">See more</a> -->
+        <!--         <a href="/products/{{ product.handle }}" class="product__item-btn">See more</a> -->
       </div>
     </a>
     {%- if product.variants.first.available -%}
-      <div style="text-align: center; padding: 0.7em 0.3em;">
-        <form method="post" action="/cart/add">
-          <input
-            type="hidden"
-            name="id"
-            value="{{ product.variants.first.id }}" />
-          <input
-            min="1"
-            type="hidden"
-            id="quantity"
-            name="quantity"
-            value="1" />
-          <input
-            type="submit"
-            value="Add to bag"
-            class="btn"
-            style="padding: 0.6em 1em;" />
-        </form>
-      </div>
-    {%- else -%}
-      <div style="text-align: center; padding: 0.7em 0.3em;">
-        <input
-          type="button"
-          class="btn"
-          onclick="location.href='{{ product.url | default: '#' }}'"
-          value="Sold out"
-          style="padding: 0.6em 1em;" />
-      </div>
-    {%- endif -%}
+  <div style="text-align: center; padding: 0.7em 0.3em;">
+    <form method="post" action="/cart/add" >
+      <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+      <input min="1" type="hidden" id="quantity" name="quantity" value="1"/>
+      <input type="submit" value="Add to bag" class="btn" style="padding: 0.6em 1em;"/>
+    </form>
+  </div>
+{%- else -%}
+  <div style="text-align: center; padding: 0.7em 0.3em;">
+    <input type="button" class="btn" onclick="location.href='{{ product.url | default: '#' }}'" value="Sold out" style="padding: 0.6em 1em;"/>
+  </div>
+{%- endif -%}
   </div>
   {% if settings.collection_color_swatches %}
     {%- assign swatch_file_extension = 'png' -%}
