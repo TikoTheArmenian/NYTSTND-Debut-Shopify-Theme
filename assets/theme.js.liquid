@@ -6383,35 +6383,26 @@ $(document).on('change', '.collection-filter select', function() {
 });
 
 $(document).ready(function() {
-  console.log('ran');
-  var screenWidth = $(window).width();
+    var screenWidth = $(window).width();
 
-  var maxlength = 24;
-  // if (screenWidth > 450) {
-  //   return;
-  // }
-  if(screenWidth < 400) {
-    maxlength = 22;
-    console.log('smal');
-      $('.product__title-variant').each(function() {
-          var variantValue = $(this).html();
-          console.log(variantValue);
+    if (screenWidth < 450) {
+        $('.product__title-variant').each(function() {
+            var variantValue = $(this).html();
+            var variantValueParts = variantValue.split('<br/>');
+            
+            if (variantValueParts.length > 1) {
+                var secondPart = variantValueParts[1];
+                var secondPartLength = secondPart.length;
 
-          var variantValueParts = variantValue.split('<br>');
-          
-          if (variantValueParts.length > 1) {
-            console.log('more than 1');
-
-              var secondPart = variantValueParts[1];
-              var secondPartLength = secondPart.length;
-
-              if (secondPartLength <= maxlength) {
-                  var variantValueDisplay = variantValueParts[0] + '<br>' + secondPart + '<br> &nbsp;';
-                  $(this).html(variantValueDisplay);
-              }
-          }
-      });
+                if (secondPartLength <= 23) {
+                    var variantValueDisplay = variantValueParts[0] + '<br/>' + secondPart + '<br/>&nbsp;';
+                    $(this).html(variantValueDisplay);
+                }
+            }
+        });
+    }
 });
+
 
 
 
