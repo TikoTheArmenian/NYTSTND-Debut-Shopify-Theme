@@ -285,10 +285,11 @@
                             style="{% if current_product.available == false %}opacity: 0.5; pointer-events: none; filter: grayscale(100%);{% endif %}">
                         <span class="product__color-variant-label">{{ product.metafields.custom.colors_label.value[forloop.index0] | replace: "/", "/<br>" }}</span>
                         {% if current_product.available == false %}
-                            <div style="position: absolute; top: 25%; left: 50%; transform: translate(-50%, -50%); color: gray; font-weight: bold; text-align: center; width: 100%;">Sold Out</div>
+                            <div style="position: absolute; top: 25%; left: 50%; transform: translate(-50%, -50%); color: #333; font-weight: bold; text-align: center; width: 100%; font-size: 12px;">Sold Out</div>
                         {% endif %}
                     </a>
                 {% endfor %}
+                
                 
                 
                 
