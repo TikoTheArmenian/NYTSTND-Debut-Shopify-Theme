@@ -6392,7 +6392,7 @@ $(document).ready(function() {
           var variantValue = $(this).html();
           console.log(variantValue);
 
-          var variantValueParts = variantValue.split('<br/>');
+          var variantValueParts = variantValue.split('<br>');
           
           if (variantValueParts.length > 1) {
             console.log('more than 1');
@@ -6401,7 +6401,7 @@ $(document).ready(function() {
               var secondPartLength = secondPart.length;
 
               if (secondPartLength <= 23) {
-                  var variantValueDisplay = variantValueParts[0] + '<br/>' + secondPart + '<br/>&nbsp;';
+                  var variantValueDisplay = variantValueParts[0] + '<br>' + secondPart + '<br> &nbsp;';
                   $(this).html(variantValueDisplay);
               }
           }
