@@ -6361,10 +6361,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
         selectElement.style.width = selectElement.scrollWidth + 'px';
         
         selectElement.addEventListener('change', function() {
-            this.style.width = 'auto';
-            this.style.width = 95 + 'px';
-            this.style.alignSelf = 'center';
-        });
+          console.log('Change event triggered');
+          this.style.width = 'auto';
+          console.log('Width after setting to auto:', this.style.width);
+          this.style.width = this.scrollWidth + 'px';
+          console.log('Width after setting to scrollWidth:', this.style.width);
+      });
     });
 });
 
