@@ -134,10 +134,13 @@
           {% endfor %}
         {% endif %}
       </div>
+      product.metafields.custom.variant.value
 
       <div class="grid-product__title grid-product__title--{{ settings.type_product_style }}">
         <div class="product_desc {% if product.metafields.custom.variant.value == blank %}grid-product_no-variant{% endif %}">
-          <h4 class="product__title-variant">{{ product.metafields.custom.variant.value }}</h4>
+          <h4 class="product__title-variant">{{ 
+            product.metafields.custom.variant.value 
+            }}</h4>
           {% render 'product-price', product: product, product_grid: true %}
         </div>
         <!--         <a href="/products/{{ product.handle }}" class="product__item-btn">See more</a> -->
