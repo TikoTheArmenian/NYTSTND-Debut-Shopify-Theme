@@ -6360,10 +6360,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
         selectElement.style.width = 'auto';
         selectElement.style.width = selectElement.scrollWidth + 'px';
         
-        // selectElement.addEventListener('change', function() {
-        //     // this.style.width = 'auto';
-        //     this.style.width = 95 + 'px';
-        // });
+        selectElement.addEventListener('change', function() {
+            this.style.width = 'auto';
+            this.style.width = 95 + 'px';
+            this.style.alignSelf = 'center';
+        });
     });
 });
 
