@@ -6354,30 +6354,17 @@ if (location.pathname === '/cart') {
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
-  var selectElements = document.querySelectorAll('.collection-filter select');
-  var width = "5px";
-  
-  selectElements.forEach(function(selectElement) {
-      selectElement.style.width = 'auto';
-      for(var i = 0; i < selectElement.options.length; i++) {
-        if(selectElement.options[i].text === "Sort")
-        {
-          width = 50 + 'px';
-          break;
-        }
-        console.log(selectElement.options[i]);
-          if(selectElement.options[i].innerText.select ) {
-            selectElement.style.width = selectElement.options[i].text + 'px';
-            break;
-          }
-      }
-      //selectElement.style.width = selectElement.scrollWidth + 'px';
-      
-      selectElement.addEventListener('change', function() {
-          this.style.width = '15px';
-          // this.style.width = this.scrollWidth + 'px';
-      });
-  });
+    var selectElements = document.querySelectorAll('.collection-filter select');
+    
+    selectElements.forEach(function(selectElement) {
+        selectElement.style.width = 'auto';
+        selectElement.style.width = selectElement.scrollWidth + 'px';
+        
+        selectElement.addEventListener('change', function() {
+            this.style.width = 'auto';
+            this.style.width = this.scrollWidth + 'px';
+        });
+    });
 });
 
 
