@@ -10,7 +10,16 @@
         <div class="grid__item medium-up--four-fifths grid__item--content">
           {% section 'collection-promotions' %}
           {% section 'collection-template' %}
-          {% comment %} {% section 'logo-list-slideshow' %}  ALREADY INCLUDED IN page-QUAD-collection-info-snippet{% endcomment %}
+
+          {% if collection.handle == 'trio' %}
+            {% include 'logo-list-slideshow' %}
+          {% endif %}
+          {% if collection.handle == 'uno' %}
+            {% include 'logo-list-slideshow' %}
+          {% endif %}
+          {% if collection.handle == 'duo' %}
+            {% include 'logo-list-slideshow' %}
+          {% endif %}
         </div>
       </div>
     </div>
@@ -30,15 +39,7 @@
 {% endif %} {% endcomment %}{% if collection.handle == 'quad' %}
   {% include 'page-QUAD-collection-info-snippet' %}
 {% endif %}
-{% comment %} {% if collection.handle == 'trio' %}
-{% include 'logo-list-slideshow' %}
-{% endif %}
-{% if collection.handle == 'uno' %}
-{% include 'logo-list-slideshow' %}
-{% endif %}
-{% if collection.handle == 'duo' %}
-{% include 'logo-list-slideshow' %}
-{% endif %} {% endcomment %}
+
 
 {% comment %} {% section 'logo-list-slideshow' %} {% endcomment %}
 <!-- already in page-QUAD-collection-info-snippet -->
