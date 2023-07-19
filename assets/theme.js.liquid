@@ -6354,21 +6354,25 @@ if (location.pathname === '/cart') {
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
-    var selectElements = document.querySelectorAll('.collection-filter select');
-    
-    selectElements.forEach(function(selectElement) {
-        selectElement.style.width = 'auto';
-        selectElement.style.width = selectElement.scrollWidth + 'px';
-        
-        selectElement.addEventListener('change', function() {
-          console.log('Change event triggered');
+  var selectElements = document.querySelectorAll('.collection-filter select');
+
+  selectElements.forEach(function(selectElement, index) {
+      // Apply the stored width if it exists
+      var storedWidth = localStorage.getItem('selectWidth' + index);
+      if (storedWidth) {
+          selectElement.style.width = storedWidth;
+      }
+      
+      selectElement.addEventListener('change', function() {
           this.style.width = 'auto';
-          console.log('Width after setting to auto:', this.style.width);
           this.style.width = this.scrollWidth + 'px';
-          console.log('Width after setting to scrollWidth:', this.style.width);
+
+          // Store the width in localStorage
+          localStorage.setItem('selectWidth' + index, this.style.width);
       });
-    });
+  });
 });
+
 
 
 //////////END JS ADDED BY BN//////////
