@@ -274,7 +274,6 @@
                     assign color_item_handles = product.metafields.custom.colors.value | map: 'handle'
                     assign product_available_products_items = color_item_handles | size
                   -%}
-
                   {% for color_image in product.metafields.custom.images.value limit: product_available_products_items %}
                     {% assign current_product = all_products[color_item_handles[forloop.index0]] %}
                     <a class="product__color-item {% if current_product.available == false %}out-of-stock{% endif %}" 
@@ -282,10 +281,11 @@
                         href="{{ shop.url }}/products/{{ color_item_handles[forloop.index0] }}">
                         <img class="product__color-img" 
                             src="{{ color_image | image_url: width: color_image.width }}" 
-                            style="{% if current_product.available == false %}opacity: 0.5; pointer-events: none;{% endif %}">
+                            style="{% if current_product.available == false %}opacity: 0.5; pointer-events: none; cursor: not-allowed;{% endif %}">
                         <span class="product__color-variant-label">{{ product.metafields.custom.colors_label.value[forloop.index0] | replace: "/", "/<br>" }}</span>
                     </a>
                 {% endfor %}
+                
                 </div>
               </div>
             {% endif %}
