@@ -276,13 +276,14 @@
                   -%}
 
                   {% for color_image in product.metafields.custom.images.value limit: product_available_products_items %}
-                  <a class="product__color-item {% if product.available == false %}out-of-stock{% endif %}" 
-                     data-handle="/products/{{ color_item_handles[forloop.index0] }}" 
-                     href="{{ shop.url }}/products/{{ color_item_handles[forloop.index0] }}">
-                    <img class="product__color-img" src="{{ color_image | image_url: width: color_image.width }}">
-                    <span class="product__color-variant-label">{{ product.metafields.custom.colors_label.value[forloop.index0] | replace: "/", "/<br>" }}</span>
-                  </a>
-                {% endfor %}
+                    {% assign current_product = all_products[color_item_handles[forloop.index0]] %}
+                    <a class="product__color-item {% if current_product.available == false %}out-of-stock{% endif %}" 
+                       data-handle="/products/{{ color_item_handles[forloop.index0] }}" 
+                       href="{{ shop.url }}/products/{{ color_item_handles[forloop.index0] }}">
+                      <img class="product__color-img" src="{{ color_image | image_url: width: color_image.width }}">
+                      <span class="product__color-variant-label">{{ product.metafields.custom.colors_label.value[forloop.index0] | replace: "/", "/<br>" }}</span>
+                    </a>
+                  {% endfor %}
                 </div>
               </div>
             {% endif %}
