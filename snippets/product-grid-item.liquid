@@ -144,18 +144,35 @@
       </div>
     </a>
     {%- if product.variants.first.available -%}
-  <div style="text-align: center; padding: 0.7em 0.3em;">
-    <form method="post" action="/cart/add" >
-      <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
-      <input min="1" type="hidden" id="quantity" name="quantity" value="1"/>
-      <input type="submit" value="Add to bag" class="btn" style="padding: 0.6em 1em;"/>
-    </form>
-  </div>
-{%- else -%}
-  <div style="text-align: center; padding: 0.7em 0.3em;">
-    <input type="button" class="btn" onclick="location.href='{{ product.url | default: '#' }}'" value="Sold out" style="padding: 0.6em 1em;"/>
-  </div>
-{%- endif -%}
+      <div style="text-align: center; padding: 0.7em 0.3em;">
+        <form method="post" action="/cart/add">
+          <input
+            type="hidden"
+            name="id"
+            value="{{ product.variants.first.id }}" />
+          <input
+            min="1"
+            type="hidden"
+            id="quantity"
+            name="quantity"
+            value="1" />
+          <input
+            type="submit"
+            value="Add to bag"
+            class="btn"
+            style="font-family: 'Jost'; padding: 0.6em 1em;" />
+        </form>
+      </div>
+    {%- else -%}
+      <div style="text-align: center; padding: 0.7em 0.3em;">
+        <input
+          type="button"
+          class="btn"
+          onclick="location.href='{{ product.url | default: '#' }}'"
+          value="Sold out"
+          style="padding: 0.6em 1em;" />
+      </div>
+    {%- endif -%}
   </div>
   {% if settings.collection_color_swatches %}
     {%- assign swatch_file_extension = 'png' -%}
