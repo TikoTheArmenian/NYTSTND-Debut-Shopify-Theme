@@ -119,9 +119,9 @@
 
       <div class="grid-product__meta">
         {% assign title_length = product.title | size %}
-        {% if title_length > 23 %}
-          {% assign first_part = product.title | slice: 0, 23 %}
-          {% assign second_part = product.title | slice: 23 %}
+        {% if title_length <= 23 %}
+          {% assign first_part = product.title %}
+          {% assign second_part = '/n' %}
           <div class="grid-product__title grid-product__title--{{ settings.type_product_style }}">{{ first_part }}<br>{{ second_part }}</div>
         {% else %}
           <div class="grid-product__title grid-product__title--{{ settings.type_product_style }}">{{ product.title }}</div>
