@@ -6392,6 +6392,8 @@ $(document).ready(function() {
             var variantValue = $(this).html();
             var variantValueParts = variantValue.split('<br>');
             
+
+            console.log(variantValueParts.length);s
             if (variantValueParts.length > 1) {
               if(!(screenWidth<385 && 
                 variantValueParts.length <= 23 && 
