@@ -276,8 +276,7 @@
                   -%}
 
                   {% for color_image in product.metafields.custom.images.value limit: product_available_products_items %}
-
-                  <a class="product__color-item" 
+                  <a class="product__color-item {% if product.available == false %}out-of-stock{% endif %}" 
                      data-handle="/products/{{ color_item_handles[forloop.index0] }}" 
                      href="{{ shop.url }}/products/{{ color_item_handles[forloop.index0] }}">
                     <img class="product__color-img" src="{{ color_image | image_url: width: color_image.width }}">
