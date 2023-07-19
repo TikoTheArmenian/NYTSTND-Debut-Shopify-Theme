@@ -6386,7 +6386,12 @@ $(document).ready(function() {
   console.log('ran');
   var screenWidth = $(window).width();
 
-  if (screenWidth < 450) {
+  var maxlength = 23;
+  if (screenWidth > 450) {
+    return;
+  }
+  if(screenWidth < 400) {
+    maxlength = 22;
     console.log('smal');
       $('.product__title-variant').each(function() {
           var variantValue = $(this).html();
@@ -6406,7 +6411,6 @@ $(document).ready(function() {
               }
           }
       });
-  }
 });
 
 
