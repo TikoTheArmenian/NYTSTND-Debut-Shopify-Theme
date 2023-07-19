@@ -29,7 +29,7 @@
 
 {%- assign product_img_structure = product.featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 <div id="ProductSection-{{ product.id }}"
-  class="product-section"
+  class="product-section {% unless product.available %}out-of-stock{% endunless %}"
   data-section="{{ section.id }}"
   itemscope itemtype="http://schema.org/Product"
   data-section-id="{{ product.id }}"

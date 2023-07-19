@@ -1196,3 +1196,11 @@ img {
       height: auto;
     }
 }
+
+/* out of stock */
+
+.product-section.out-of-stock {
+  /* make the product appear greyed out */
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
