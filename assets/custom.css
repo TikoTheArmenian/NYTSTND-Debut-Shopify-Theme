@@ -1199,7 +1199,7 @@ img {
 
 /* out of stock */
 
-.product__color-item.out-of-stock {
-  opacity: 0.5; /* Makes the item semi-transparent */
-  pointer-events: none; /* Disables all click, hover, etc events */
+.product__color-variants .product__color-item.out-of-stock {
+  opacity: 0.5 !important;
+  pointer-events: none !important;
 }
