@@ -6358,6 +6358,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
   
   selectElements.forEach(function(selectElement) {
       selectElement.style.width = 'auto';
+      for(var i = 0; i < selectElement.options.length; i++) {
+          if(selectElement.options[i].innerText.select ) {
+            selectElement.style.width = selectElement.options[i].text + 'px';
+          }
+      }
       console.log(selectElement);
       selectElement.style.width = selectElement.scrollWidth + 'px';
       
