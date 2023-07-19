@@ -6355,13 +6355,14 @@ if (location.pathname === '/cart') {
 
 window.addEventListener('DOMContentLoaded', (event) => {
   var selectElements = document.querySelectorAll('.collection-filter select');
+  var width = "5px";
   
   selectElements.forEach(function(selectElement) {
       selectElement.style.width = 'auto';
       for(var i = 0; i < selectElement.options.length; i++) {
         if(selectElement.options[i].text === "Sort")
         {
-          selectElement.style.width = 50 + 'px';
+          width = 50 + 'px';
           break;
         }
         console.log(selectElement.options[i]);
@@ -6373,8 +6374,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
       //selectElement.style.width = selectElement.scrollWidth + 'px';
       
       selectElement.addEventListener('change', function() {
-          this.style.width = 'auto';
-          this.style.width = this.scrollWidth + 'px';
+          this.style.width = 'width';
+          // this.style.width = this.scrollWidth + 'px';
       });
   });
 });
