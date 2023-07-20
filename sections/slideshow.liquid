@@ -3,40 +3,48 @@
   {% if section.blocks.size > 0 %}
     <div class="slideshow-wrapper">
 
-      <div class="slideshow" id="Slideshow-{{ section.id }}" data-autoplay="{{ section.settings.autoplay }}" data-speed="{{ section.settings.autoplay_speed }}">
-        
-        {% for block in section.blocks %}
-          
-        <div class="background-media-text__image--{{ block.id }}">
-        {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      <div
+        class="slideshow"
+        id="Slideshow-{{ section.id }}"
+        data-autoplay="{{ section.settings.autoplay }}"
+        data-speed="{{ section.settings.autoplay_speed }}">
 
-       
-       <div class="background-image-wrapper bgWrapperImg" style="padding-bottom: {{ 100 | divided_by: block.settings.image.aspect_ratio }}%;">
+        {% for block in section.blocks %}
+
+          <div class="background-media-text__image--{{ block.id }}">
             {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-            <img class="feature-row__image lazyload"
+
+
+            <div class="background-image-wrapper bgWrapperImg" style="padding-bottom: {{ 100 | divided_by: block.settings.image.aspect_ratio }}%;">
+              {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+              <img
+                class="feature-row__image lazyload"
                 data-src="{{ img_url }}"
                 data-aspectratio="{{ block.settings.image.aspect_ratio }}"
                 data-sizes="auto">
-        <div class="absolute--center index-hero--static-image__text-container titlesWrapper">
-          <h1 class="title title--big slideTitle" style="line-height: 1; margin: 0;">
-            {{block.settings.title}}
-          </h1>
-          <p class="slideSubtitle" style="margin: 20px 0;">{{block.settings.text}}</p>
-          <a href="{{block.settings.button_link}}">
-            <button class="btn btn--block" id="dropdown-click">
-                {{block.settings.button_label}}
-            </button>
-          </a>
-        </div>
+              <div class="absolute--center index-hero--static-image__text-container titlesWrapper">
+                <h1 class="title title--big slideTitle" style="line-height: 1; margin: 0;">
+                  {{ block.settings.title }}
+                </h1>
+                <p class="slideSubtitle" style="margin: 20px 0;">{{ block.settings.text }}</p>
+                <a href="{{block.settings.button_link}}">
+                  <button
+                    class="btn btn--block"
+                    style="background-color: #159747"
+                    id="dropdown-click">
+                    {{ block.settings.button_label }}
+                  </button>
+                </a>
+              </div>
+            </div>
+            <noscript>
+              <img
+                class="image-fit background-media-text__image background-media-text__image--{{ block.id }} lazyloaded"
+                src="{{ block.settings.image | img_url: '1800x' }}"
+                alt="{{ block.settings.image.alt }}">
+            </noscript>
           </div>
-        <noscript>
-          <img
-            class="image-fit background-media-text__image background-media-text__image--{{ block.id }} lazyloaded"
-            src="{{ block.settings.image | img_url: '1800x' }}"
-            alt="{{ block.settings.image.alt }}">
-        </noscript>
-	</div>
-        
+
         {% endfor %}
       </div>
     </div>
@@ -50,32 +58,32 @@
 </div>
 
 <style>
-  @media screen and (min-width: 651px) and (max-width: 989px){
-    .bgWrapperImg img{
-    height: auto !important;
+  @media screen and (min-width: 651px) and(max-width: 989px) {
+    .bgWrapperImg img {
+      height: auto !important;
     }
   }
-  @media(max-width: 768px){
-    .slideTitle{
+  @media(max-width: 768px) {
+    .slideTitle {
       font-size: 24px;
       line-height: 1.44;
-      
+
     }
-  
-  .slideSubtitle{
+
+    .slideSubtitle {
       line-height: 1.4;
-    margin: 10px 0 5px !important;
-    font-family: "Jost";
-  }
-    
-/*   #dropdown-click{
+      margin: 10px 0 5px !important;
+      font-family: "Jost";
+    }
+
+    /*   #dropdown-click{
     margin: 8px 0;
   } */
-    
-  .titlesWrapper{
-    padding: 0 20px;
-  }
-    
+
+    .titlesWrapper {
+      padding: 0 20px;
+    }
+
   }
 </style>
 {% schema %}
@@ -89,22 +97,36 @@
         "id": "autoplay",
         "label": "Auto-rotate slides",
         "default": true
-      },
-      {
+      }, {
         "type": "select",
         "id": "autoplay_speed",
         "label": "Change slides every",
         "options": [
-          { "value": "5000", "label": "5 seconds" },
-          { "value": "6000", "label": "6 seconds" },
-          { "value": "7000", "label": "7 seconds" },
-          { "value": "8000", "label": "8 seconds" },
-          { "value": "9000", "label": "9 seconds" },
-          { "value": "10000", "label": "10 seconds" }
+          {
+            "value": "5000",
+            "label": "5 seconds"
+          },
+          {
+            "value": "6000",
+            "label": "6 seconds"
+          },
+          {
+            "value": "7000",
+            "label": "7 seconds"
+          },
+          {
+            "value": "8000",
+            "label": "8 seconds"
+          }, {
+            "value": "9000",
+            "label": "9 seconds"
+          }, {
+            "value": "10000",
+            "label": "10 seconds"
+          }
         ],
         "default": "7000"
-      },
-      {
+      }, {
         "type": "select",
         "id": "text_size",
         "label": "Text size",
@@ -113,8 +135,7 @@
           {
             "label": "Medium",
             "value": "medium"
-          },
-          {
+          }, {
             "label": "Large",
             "value": "large"
           }
@@ -140,12 +161,10 @@
               {
                 "value": "top",
                 "label": "Top"
-              },
-              {
+              }, {
                 "value": "center",
                 "label": "Middle"
-              },
-              {
+              }, {
                 "value": "bottom",
                 "label": "Bottom"
               }
@@ -162,22 +181,18 @@
             "id": "text",
             "label": "Text",
             "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          },
-		  {
+          }, {
             "type": "text",
             "id": "button_label",
             "label": "Button label",
             "default": "Lorem ipsum"
-          },
-
-          {
+          }, {
             "type": "url",
             "id": "button_link",
             "label": "BUtton link"
           }
         ]
-      },
-      {
+      }, {
         "type": "video",
         "name": "Video slide",
         "settings": [
@@ -196,12 +211,10 @@
               {
                 "value": "chrome",
                 "label": "Image with play button"
-              },
-              {
+              }, {
                 "value": "background-chrome",
                 "label": "Background video with play button"
-              },
-              {
+              }, {
                 "value": "background",
                 "label": "Background video"
               }
@@ -218,8 +231,7 @@
             "id": "title",
             "label": "Heading",
             "default": "Video slide"
-          },
-          {
+          }, {
             "type": "text",
             "id": "subheading",
             "label": "Subheading",
@@ -228,21 +240,22 @@
         ]
       }
     ],
-    "presets": [{
-      "name": "Slideshow",
-      "category": "Image",
-      "settings": {
-        "autoplay": true,
-        "autoplay_speed": "5000"
-      },
-      "blocks": [
-        {
-          "type": "image"
+    "presets": [
+      {
+        "name": "Slideshow",
+        "category": "Image",
+        "settings": {
+          "autoplay": true,
+          "autoplay_speed": "5000"
         },
-        {
-          "type": "image"
-        }
-      ]
-    }]
+        "blocks": [
+          {
+            "type": "image"
+          }, {
+            "type": "image"
+          }
+        ]
+      }
+    ]
   }
 {% endschema %}
