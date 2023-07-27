@@ -898,18 +898,18 @@
           "1581584292419-0": {
             "type": "image",
             "settings": {
-              "image": "shopify:\/\/shop_images\/UNO-black.webp",
+              "image": "shopify:\/\/shop_images\/Header_duo.jpg",
               "alignment": "top",
-              "title": "UNO FLASH SALE",
+              "title": "MagSafe Wireless Charging Station",
               "text": "Where Style Meets Unmatched Charging Excellence!",
-              "button_label": "Grab 20% Off + Gift Now",
-              "button_link": "shopify:\/\/collections\/uno"
+              "button_label": "Shop now",
+              "button_link": "shopify:\/\/collections\/all"
             }
           },
           "f6d2b36a-b338-4d89-9ba1-687172e7248a": {
             "type": "image",
             "settings": {
-              "image": "shopify:\/\/shop_images\/QUAD-t-saddle-lc-header_f548cf40-5767-457e-9397-e61b00818697.jpg",
+              "image": "shopify:\/\/shop_images\/Header_box.jpg",
               "alignment": "top",
               "title": "LIFE UNCLUTTERED",
               "text": "Wireless Charger 4-1: Handcrafted with premium wood and leather",
