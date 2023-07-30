@@ -981,7 +981,7 @@
         "type": "Hero-with-info-block",
         "settings": {
           "bg_image": "shopify:\/\/shop_images\/QUAD_b0cd8e93-caeb-4498-bbec-ae024750eef3.png",
-          "text": "4-in-1 Multi-Device 5-Coil Wireless Charger, iPad Docking Station, Black Leather Top Oak Wood Base",
+          "text": "4-in-1 Multi-Device 2-Coil Wireless Charger, iPad Docking Station, Black Leather Top Oak Wood Base",
           "btn_text": "SEE QUAD",
           "btn_link": "shopify:\/\/products\/quad-tray-magsafe-black-oak",
           "text_color": "#ffffff"
@@ -991,7 +991,7 @@
         "type": "Hero-with-info-block-right",
         "settings": {
           "bg_image": "shopify:\/\/shop_images\/TRIO_4f2162dc-f945-4e89-ae36-93c544410f4c.png",
-          "text": "3-in-1 Multi-Device 5-Coil Qi Wireless Handcrafted Charging Station with Extra USB-A Port",
+          "text": "3-in-1 Multi-Device 2-Coil Qi Wireless Handcrafted Charging Station with Extra USB-A Port",
           "btn_text": "SEE TRIO",
           "btn_link": "shopify:\/\/products\/trio-tray-magsafe-black-oak",
           "text_color": "#ffffff"
@@ -2267,7 +2267,7 @@
         "type": "Hero-with-info-block",
         "settings": {
           "bg_image": "shopify:\/\/shop_images\/DUO_09bbaad4-1909-4a67-9a3a-2e57d022d148.png",
-          "text": "2-in-1 Multi-Device 5-Coil Qi Wireless Handcrafted Charging Station",
+          "text": "2-in-1 Multi-Device 2-Coil Qi Wireless Handcrafted Charging Station",
           "btn_text": "SEE DUO",
           "btn_link": "shopify:\/\/products\/duo-black-oak",
           "text_color": "#ffffff"
