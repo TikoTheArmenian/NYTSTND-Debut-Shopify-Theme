@@ -322,7 +322,7 @@
           "hero_size": "x-large",
           "text_size": "medium",
           "button_label": "ORDER NOW",
-          "button_link": "shopify:\/\/collections\/trio"
+          "button_link": "shopify:\/\/collections\/trio2"
         }
       },
       "hero-video-new": {
@@ -420,7 +420,7 @@
           "title": "Find Your TRIO",
           "subtitle": "Available in Midnight Black, Rustic White, Slate Gray and Merlot Red Colors",
           "image": "shopify:\/\/shop_images\/trio-tray-top-oak_black_87c890a5-5989-4667-b5a8-881c18476c74.jpg",
-          "link": "shopify:\/\/collections\/trio",
+          "link": "shopify:\/\/collections\/trio2",
           "link_text": "SHOP NOW",
           "colorBtn": "#000000"
         }
